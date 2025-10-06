@@ -1,0 +1,791 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Carbon\Carbon;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Filter;
+use App\Models\Gallery;
+use App\Models\Product;
+use App\Models\Occasion;
+use App\Traits\FileHandler;
+use App\Models\GalleryGroup;
+use Illuminate\Http\Request;
+use App\Models\ProductPocket;
+use App\Models\ProductCategory;
+use App\Models\ProductTranslation;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductRequest;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Traits\TranslatableHandler;
+
+
+class ProductController extends Controller
+{
+    use FileHandler, TranslatableHandler;
+    public $products;
+    public $productPath;
+    public $galleryPath;
+
+
+
+    public function __construct()
+    {
+        $this->products = Product::with(
+            [
+                'trans' => function ($q) {
+                    $q->where('locale', app()->getLocale());
+                }
+            ]
+        )->with('occasions')->latest()->paginate(20);
+
+        $this->productPath = '/attachments/products/';
+        $this->galleryPath = "/attachments/gallery/products/";
+    }
+
+
+    public function index(Request $request)
+    {
+
+        if ($request->input('export') === 'excel') {
+            return Excel::download(new ProductsExport($request), 'products.xlsx');
+        }
+        $occasions = Occasion::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->where('type', 0)->active()->latest()->get();
+        $cats = ProductCategory::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->active()->latest()->get();
+
+        $query = Product::query()->with('occasions', 'productCategoriesProducts', 'filters')->with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->with('occasions')->ordinary()->orderBy('id', 'DESC');
+
+        $items = $query->paginate(10);
+        $occasions = Occasion::all();
+        $cats = ProductCategory::all();
+
+
+        if ($request->status != '') {
+            if ($request->status == 1) $query->where('status', $request->status);
+            else {
+                $query->where('status', '!=', 1);
+            }
+        }
+        if ($request->title != '') {
+            if ($request->title !== '') {
+                $search = '%' . $request->title . '%';
+                $query->whereHas('translations', function ($q) use ($search) {
+                    $q->where('locale', app()->getLocale())
+                        ->where('title', 'LIKE', $search);
+                });
+            }
+        }
+
+        if ($request->description != '') {
+            if ($request->description !== '') {
+                $search = '%' . $request->description . '%';
+                $query->whereHas('translations', function ($q) use ($search) {
+                    $q->where('locale', app()->getLocale())
+                        ->where('description', 'LIKE', $search);
+                });
+            }
+        }
+        if ($request->care_tips != '') {
+            if ($request->care_tips !== '') {
+                $search = '%' . $request->care_tips . '%';
+                $query->whereHas('translations', function ($q) use ($search) {
+                    $q->where('locale', app()->getLocale())
+                        ->where('care_tips', 'LIKE', $search);
+                });
+            }
+        }
+
+
+        /*************************search of price******************/
+        if ($request->from_price != '' && $request->to_price == '') {
+            $query = $query->where('price', '>=', $request->from_price);
+        }
+
+        if ($request->to_price != '' && $request->from_price == '') {
+            $query = $query->where('price', '<=', $request->to_price);
+        }
+        if ($request->to_price != '' && $request->from_price != '') {
+            $query = $query->where('price', '<=', $request->to_price)->where('price', '>=', $request->from_price);
+        }
+        /*************************search of price******************/
+
+
+        /*************************search of date******************/
+        if ($request->from_date && $request->to_date) {
+            $from = date($request->from_date);
+            $to = date($request->to_date);
+            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
+        }
+
+        if ($request->from_date != '' && $request->to_date == '') {
+            $from = date($request->from_date);
+            $query->whereDate('created_at', '>', Carbon::parse($from));
+        }
+        if ($request->to_date != '' && $request->from_date == '') {
+            $to = date($request->to_date);
+            $query->whereDate('created_at', '<', Carbon::parse($to));
+        }
+        /*************************search of date******************/
+
+
+        if ($request->occasions != '') {
+            if ($request->occasions !== '') {
+                $search = '%' . $request->occasions . '%';
+                $query->whereHas('occasions', function ($q) use ($search) {
+                    $q->whereHas('translations', function ($q2) use ($search) {
+                        $q2->where('locale', app()->getLocale())
+                            ->where('title', 'LIKE', $search);
+                    });
+                });
+            }
+        }
+        if ($request->cat_id !== '') {
+            $search = '%' . $request->input('cat_id') . '%';
+            $query->whereHas('productCategoriesProducts', function ($q) use ($search) {
+                $q->whereHas('translations', function ($q2) use ($search) {
+                    $q2->where('locale', app()->getLocale())
+                        ->where('title', 'LIKE', $search);
+                });
+            });
+        }
+
+        if ($request->filled('filters')) {
+            $search = '%' . $request->filters . '%';
+            $query->whereHas('filters', function ($q) use ($search) {
+                $q->whereHas('translations', function ($q2) use ($search) {
+                    $q2->where('locale', app()->getLocale())
+                        ->where('name', 'LIKE', $search);
+                });
+            });
+        }
+
+        $items = $query->paginate($this->pagination_count);
+        return view('admin/dashboard/products/index')->with(['items' => $items, 'occasions' => $occasions, 'cats' => $cats]);
+    }
+
+
+    public function show($id)
+    {
+
+        $product = Product::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->ordinary()->find($id);
+
+        if (!$product) {
+            session()->flash('error', trans('message.admin.not_found'));
+            return redirect()->back(); //here
+        }
+        return view('admin/dashboard/products/show')->with(['product' => $product]);
+    }
+
+
+    public function create()
+    {
+        $cats = ProductCategory::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->ordinary()->active()->latest()->get();
+
+        $occasions = Occasion::with(['trans' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])->where('status', 1)->where('type', 0)->active()->latest()->get();
+
+
+        $filters = Filter::with(['translations' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])->get();
+        return view('admin/dashboard/products/create', compact('occasions', 'cats', 'filters'));
+    }
+
+
+    public function store(ProductRequest $request)
+    {
+        $data = $request->getSanitized();
+
+        $data['image'] = $this->storeImage2($request, $this->productPath, $request->image, 'image');
+        $product = Product::create($data);
+
+        $this->saveModelTranslation($product, $data);
+
+
+        if ($request->has('has_pockets')) {
+            $product->has_pockets = true;
+            $product->save();
+
+            foreach ($request->pockets['price'] as $index => $price) {
+                $pocketData = [
+                    'product_id' => $product->id,
+                    'price'      => $price,
+                ];
+
+                if ($request->hasFile("pockets.image.{$index}")) {
+                    $images = [];
+                    foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
+                        if ($image->isValid()) {
+                            $images[] = $this->storePocketImage(
+                                $image,
+                                '/attachments/pockets/',
+                                $imgKey
+                            );
+                        }
+                    }
+                    $pocketData['image'] = json_encode($images);
+                }
+
+                $pocket = ProductPocket::create($pocketData);
+
+                // $pocket->translations()->create([
+                //     'locale'      => 'en',
+                //     'pocket_name' => $request->pockets['en'][$index],
+                // ]);
+
+                // $pocket->translations()->create([
+                //     'locale'      => 'ar',
+                //     'pocket_name' => $request->pockets['ar'][$index],
+                // ]);
+            }
+        }
+        if ($request->gallery_image) {
+            $group = GalleryGroup::create([
+                'type' => 0,
+                'status' => 1,
+
+                'foreign_key' => $product->id,
+                'created_by' => auth()->id(),
+            ])->refresh();
+            $group->update($request->gallery);
+
+            if ($request->gallery_image) {
+                $all_images_returned_arr = $this->storeImageMulti($request, $this->galleryPath, $request->gallery_image, 'gallery_image');
+                $imgArr = [];
+                foreach ($request->gallery_image as $keyImg => $valImg) {
+                    $imgArr[] = new Gallery([
+                        'image' => $all_images_returned_arr[$keyImg] ?? '',
+                        'sort' => $request->gallery_sort[$keyImg] ?? '',
+                        'gallery_group_id' => $group->id,
+                        'feature' => isset($request->gallery_feature[$keyImg]) ? (int)$request->gallery_feature[$keyImg] : 0,
+                        'status' => 1,
+                        'created_by' => auth()->id(),
+                    ]);
+                }
+                $group->images()->saveMany($imgArr);
+            }
+        }
+
+        if ($request->occasions) {
+            $product->occasions()->attach($request->occasions);
+        }
+
+        if ($request->categories) {
+            $product->productCategoriesProducts()->attach($request->categories);
+        }
+        if ($request->filters) {
+            $product->filters()->attach($request->filters);
+        }
+
+
+
+
+
+
+        session()->flash('success', trans('message.admin.created_sucessfully'));
+        return redirect((route('admin.products.index')));
+    }
+
+
+    public function edit($id)
+    {
+        $product = Product::with('trans', 'pockets.translations')->ordinary()->find($id);
+
+
+        $cats = ProductCategory::with(['trans' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])->ordinary()->active()->latest()->get();
+
+        $occasions = Occasion::with(['trans' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])->where('status', 1)->where('type', 0)->latest()->get();
+
+        $filters = Filter::with(['translations' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])->get();
+
+
+
+
+
+
+        return view('admin/dashboard/products/edit')->with(['product' => $product, 'occasions' => $occasions, 'cats' => $cats, 'filters' => $filters]);
+    }
+
+
+    public function update(Product $product, ProductRequest $request)
+    {
+        $data = $request->getSanitized();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->updateImage($request, $product, $product->path('products'), $request->image, 'image');
+        }
+
+        if ($request->has('filters')) {
+            $product->filters()->sync($request->filters);
+        } else {
+            $product->filters()->detach();
+        }
+
+        $product->update($data);
+        $this->saveModelTranslation($product, $data);
+
+       if ($request->has('has_pockets')) {
+    $pocketIdsToKeep = [];
+
+    
+    $pockets = $request->input('pockets', []);
+    $prices = is_array($pockets) && isset($pockets['price']) ? $pockets['price'] : [];
+
+    foreach ($prices as $index => $price) {
+        $pocketData = [
+            'product_id' => $product->id,
+            'price'      => $price,
+        ];
+
+        $pocketId = $pockets['id'][$index] ?? null;
+
+        if ($request->hasFile("pockets.image.{$index}")) {
+            $images = [];
+            foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
+                if ($image && $image->isValid()) {
+                    $images[] = $this->storePocketImage(
+                        $image,
+                        '/attachments/pockets/',
+                        $imgKey
+                    );
+                }
+            }
+            $pocketData['image'] = !empty($images) ? json_encode($images) : null;
+        } elseif ($pocketId && $pocketId !== 'new') {
+            $existingPocket = ProductPocket::find($pocketId);
+            if ($existingPocket) {
+                $pocketData['image'] = $existingPocket->image;
+            }
+        }
+
+        if ($pocketId && $pocketId !== 'new') {
+            $pocket = ProductPocket::find($pocketId);
+            if ($pocket) {
+                $pocket->update($pocketData);
+                $pocketIdsToKeep[] = $pocket->id;
+            } else {
+                // fallback: create if id provided but not found
+                $pocket = ProductPocket::create($pocketData);
+                $pocketIdsToKeep[] = $pocket->id;
+            }
+        } else {
+            $pocket = ProductPocket::create($pocketData);
+            $pocketIdsToKeep[] = $pocket->id;
+        }
+
+
+        $enName = $pockets['en'][$index] ?? null;
+        $arName = $pockets['ar'][$index] ?? null;
+
+        if ($enName !== null) {
+            $pocket->translations()->updateOrCreate(
+                ['locale' => 'en'],
+                ['pocket_name' => $enName]
+            );
+        }
+        if ($arName !== null) {
+            $pocket->translations()->updateOrCreate(
+                ['locale' => 'ar'],
+                ['pocket_name' => $arName]
+            );
+        }
+    }
+
+    ProductPocket::where('product_id', $product->id)
+        ->whereNotIn('id', $pocketIdsToKeep)
+        ->delete();
+} else {
+}
+
+        if ($product->galleryGroup) {
+            $groupGallery = $product->galleryGroup;
+        } else {
+            $groupGallery = GalleryGroup::create([
+                'type' => 0,
+                'status' => 1,
+                'foreign_key' => $product->id,
+                'created_by' => auth()->id(),
+            ])->refresh();
+        }
+        $groupGallery->update($request->gallery);
+
+        $group = $groupGallery;
+
+        if ($request->gallery_image) {
+            $all_images_returned_arr = $this->storeImageMulti($request, $this->galleryPath, $request->gallery_image, 'gallery_image');
+            $imgArr = [];
+            foreach ($request->gallery_image as $keyImg => $valImg) {
+                $imgArr[] = new Gallery([
+                    'image' => $all_images_returned_arr[$keyImg] ?? '',
+                    'sort' => $request->gallery_sort[$keyImg] ?? '',
+                    'gallery_group_id' => $group->id,
+                    'feature' => isset($request->gallery_feature[$keyImg]) ? (int)$request->gallery_feature[$keyImg] : 0,
+                    'status' => 1,
+                    'created_by' => auth()->id(),
+                ]);
+            }
+            $group->images()->saveMany($imgArr);
+        }
+
+        if ($request->occasions) {
+            $product->occasions()->sync($request->occasions);
+        }
+
+        if ($request->categories) {
+            $product->productCategoriesProducts()->sync($request->categories);
+        }
+
+        session()->flash('success', trans('message.admin.updated_sucessfully'));
+        return redirect()->back();
+    }
+
+    public function deletePocketImage($pocketId, $imageName)
+    {
+        $pocket = ProductPocket::findOrFail($pocketId);
+
+        $imagePath = public_path('attachments/pockets/' . $imageName);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $images = json_decode($pocket->image, true) ?? [];
+        $updatedImages = array_filter($images, fn($img) => $img !== $imageName);
+
+        if (empty($updatedImages)) {
+            $pocket->image = null;
+        } else {
+            $pocket->image = json_encode(array_values($updatedImages));
+        }
+
+        $pocket->save();
+
+        return response()->json(['success' => true]);
+    }
+    public function destroy(Product $product)
+    {
+
+        $this->deleteImage($product, 'image');
+        $product->update(['updated_by' => auth()->id()]);
+        $product->trans()->delete();
+        $product->delete();
+
+        session()->flash('danger', trans('message.admin.deleted_sucessfully'));
+        return redirect((route('admin.products.index')));
+    }
+
+
+    public function updateFeature($id)
+    {
+        $product = Product::find($id);
+        if ($product->feature < 1) {
+            $product->feature = 1;
+        } else {
+            $product->feature = 0;
+        }
+        $product->updated_by = auth()->id();
+        $product->save();
+        session()->flash('success', trans('message.admin.featured_changed_sucessfully'));
+        return redirect()->back();
+    }
+
+
+    public function updateStatus($id)
+    {
+        $product = Product::find($id);
+        if ($product->status < 1) {
+            $product->status = 1;
+        } else {
+            $product->status = 0;
+        }
+        $product->updated_by = auth()->id();
+        $product->save();
+        session()->flash('success', trans('message.admin.status_changed_sucessfully'));
+        return redirect()->back();
+    }
+    public function updateshow_in_slider($id)
+    {
+        $product = Product::find($id);
+        if ($product->show_in_slider < 1) {
+            $product->show_in_slider = 1;
+        } else {
+            $product->show_in_slider = 0;
+        }
+        $product->updated_by = auth()->id();
+        $product->save();
+        session()->flash('success', trans('message.admin.show_in_slider_changed_sucessfully'));
+        return redirect()->back();
+    }
+    public function updateshow_text($id)
+    {
+        $product = Product::find($id);
+        if ($product->show_text < 1) {
+            $product->show_text = 1;
+        } else {
+            $product->show_text = 0;
+        }
+        $product->updated_by = auth()->id();
+        $product->save();
+        session()->flash('success', trans('message.admin.show_text_changed_sucessfully'));
+        return redirect()->back();
+    }
+    public function updateuser_input($id)
+    {
+        $product = Product::find($id);
+        if ($product->user_input < 1) {
+            $product->user_input = 1;
+        } else {
+            $product->user_input = 0;
+        }
+        $product->updated_by = auth()->id();
+        $product->save();
+        session()->flash('success', trans('message.admin.user_input_changed_sucessfully'));
+        return redirect()->back();
+    }
+
+
+    public function destroyImage($id)
+    {
+
+        $img = Gallery::find($id);
+        //        $this->deleteImageOfGallery($img->pathInView("products"), $img, 'gallery_image');
+        $this->deleteImageOfGallery($img->path("products"), $img, 'image');
+
+        $img->delete();
+        session()->flash('success', trans('message.admin.deleted_sucessfully'));
+        return redirect()->back();
+    }
+
+
+    /***********################################################***************/
+
+    public function actions(Request $request)
+    {
+
+        if ($request['publish'] == 1) {
+            $products = Product::findMany($request['record']);
+            foreach ($products as $product) {
+                $product->update(['status' => 1, 'updated_by' => auth()->id()]);
+            }
+            session()->flash('success', trans('pages.status_changed_sucessfully'));
+        }
+        if ($request['unpublish'] == 1) {
+            $products = Product::findMany($request['record']);
+            foreach ($products as $product) {
+                $product->update(['status' => 0, 'updated_by' => auth()->id()]);
+            }
+            session()->flash('success', trans('pages.status_changed_sucessfully'));
+        }
+        if ($request['delete_all'] == 1) {
+            $products = Product::findMany($request['record']);
+            foreach ($products as $product) {
+                if ($product->path() . $product->image) {
+                    $this->deleteImage($product, 'image');
+                    @unlink($product->path() . $product->image);
+                    $product->update(['updated_by' => auth()->id()]);
+                    $product->delete();
+                }
+            }
+            session()->flash('success', trans('pages.delete_all_sucessfully'));
+        }
+        return redirect()->back();
+    }
+
+
+    public function reports(Request $request)
+    {
+
+
+        $query = Order::query();
+
+        if ($request->has('from_date') && $request->has('to_date')) {
+            $fromDate = Carbon::parse($request->input('from_date'));
+            $toDate = Carbon::parse($request->input('to_date'))->endOfDay();
+            $query->whereBetween('created_at', [$fromDate, $toDate]);
+        }
+
+        $totalOrders = $query->count();
+        $totalSum = $query->sum('total');
+
+        $occasions = Occasion::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->where('type', 0)->active()->latest()->get();
+
+        $cats = ProductCategory::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->active()->latest()->get();
+
+
+        $query = Product::query()->with('occasions', 'productCategoriesProducts')->with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->with('occasions')->ordinary()->orderBy('id', 'DESC');
+
+
+        if ($request->status != '') {
+            if ($request->status == 1) $query->where('status', $request->status);
+            else {
+                $query->where('status', '!=', 1);
+            }
+        }
+        if ($request->title != '') {
+            $query = $query->whereTranslationLike('title', '%' . request()->input('title') . '%');
+        }
+
+        if ($request->description != '') {
+            $query = $query->whereTranslationLike('description', '%' . request()->input('description') . '%');
+        }
+        if ($request->care_tips != '') {
+            $query = $query->whereTranslationLike('care_tips', '%' . request()->input('care_tips') . '%');
+        }
+
+
+        if ($request->code != '') {
+            $query = $query->where('code', 'like', '%' . request()->input('code') . '%');
+        }
+
+        if ($request->rate) {
+            $query->whereHas('rates', function ($query) use ($request) {
+                $query->select(DB::raw('AVG(rating_value) as avg_rating_value'))
+                    ->groupBy('product_id')
+                    ->having(DB::raw('AVG(rating_value)'), 'like', '%' . $request->rate . '%');
+            });
+        }
+
+        /*************************search of price******************/
+        if ($request->from_price != '' && $request->to_price == '') {
+            $query = $query->where('price', '>=', $request->from_price);
+        }
+
+        if ($request->to_price != '' && $request->from_price == '') {
+            $query = $query->where('price', '<=', $request->to_price);
+        }
+        if ($request->to_price != '' && $request->from_price != '') {
+            $query = $query->where('price', '<=', $request->to_price)->where('price', '>=', $request->from_price);
+        }
+        /*************************search of price******************/
+
+
+        /*************************search of date******************/
+        //        if ($request->from_date && $request->to_date) {
+        //            $from = date($request->from_date);
+        //            $to = date($request->to_date);
+        //            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
+        //        }
+        //        if ($request->from_date != '' && $request->to_date == '') {
+        //            $from = date($request->from_date);
+        //            $to = now();
+        //            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
+        //        }
+        //
+        //        if ($request->to_date != '' && $request->from_date == '') {
+        //            $from = date("1-1-2000");
+        //            $to = date($request->to_date);
+        //            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
+        //        }
+        //
+        /*************************search of date******************/
+        if ($request->from_date && $request->to_date) {
+            $from = date($request->from_date);
+            $to = date($request->to_date);
+            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
+        }
+
+        if ($request->from_date != '' && $request->to_date == '') {
+            $from = date($request->from_date);
+            $query->whereDate('created_at', '>', Carbon::parse($from));
+        }
+
+
+        if ($request->to_date != '' && $request->from_date == '') {
+            $to = date($request->to_date);
+            $query->whereDate('created_at', '<', Carbon::parse($to));
+        }
+
+        /*************************search of date******************/
+
+
+        /*************************search of date******************/
+
+
+        if ($request->occasions != '') {
+            $query = $query->whereHas('occasions', function ($q) {
+                $q->whereTranslationLike('title', request()->input('occasions'));
+            });
+        }
+
+        if ($request->cat_id != '') {
+            $query = $query->whereHas('productCategoriesProducts', function ($q) {
+                //    $q->where('id', request()->input('cat_id'));
+                $q->whereTranslationLike('title', request()->input('cat_id'));
+            });
+        }
+
+        $items = $query->withSum('orderDetails', 'quantity')->withSum('orderDetails', 'total')->withAvg('rates', 'rating_value')->paginate($this->pagination_count);
+        // dd($items->first()->productCategoriesProducts);
+
+
+        return view('admin/dashboard/reports/products/index')->with(['items' => $items, 'occasions' => $occasions, 'cats' => $cats, 'totalSum' => $totalSum, 'totalOrders' => $totalOrders]);
+    }
+
+    // في App\Http\Controllers\Admin\ProductController
+    public function updateFeatured(Request $request)
+    {
+        Product::query()->update([
+            'most_selling' => 0,
+            'best_offer' => 0
+        ]);
+
+        if ($request->has('most_selling')) {
+            Product::whereIn('id', $request->most_selling)->update(['most_selling' => 1]);
+        }
+
+        if ($request->has('best_offer')) {
+            Product::whereIn('id', $request->best_offer)->update(['best_offer' => 1]);
+        }
+
+        return redirect()->back()->with('success', 'تم التحديث بنجاح');
+    }
+    public function featuredProducts()
+    {
+        $products = Product::with(['transNow' => function ($query) {
+            $query->select('product_id', 'title');
+        }])->get();
+
+        return view('admin.products.featured', compact('products'));
+    }
+}

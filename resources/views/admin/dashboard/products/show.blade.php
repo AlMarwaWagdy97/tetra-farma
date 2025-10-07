@@ -204,49 +204,7 @@
 
                                     {{-- images Gellary  --}}
                                     <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample">
-                                        <div class="accordion-item border rounded">
-                                            <h2 class="accordion-header" id="headingImage">
-                                                <button class="accordion-button fw-medium" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseImage"
-                                                    aria-expanded="true" aria-controls="collapseOne">
-                                                    @lang('admin.gallerys')
-                                                </button>
-                                            </h2>
-                                            <div id="collapseImage" class="accordion-collapse collapse show mt-3"
-                                                aria-labelledby="headingImage" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <div class="row mb-3">
-                                                        <div id="images_section"></div>
-
-                                                        @if ($product->galleryGroup && $product->galleryGroup->images && $product->galleryGroup->images->count())
-
-                                                            @forelse($product->galleryGroup->images as $image)
-                                                                <div class="col-4 p-5 ">
-                                                                    <div class="card">
-                                                                        <div class="card-header">
-                                                                            <img style="width: 100%; height:100px"
-                                                                                src="{{ $image->pathInView('products') }}">
-                                                                        </div>
-
-                                                                        <div class="card-body">
-                                                                            {{-- <h4>{{$image->title}} </h4> --}}
-                                                                            <h6> @lang('products.sort')
-                                                                                : {{ $image->sort }} </h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @empty
-                                                            @endforelse
-                                                            {{-- </div> --}}
-
-
-                                                        @endif
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                       
                                     </div>
 
                                 </div>
@@ -409,7 +367,7 @@
 
 
                                                     {{-- in_stock ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
+                                                    {{-- <div class="col-12">
                                                         <label class="col-sm-3 col-form-label"
                                                             for="available">{{ trans('admin.in_stock') }}</label>
                                                         @if ($product->in_stock == 1)
@@ -419,12 +377,12 @@
                                                             <p class="badge  bg-danger h3" style="font-size:20px">
                                                                 @lang('admin.dis_active')</p>
                                                         @endif
-                                                    </div>
+                                                    </div> --}}
                                                     {{-- show_text ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
+                                                    {{-- <div class="col-12">
                                                         <label class="col-sm-3 col-form-label"
                                                             for="available">{{ trans('admin.show_text
-                                                            ') }}</label>
+                                                                                                                        ') }}</label>
                                                         @if ($product->show_text == 1)
                                                             <p class="badge  bg-success h3" style="font-size:20px">
                                                                 @lang('admin.active')</p>
@@ -432,11 +390,11 @@
                                                             <p class="badge  bg-danger h3" style="font-size:20px">
                                                                 @lang('admin.dis_active')</p>
                                                         @endif
-                                                    </div>
+                                                    </div> --}}
 
                                                     <br>
                                                     {{-- //here --}}
-                                                    <div class="row mb-3">
+                                                    {{-- <div class="row mb-3">
                                                         <label for="example-text-input"
                                                             class="col-sm-2 col-form-label">{{ trans('products.occasions') }}</label>
                                                         <div class="col-sm-10">
@@ -451,10 +409,10 @@
                                                             @endforelse
 
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
 
-                                                    <div class="row mb-3">
+                                                    {{-- <div class="row mb-3">
                                                         <label for="example-text-input"
                                                             class="col-sm-2 col-form-label">{{ trans('products.category') }}</label>
                                                         <div class="col-sm-10">
@@ -467,7 +425,7 @@
                                                             @endif
 
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                 </div>
                                             </div>

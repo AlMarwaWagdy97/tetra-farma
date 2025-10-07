@@ -47,136 +47,95 @@ class ProductController extends Controller
     }
 
 
-    public function index(Request $request)
-    {
-
-        if ($request->input('export') === 'excel') {
-            return Excel::download(new ProductsExport($request), 'products.xlsx');
-        }
-        $occasions = Occasion::with([
-            'trans' => function ($q) {
-                $q->where('locale', app()->getLocale());
-            }
-        ])->where('type', 0)->active()->latest()->get();
-        $cats = ProductCategory::with([
-            'trans' => function ($q) {
-                $q->where('locale', app()->getLocale());
-            }
-        ])->active()->latest()->get();
-
-        $query = Product::query()->with('occasions', 'productCategoriesProducts', 'filters')->with([
-            'trans' => function ($q) {
-                $q->where('locale', app()->getLocale());
-            }
-        ])->with('occasions')->ordinary()->orderBy('id', 'DESC');
-
-        $items = $query->paginate(10);
-        $occasions = Occasion::all();
-        $cats = ProductCategory::all();
-
-
-        if ($request->status != '') {
-            if ($request->status == 1) $query->where('status', $request->status);
-            else {
-                $query->where('status', '!=', 1);
-            }
-        }
-        if ($request->title != '') {
-            if ($request->title !== '') {
-                $search = '%' . $request->title . '%';
-                $query->whereHas('translations', function ($q) use ($search) {
-                    $q->where('locale', app()->getLocale())
-                        ->where('title', 'LIKE', $search);
-                });
-            }
-        }
-
-        if ($request->description != '') {
-            if ($request->description !== '') {
-                $search = '%' . $request->description . '%';
-                $query->whereHas('translations', function ($q) use ($search) {
-                    $q->where('locale', app()->getLocale())
-                        ->where('description', 'LIKE', $search);
-                });
-            }
-        }
-        if ($request->care_tips != '') {
-            if ($request->care_tips !== '') {
-                $search = '%' . $request->care_tips . '%';
-                $query->whereHas('translations', function ($q) use ($search) {
-                    $q->where('locale', app()->getLocale())
-                        ->where('care_tips', 'LIKE', $search);
-                });
-            }
-        }
-
-
-        /*************************search of price******************/
-        if ($request->from_price != '' && $request->to_price == '') {
-            $query = $query->where('price', '>=', $request->from_price);
-        }
-
-        if ($request->to_price != '' && $request->from_price == '') {
-            $query = $query->where('price', '<=', $request->to_price);
-        }
-        if ($request->to_price != '' && $request->from_price != '') {
-            $query = $query->where('price', '<=', $request->to_price)->where('price', '>=', $request->from_price);
-        }
-        /*************************search of price******************/
-
-
-        /*************************search of date******************/
-        if ($request->from_date && $request->to_date) {
-            $from = date($request->from_date);
-            $to = date($request->to_date);
-            $query->whereBetween('created_at', [Carbon::parse($from), Carbon::parse($to)]);
-        }
-
-        if ($request->from_date != '' && $request->to_date == '') {
-            $from = date($request->from_date);
-            $query->whereDate('created_at', '>', Carbon::parse($from));
-        }
-        if ($request->to_date != '' && $request->from_date == '') {
-            $to = date($request->to_date);
-            $query->whereDate('created_at', '<', Carbon::parse($to));
-        }
-        /*************************search of date******************/
-
-
-        if ($request->occasions != '') {
-            if ($request->occasions !== '') {
-                $search = '%' . $request->occasions . '%';
-                $query->whereHas('occasions', function ($q) use ($search) {
-                    $q->whereHas('translations', function ($q2) use ($search) {
-                        $q2->where('locale', app()->getLocale())
-                            ->where('title', 'LIKE', $search);
-                    });
-                });
-            }
-        }
-        if ($request->cat_id !== '') {
-            $search = '%' . $request->input('cat_id') . '%';
-            $query->whereHas('productCategoriesProducts', function ($q) use ($search) {
-                $q->whereHas('translations', function ($q2) use ($search) {
-                    $q2->where('locale', app()->getLocale())
-                        ->where('title', 'LIKE', $search);
-                });
-            });
-        }
-
-        if ($request->filled('filters')) {
-            $search = '%' . $request->filters . '%';
-            $query->whereHas('filters', function ($q) use ($search) {
-                $q->whereHas('translations', function ($q2) use ($search) {
-                    $q2->where('locale', app()->getLocale())
-                        ->where('name', 'LIKE', $search);
-                });
-            });
-        }
-
-        $items = $query->paginate($this->pagination_count);
-        return view('admin/dashboard/products/index')->with(['items' => $items, 'occasions' => $occasions, 'cats' => $cats]);
+public function index(Request $request)
+{
+    // export (اختياري)
+    if ($request->input('export') === 'excel') {
+        return Excel::download(new ProductsExport($request), 'products.xlsx');
     }
+
+    // Base query: جلب المنتجات مع ترجمة اللغة الحالية فقط
+    $query = Product::query()
+        ->with(['translations' => function ($q) {
+            $q->where('locale', app()->getLocale());
+        }])
+        ->ordinary() // حسب كودك الأصلي؛ احذفها لو ما تحتاجها
+        ->orderBy('id', 'DESC');
+
+    // status filter
+    if ($request->filled('status')) {
+        if ($request->status == 1) {
+            $query->where('status', 1);
+        } else {
+            $query->where('status', '!=', 1);
+        }
+    }
+
+    // search by title (translations)
+    if ($request->filled('title')) {
+        $search = '%' . $request->title . '%';
+        $query->whereHas('translations', function ($q) use ($search) {
+            $q->where('locale', app()->getLocale())
+              ->where('title', 'LIKE', $search);
+        });
+    }
+
+    // search by description (translations)
+    if ($request->filled('description')) {
+        $search = '%' . $request->description . '%';
+        $query->whereHas('translations', function ($q) use ($search) {
+            $q->where('locale', app()->getLocale())
+              ->where('description', 'LIKE', $search);
+        });
+    }
+
+    // search by care_tips (translations)
+    if ($request->filled('care_tips')) {
+        $search = '%' . $request->care_tips . '%';
+        $query->whereHas('translations', function ($q) use ($search) {
+            $q->where('locale', app()->getLocale())
+              ->where('care_tips', 'LIKE', $search);
+        });
+    }
+
+    // search by code (product column)
+    if ($request->filled('code')) {
+        $query->where('code', 'LIKE', '%' . $request->code . '%');
+    }
+
+    // price filters
+    if ($request->filled('from_price') && !$request->filled('to_price')) {
+        $query->where('price', '>=', $request->from_price);
+    }
+    if ($request->filled('to_price') && !$request->filled('from_price')) {
+        $query->where('price', '<=', $request->to_price);
+    }
+    if ($request->filled('from_price') && $request->filled('to_price')) {
+        $query->whereBetween('price', [$request->from_price, $request->to_price]);
+    }
+
+    // date filters
+    if ($request->filled('from_date') && $request->filled('to_date')) {
+        $from = Carbon::parse($request->from_date);
+        $to = Carbon::parse($request->to_date);
+        $query->whereBetween('created_at', [$from, $to]);
+    } elseif ($request->filled('from_date')) {
+        $from = Carbon::parse($request->from_date);
+        $query->whereDate('created_at', '>=', $from);
+    } elseif ($request->filled('to_date')) {
+        $to = Carbon::parse($request->to_date);
+        $query->whereDate('created_at', '<=', $to);
+    }
+
+    // pagination
+    $items = $query->paginate($this->pagination_count);
+
+    // رجّع الـ view مع المنتجات فقط (بدون occasions/cats/filters)
+    return view('admin/dashboard/products/index')->with([
+        'items' => $items,
+    ]);
+}
+
 
 
     public function show($id)

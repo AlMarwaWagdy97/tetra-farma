@@ -43,6 +43,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\Authorizations\RolesController;
 use App\Http\Controllers\Admin\ServiceCategoryEventsController;
 use App\Http\Controllers\Admin\Authorizations\PermissionsController;
+use App\Http\Controllers\Admin\PartnerController;
 
 
 /*
@@ -152,6 +153,16 @@ Route::group([
                 // ----- subscribes -----------------------------------------------
                 Route::resource('subscribes', SubscribesController::class);
                 //--------------- End subscribes ---------------------------------
+
+                // ----- Jobs -----------------------------------------------
+                Route::resource('jobs', App\Http\Controllers\Admin\JobController::class);
+                Route::get('jobs/{job}/toggle-status', [App\Http\Controllers\Admin\JobController::class, 'toggleStatus'])->name('jobs.toggle-status');
+
+
+                // ----- Partners -----------------------------------------------
+                Route::resource('partners', PartnerController::class);
+                Route::get('partners/{partner}/toggle-status', [PartnerController::class, 'toggleStatus'])->name('partners.toggle-status');
+
 
                 // ----- Specialties -----------------------------------------------
                 Route::resource('specialties', SpecialtiesController::class);

@@ -99,7 +99,7 @@
                                                             </div>
 
                                                             {{-- care_tips ------------------------------------------------------------------------------------- --}}
-                                                            <div class="row mb-3">
+                                                            {{-- <div class="row mb-3">
                                                                 <label for="example-text-input"
                                                                     class="col-sm-2 col-form-label"> @lang('admin.care_tips_in')
                                                                     {{ trans('lang.' . Locale::getDisplayName($locale)) }}
@@ -117,7 +117,7 @@
                                                                             class="missiong-spam">{{ $errors->first($locale . '.care_tips') }}</span>
                                                                     @endif
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -372,51 +372,6 @@
                                         </div>
                                     </div>
 
-                                    @if ($product->galleryGroup && $product->galleryGroup->images && $product->galleryGroup->images->count())
-                                        {{-- images Gellary  --}}
-                                        <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample_image_old">
-                                            <div class="accordion-item border rounded">
-                                                <h2 class="accordion-header" id="headingImage2">
-                                                    <button class="accordion-button fw-medium" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseImage2"
-                                                        aria-expanded="true" aria-controls="collapseOne">
-                                                        @lang('admin.current_gallerys')
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseImage2" class="accordion-collapse collapse show mt-3"
-                                                    aria-labelledby="headingImage2"
-                                                    data-bs-parent="#accordionExample_image_old">
-                                                    <div class="accordion-body">
-                                                        <div class="row mb-3">
-                                                            <div class="row">
-                                                                @forelse($product->galleryGroup->images as $image)
-                                                                    <div class="col-4 p-5">
-                                                                        <div class="card">
-                                                                            <div class="card-header">
-                                                                                <img style="width: 100%; height:100px"
-                                                                                    src="{{ asset($image->pathInView('products')) }}">
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <h4>{{ $image->title }} </h4>
-                                                                                <h6> @lang('products.sort')
-                                                                                    : {{ $image->sort }} </h6>
-                                                                                <br>
-                                                                                <a class="btn btn-danger btn-sm"
-                                                                                    href="{{ \LaravelLocalization::localizeURL(route('admin.products.destroy_product_gallery_image', $image->id)) }}">
-                                                                                    <i class="fa fa-trash"></i> </a>
-                                                                                <br>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @empty
-                                                                @endforelse
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
 
                                     {{-- images Gellary  --}}
                                     <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample_image">
@@ -477,71 +432,10 @@
                                             <div id="collapseOne" class="accordion-collapse collapse show"
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <div class="row mb-3">
-                                                        <label for="example-text-input"
-                                                            class="col-sm-12 col-form-label">{{ trans('products.categories') }}</label>
-                                                        <div class="col-sm-12">
-                                                            <select class="form-select form-select-sm select2" multiple
-                                                                name="categories[]">
-                                                                @forelse($cats as $key2 => $val2)
-                                                                    <option value="{{ $val2->id }}"
-                                                                        {{ in_array($val2->id, $product->productCategoriesProducts->pluck('id')->toArray()) || old('categories.' . $key2) == $val2->id ? 'selected' : '' }}>
-                                                                        {{ isset($val2->transNow) ? $val2->transNow->title : '' }}
-                                                                    @empty
-                                                                @endforelse
-                                                            </select>
-                                                        </div>
-                                                        @if ($errors->has('categories'))
-                                                            <span
-                                                                class="missiong-spam">{{ $errors->first($locale . '.status') }}</span>
-                                                        @endif
-                                                    </div>
+                                             
 
-                                                    <div class="row mb-3">
-                                                        <label for="example-text-input"
-                                                            class="col-sm-12 col-form-label">{{ trans('products.occasions') }}</label>
-                                                        <div class="col-sm-12">
-                                                            <select multiple class="form-select form-select-sm select2"
-                                                                name="occasions[]">
-                                                                @forelse($occasions as $key1 => $val1)
-                                                                    <option value="{{ $val1->id }}"
-                                                                        {{ in_array($val1->id, $product->occasions->pluck('id')->toArray()) || old('occasions.' . $key1) == $val1->id ? 'selected' : '' }}>
-                                                                        {{ isset($val1->transNow) ? $val1->transNow->title : '' }}
-                                                                    @empty
-                                                                @endforelse
-                                                            </select>
-                                                        </div>
-                                                        @if ($errors->has($locale . '.occasions'))
-                                                            <span
-                                                                class="missiong-spam">{{ $errors->first($locale . '.status') }}</span>
-                                                        @endif
-                                                    </div>
+                                               
 
-                                                    <div class="row mb-3">
-                                                        <label for="filters"
-                                                            class="col-sm-12 col-form-label">{{ trans('products.filters') }}</label>
-                                                        <div class="col-sm-12">
-                                                            <select class="form-select form-select-sm select2" multiple
-                                                                name="filters[]">
-                                                                <option value="" disabled>
-                                                                    {{ trans('products.choose_filters') }}</option>
-                                                                @forelse ($filters as $filter)
-                                                                    <option value="{{ $filter->id }}"
-                                                                        {{ in_array($filter->id, $product->filters->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                                        {{ @$filter->translations[0]->name }}
-                                                                    </option>
-                                                                @empty
-                                                                    <option value="" disabled>
-                                                                        {{ trans('products.no_filters_available') }}
-                                                                    </option>
-                                                                @endforelse
-                                                            </select>
-                                                        </div>
-                                                        @if ($errors->has('filters'))
-                                                            <span
-                                                                class="missiong-spam">{{ $errors->first('filters') }}</span>
-                                                        @endif
-                                                    </div>
 
                                                     @if (@$product->image != null)
                                                         <div class="col-12">
@@ -627,209 +521,13 @@
                                                                 data-off-label=" @lang('admin.no')"></label>
                                                         </div>
                                                     </div>
-                                                    {{-- show_in_slider ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
-                                                        <label class="col-sm-2 col-form-label"
-                                                            for="available">{{ trans('admin.show_in_slider') }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input class="form-check form-switch" name="show_in_slider"
-                                                                type="checkbox" id="switch9" switch="success"
-                                                                {{ $product->show_in_slider == 1 || old('show_in_slider') == 1 ? 'checked' : '' }}
-                                                                value="1">
-                                                            <label class="form-label" for="switch9"
-                                                                data-on-label=" @lang('admin.yes') "
-                                                                data-off-label=" @lang('admin.no')"></label>
-                                                        </div>
-                                                    </div>
+                                             
 
-                                                    {{-- in_stock ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
-                                                        <label class="col-sm-2 col-form-label"
-                                                            for="available">{{ trans('admin.in_stock') }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input class="form-check form-switch" name="in_stock"
-                                                                type="checkbox" id="switch34" switch="success"
-                                                                {{ $product->in_stock == 1 || old('in_stock') == 1 ? 'checked' : '' }}
-                                                                value="1">
-                                                            <label class="form-label" for="switch34"
-                                                                data-on-label=" @lang('admin.yes') "
-                                                                data-off-label=" @lang('admin.no')"></label>
-                                                        </div>
-                                                    </div>
+                                        
 
-                                                    {{-- show_text
- ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
-                                                        <label class="col-sm-2 w-100 col-form-label"
-                                                            for="available">{{ trans('admin.show_text') }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input class="form-check form-switch" name="show_text"
-                                                                type="checkbox" id="switch35" switch="success"
-                                                                {{ $product->show_text == 1 || old('show_text') == 1 ? 'checked' : '' }}
-                                                                value="1">
-                                                            <label class="form-label" for="switch35"
-                                                                data-on-label=" @lang('admin.yes') "
-                                                                data-off-label=" @lang('admin.no')"></label>
-                                                        </div>
-                                                    </div>
 
-                                                    {{-- user_input ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
-                                                        <label class="col-sm-2 w-100 col-form-label"
-                                                            for="available">{{ trans('admin.user_input') }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input class="form-check form-switch" name="user_input"
-                                                                type="checkbox" id="switch36" switch="success"
-                                                                {{ $product->user_input == 1 || old('user_input') == 1 ? 'checked' : '' }}
-                                                                value="1">
-                                                            <label class="form-label" for="switch36"
-                                                                data-on-label=" @lang('admin.yes') "
-                                                                data-off-label=" @lang('admin.no')"></label>
-                                                        </div>
-                                                    </div>
 
-                                                    {{-- product_cart ------------------------------------------------------------------------------------- --}}
-                                                    <div class="col-12">
-                                                        <label class="col-sm-2 w-100 col-form-label"
-                                                            for="available">{{ trans('admin.product_cart') }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input class="form-check form-switch" name="product_cart"
-                                                                type="checkbox" id="switch37" switch="success"
-                                                                {{ $product->product_cart == 1 || old('product_cart') == 1 ? 'checked' : '' }}
-                                                                value="1">
-                                                            <label class="form-label" for="switch37"
-                                                                data-on-label=" @lang('admin.yes') "
-                                                                data-off-label=" @lang('admin.no')"></label>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Pockets Section --}}
-                                                    {{-- Pockets Section --}}
-                                                    <div class="accordion mt-4 mb-4" id="accordionPockets">
-                                                        <div class="accordion-item border rounded">
-                                                            <h2 class="accordion-header" id="headingPockets">
-                                                                <button class="accordion-button fw-medium" type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapsePockets" aria-expanded="true"
-                                                                    aria-controls="collapsePockets">
-                                                                    @lang('products.pockets')
-                                                                </button>
-                                                            </h2>
-                                                            <div id="collapsePockets"
-                                                                class="accordion-collapse collapse show mt-3"
-                                                                aria-labelledby="headingPockets"
-                                                                data-bs-parent="#accordionPockets">
-                                                                <div class="accordion-body">
-                                                                    <div class="row mb-3">
-                                                                        <div class="col-12 mb-3">
-                                                                            <label>@lang('products.has_pockets')</label>
-                                                                            <input type="checkbox" name="has_pockets"
-                                                                                id="has_pockets"
-                                                                                {{ $product->has_pockets ? 'checked' : '' }}>
-                                                                        </div>
-
-                                                                        <div id="pockets_section"
-                                                                            style="{{ $product->has_pockets ? '' : 'display:none;' }}">
-                                                                            @if ($product->has_pockets && $product->pockets->count())
-                                                                                @foreach ($product->pockets as $index => $pocket)
-                                                                                    <div class="pocket mb-4 p-3 border rounded"
-                                                                                        data-index="{{ $index }}">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-12 mb-2">
-                                                                                                <label>@lang('products.pocket_name_en')</label>
-                                                                                                <input type="text"
-                                                                                                    name="pockets[en][{{ $index }}]"
-                                                                                                    value="{{ $pocket->translate('en')->pocket_name }}"
-                                                                                                    class="form-control"
-                                                                                                    required>
-                                                                                            </div>
-
-                                                                                            <div class="col-md-12 mb-2">
-                                                                                                <label>@lang('products.pocket_name_ar')</label>
-                                                                                                <input type="text"
-                                                                                                    name="pockets[ar][{{ $index }}]"
-                                                                                                    value="{{ $pocket->translate('ar')->pocket_name }}"
-                                                                                                    class="form-control"
-                                                                                                    required>
-                                                                                            </div>
-
-                                                                                            <div class="col-md-12 mb-2">
-                                                                                                <label>@lang('products.pocket_price')</label>
-                                                                                                <input type="number"
-                                                                                                    name="pockets[price][{{ $index }}]"
-                                                                                                    value="{{ $pocket->price}}"
-                                                                                                    class="form-control"
-                                                                                                    step="0.01"
-                                                                                                    required>
-                                                                                            </div>
-
-                                                                                            @if ($pocket->image && ($images = json_decode($pocket->image)))
-                                                                                                <div class="col-12 mb-2">
-                                                                                                    <label>@lang('products.current_images')</label>
-                                                                                                    <div
-                                                                                                        class="d-flex flex-wrap">
-                                                                                                        @foreach ($images as $img)
-                                                                                                            <div class="position-relative me-2 mb-2"
-                                                                                                                style="width: 80px;">
-                                                                                                                <img src="{{ asset('attachments/pockets/' . $img) }}"
-                                                                                                                    class="img-thumbnail"
-                                                                                                                    style="max-width:80px; max-height:80px;">
-                                                                                                                {{-- <button
-                                                                                                                    type="button"
-                                                                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0 p-0"
-                                                                                                                    style="width:20px; height:20px;"
-                                                                                                                    onclick="deletePocketImage(this, '{{ $img }}', '{{ $pocket->id }}')">
-                                                                                                                    &times;
-                                                                                                                </button> --}}
-                                                                                                            </div>
-                                                                                                        @endforeach
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endif
-
-                                                                                            
-                                                                                            <div class="col-md-12 mb-2">
-                                                                                                <label>@lang('products.new_pocket_images')</label>
-                                                                                                <input type="file"
-                                                                                                    name="pockets[image][{{ $index }}][]"
-                                                                                                    class="form-control"
-                                                                                                    accept="image/*"
-                                                                                                    multiple>
-                                                                                            </div>
-
-                                                                                            
-                                                                                            <input type="hidden"
-                                                                                                name="pockets[id][{{ $index }}]"
-                                                                                                value="{{ $pocket->id }}">
-
-                                                                                            
-                                                                                            <div
-                                                                                                class="col-md-4 text-end align-self-end mb-2">
-                                                                                                <button type="button"
-                                                                                                    class="btn btn-danger delete_pocket">
-                                                                                                    <i
-                                                                                                        class="fa fa-trash"></i>
-                                                                                                </button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endforeach
-                                                                            @endif
-                                                                        </div>
-
-                                                                        <div class="col-12">
-                                                                            <button type="button" id="add_pocket"
-                                                                                class="btn btn-success"
-                                                                                style="{{ $product->has_pockets ? '' : 'display:none;' }}">
-                                                                                <i class="fa fa-plus"></i>
-                                                                                @lang('products.add_pocket')
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                               
                                                 </div>
                                             </div>
                                         </div>

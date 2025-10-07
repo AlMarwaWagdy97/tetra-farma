@@ -499,6 +499,10 @@ return [
     'video' => 'Video',
     'slider_video' => 'Slider Video',
     'about' => 'About',
+     'active' => ' Active',
+    'dis_active' => ' Dis Active',
+    'no_data' => ' No Data ',
+    
 
 
 

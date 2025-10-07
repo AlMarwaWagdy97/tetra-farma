@@ -522,6 +522,9 @@ return [
     'video' => 'الفيديو',
     'slider_video' => 'Slider Video',
     'about' => 'من نحن',
+    'active' => 'نشط',
+    'dis_active' => 'غير نشط',
+    'no_data' => 'لا توجد بيانات',
 
 
 

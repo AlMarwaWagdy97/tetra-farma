@@ -46,4 +46,7 @@ return [
     // buttons
     'save' => 'حفظ',
     'cancel' => 'إلغاء',
+    'remove' => 'إزالة',
+    'add_core_value' => 'إضافة قيمة أساسية',
+    'core_values' => 'القيم الأساسية',
 ];

@@ -83,9 +83,9 @@
                                             <label class="form-label">@lang('about.at_a_glance')</label>
                                             <textarea name="{{ $locale }}[at_a_glance]" class="form-control" rows="2">{{ old($locale . '.at_a_glance', optional($about->translate($locale))->at_a_glance) }}</textarea>
                                         </div>
-                                        <!-- داخل حلقة اللغات -->
+
                                         <div class="mb-3">
-                                            <label>Core Values ({{ strtoupper($locale) }})</label>
+                                            <label>@lang('about.core_values') ({{ strtoupper($locale) }})</label>
 
                                             <div id="core-values-{{ $locale }}">
                                                 @php
@@ -104,11 +104,11 @@
                                                         <textarea name="{{ $locale }}[core_values][{{ $i }}][description]" class="form-control"
                                                             placeholder="Description">{{ $cv['description'] ?? '' }}</textarea>
                                                         <button type="button"
-                                                            class="btn btn-sm btn-danger remove-core">Remove</button>
+                                                            class="btn btn-sm btn-danger remove-core">@lang('about.remove')</button>
                                                     </div>
                                                 @endforeach
 
-                                                
+
                                                 @if (empty($existing))
                                                     <div class="core-value-item mb-2">
                                                         <input type="text"
@@ -116,13 +116,13 @@
                                                             placeholder="Title" class="form-control mb-1">
                                                         <textarea name="{{ $locale }}[core_values][0][description]" class="form-control" placeholder="Description"></textarea>
                                                         <button type="button"
-                                                            class="btn btn-sm btn-danger remove-core">Remove</button>
+                                                            class="btn btn-sm btn-danger remove-core">@lang('about.remove')</button>
                                                     </div>
                                                 @endif
                                             </div>
 
                                             <button type="button" class="btn btn-sm btn-primary mt-2 add-core"
-                                                data-locale="{{ $locale }}">Add core value</button>
+                                                data-locale="{{ $locale }}">@lang('about.add_core_value')</button>
                                         </div>
 
 
@@ -171,11 +171,19 @@
 
 
 
-                        <div class="d-grid">
+                        {{-- <div class="d-grid">
                             <button type="submit" class="btn btn-success">@lang('button.save')</button>
-                        </div>
+                        </div> --}}
 
 
+                    </div>
+                </div>
+                <div class="row mb-3 text-end">
+                    <div>
+                        <a href="{{ route('admin.slider.index') }}"
+                            class="btn btn-primary waves-effect waves-light ml-3 btn-sm">@lang('button.cancel')</a>
+                        <button type="submit"
+                            class="btn btn-outline-success waves-effect waves-light ml-3 btn-sm">@lang('button.save')</button>
                     </div>
                 </div>
             </div>
@@ -183,25 +191,24 @@
     </div>
 @endsection
 <script>
-    document.addEventListener('click', function(e){
-    if(e.target.matches('.add-core')){
-        const locale = e.target.dataset.locale;
-        const container = document.getElementById('core-values-' + locale);
-        const index = container.querySelectorAll('.core-value-item').length;
-        const tpl = document.createElement('div');
-        tpl.className = 'core-value-item mb-2';
-        tpl.innerHTML = `
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.add-core')) {
+            const locale = e.target.dataset.locale;
+            const container = document.getElementById('core-values-' + locale);
+            const index = container.querySelectorAll('.core-value-item').length;
+            const tpl = document.createElement('div');
+            tpl.className = 'core-value-item mb-2';
+            tpl.innerHTML = `
             <input type="text" name="${locale}[core_values][${index}][title]" placeholder="Title" class="form-control mb-1">
             <textarea name="${locale}[core_values][${index}][description]" class="form-control" placeholder="Description"></textarea>
             <button type="button" class="btn btn-sm btn-danger remove-core">Remove</button>
         `;
-        container.appendChild(tpl);
-    }
+            container.appendChild(tpl);
+        }
 
-    if(e.target.matches('.remove-core')){
-        e.target.closest('.core-value-item').remove();
-        
-    }
-});
+        if (e.target.matches('.remove-core')) {
+            e.target.closest('.core-value-item').remove();
 
+        }
+    });
 </script>

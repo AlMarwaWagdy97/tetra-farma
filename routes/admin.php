@@ -214,6 +214,13 @@ Route::group([
                 Route::get('services/update-featured/{id}', [ServicesController::class, 'update_featured'])->name('services.update-featured');
                 // ----- End Services -------------------------------------------
 
+                // ----- faqs -----------------------------------------------
+                Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
+                Route::get('faqs/{faq}/toggle-status', [App\Http\Controllers\Admin\FaqController::class, 'toggleStatus'])->name('faqs.toggle-status');
+
+                Route::resource('faq-categories', App\Http\Controllers\Admin\FaqCategoryController::class);
+                Route::get('faq-categories/{id}/toggle-status', [App\Http\Controllers\Admin\FaqCategoryController::class, 'toggleStatus'])->name('faq-categories.toggle-status');
+
                 // ----- offers -----------------------------------------------
                 Route::resource('news', NewsController::class);
                 Route::post('news/actions', [NewsController::class, 'actions'])->name('news.actions');

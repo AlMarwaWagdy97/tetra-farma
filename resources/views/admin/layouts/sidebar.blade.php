@@ -1,5 +1,5 @@
 <div class="vertical-menu side-navbar-custom-color"
-     style="background-color:{{ @$adminDashboardTheme->side_navbar_background }};">
+    style="background-color:{{ @$adminDashboardTheme->side_navbar_background }};">
 
     <div data-simplebar class="h-100">
 
@@ -77,41 +77,23 @@
                         {{-- End Pages ------------------------------------------------------------ --}}
 
 
-                        {{-- Slider --------------------------------------------------------------- --}}
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fa fa-sliders-h"></i>
-                                <span> @lang('admin.slider')</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('admin.slider.index') }}"> @lang('admin.slider_show')</a></li>
-                                <li><a href="{{ route('admin.slider.create') }}"> @lang('admin.slider_create')</a></li>
-                            </ul>
-                        </li>
-                        {{-- End Slider ----------------------------------------------------------- --}}
+                       
 
-                        {{-- Contact Us ----------------------------------------------------------- --}}
-                        <li>
-                            <a href="{{ route('admin.contact-us.index') }}" class="waves-effect">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span>{{ trans('admin.contact_us') }}</span>
-                            </a>
-                        </li>
-                        {{-- End Contact Us ------------------------------------------------------- --}}
+                  
 
                         {{-- subscribes Us ----------------------------------------------------------- --}}
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('admin.subscribes.index') }}" class="waves-effect">
                                 <i class="far fa-handshake"></i>
                                 <span>{{ trans('admin.subscribes') }}<span>
                             </a>
-                        </li>
+                        </li> --}}
                         {{-- End subscribes Us ------------------------------------------------------- --}}
 
                         {{-- whatsapp contacts   ----------------------------------------------------------- --}}
-                        <li><a href="{{ route('admin.whatsapp-contact.index') }}"> <i
-                                    class="fab  fa-whatsapp"></i> @lang('whatsapp_contacts.show_whatsapp_contacts')</a>
-                        </li>
+                        {{-- <li><a href="{{ route('admin.whatsapp-contact.index') }}"> <i class="fab  fa-whatsapp"></i>
+                                @lang('whatsapp_contacts.show_whatsapp_contacts')</a>
+                        </li> --}}
 
                     </ul>
                 </li>
@@ -119,125 +101,125 @@
 
 
                 {{--                --}}{{-- Works ----------------------------------------------------------- --}}
-                {{--                <li>--}}
-                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                        <i class="fas fa-briefcase"></i>--}}
-                {{--                        <span> @lang('admin.works')</span>--}}
-                {{--                    </a>--}}
-                {{--                    <ul class="sub-menu" aria-expanded="false">--}}
+                {{--                <li> --}}
+                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                        <i class="fas fa-briefcase"></i> --}}
+                {{--                        <span> @lang('admin.works')</span> --}}
+                {{--                    </a> --}}
+                {{--                    <ul class="sub-menu" aria-expanded="false"> --}}
 
                 {{--                        --}}{{-- Specialties --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fa fa-sitemap"></i>--}}
-                {{--                                <span> @lang('specialties.specialties')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li>--}}
-                {{--                                    <a href="{{ route('admin.specialties.index') }}"> @lang('specialties.show_specialties')</a>--}}
-                {{--                                </li>--}}
-                {{--                                <li>--}}
-                {{--                                    <a href="{{ route('admin.specialties.create') }}"> @lang('specialties.create_specialties')</a>--}}
-                {{--                                </li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fa fa-sitemap"></i> --}}
+                {{--                                <span> @lang('specialties.specialties')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li> --}}
+                {{--                                    <a href="{{ route('admin.specialties.index') }}"> @lang('specialties.show_specialties')</a> --}}
+                {{--                                </li> --}}
+                {{--                                <li> --}}
+                {{--                                    <a href="{{ route('admin.specialties.create') }}"> @lang('specialties.create_specialties')</a> --}}
+                {{--                                </li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End Specialties ----------------------------------------------------------- --}}
 
                 {{--                        --}}{{-- Doctors --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fas fa-user-md"></i>--}}
-                {{--                                <span> @lang('doctors.doctors')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li><a href="{{ route('admin.doctors.index') }}"> @lang('doctors.show_doctors')</a></li>--}}
-                {{--                                <li><a href="{{ route('admin.doctors.create') }}"> @lang('doctors.create_doctor')</a>--}}
-                {{--                                </li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fas fa-user-md"></i> --}}
+                {{--                                <span> @lang('doctors.doctors')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li><a href="{{ route('admin.doctors.index') }}"> @lang('doctors.show_doctors')</a></li> --}}
+                {{--                                <li><a href="{{ route('admin.doctors.create') }}"> @lang('doctors.create_doctor')</a> --}}
+                {{--                                </li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End Doctors ----------------------------------------------------------- --}}
 
                 {{--                        --}}{{-- booking --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="{{ route('admin.booking.index') }}" class="waves-effect">--}}
-                {{--                                <i class="fas fa-shopping-bag"></i>--}}
-                {{--                                <span>{{ trans('admin.booking') }}</span>--}}
-                {{--                            </a>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="{{ route('admin.booking.index') }}" class="waves-effect"> --}}
+                {{--                                <i class="fas fa-shopping-bag"></i> --}}
+                {{--                                <span>{{ trans('admin.booking') }}</span> --}}
+                {{--                            </a> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End booking ----------------------------------------------------------- --}}
 
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+                {{--                    </ul> --}}
+                {{--                </li> --}}
                 {{--                --}}{{-- End Works -------------------------------------------------------- --}}
 
 
                 {{--                --}}{{-- Blogs ----------------------------------------------------------- --}}
-                {{--                <li>--}}
-                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                        <i class="mdi mdi-buffer"></i>--}}
-                {{--                        <span> @lang('admin.blogs')</span>--}}
-                {{--                    </a>--}}
-                {{--                    <ul class="sub-menu" aria-expanded="false">--}}
+                {{--                <li> --}}
+                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                        <i class="mdi mdi-buffer"></i> --}}
+                {{--                        <span> @lang('admin.blogs')</span> --}}
+                {{--                    </a> --}}
+                {{--                    <ul class="sub-menu" aria-expanded="false"> --}}
                 {{--                        --}}{{-- services --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fa fa-smile"></i>--}}
-                {{--                                <span> @lang('services.services')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li><a href="{{ route('admin.services.index') }}"> @lang('services.show_services')</a>--}}
-                {{--                                </li>--}}
-                {{--                                <li>--}}
-                {{--                                    <a href="{{ route('admin.services.create') }}"> @lang('services.create_services')</a>--}}
-                {{--                                </li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fa fa-smile"></i> --}}
+                {{--                                <span> @lang('services.services')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li><a href="{{ route('admin.services.index') }}"> @lang('services.show_services')</a> --}}
+                {{--                                </li> --}}
+                {{--                                <li> --}}
+                {{--                                    <a href="{{ route('admin.services.create') }}"> @lang('services.create_services')</a> --}}
+                {{--                                </li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End services ----------------------------------------------------------- --}}
 
                 {{--                        --}}{{-- offers --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fas fa-hand-holding-usd"></i>--}}
-                {{--                                <span> @lang('offers.offers')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li><a href="{{ route('admin.news.index') }}"> @lang('offers.show_offers')</a></li>--}}
-                {{--                                <li><a href="{{ route('admin.news.create') }}"> @lang('news.create_news')</a></li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fas fa-hand-holding-usd"></i> --}}
+                {{--                                <span> @lang('offers.offers')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li><a href="{{ route('admin.news.index') }}"> @lang('offers.show_offers')</a></li> --}}
+                {{--                                <li><a href="{{ route('admin.news.create') }}"> @lang('news.create_news')</a></li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End services ----------------------------------------------------------- --}}
 
 
                 {{--                        --}}{{-- gallery --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fas fa-images"></i>--}}
-                {{--                                <span> @lang('gallery.galleries')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li><a href="{{ route('admin.gallery.index') }}"> @lang('gallery.show_gallery')</a></li>--}}
-                {{--                                <li><a href="{{ route('admin.gallery.create') }}"> @lang('gallery.create_gallery')</a>--}}
-                {{--                                </li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fas fa-images"></i> --}}
+                {{--                                <span> @lang('gallery.galleries')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li><a href="{{ route('admin.gallery.index') }}"> @lang('gallery.show_gallery')</a></li> --}}
+                {{--                                <li><a href="{{ route('admin.gallery.create') }}"> @lang('gallery.create_gallery')</a> --}}
+                {{--                                </li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End gallery ----------------------------------------------------------- --}}
 
                 {{--                        --}}{{-- videos --------------------------------------------------------------- --}}
-                {{--                        <li>--}}
-                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                                <i class="fas fa-video"></i>--}}
-                {{--                                <span> @lang('videos.videos')</span>--}}
-                {{--                            </a>--}}
-                {{--                            <ul class="sub-menu" aria-expanded="false">--}}
-                {{--                                <li><a href="{{ route('admin.videos.index') }}"> @lang('videos.show_videos')</a></li>--}}
-                {{--                                <li><a href="{{ route('admin.videos.create') }}"> @lang('videos.create_video')</a></li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
+                {{--                        <li> --}}
+                {{--                            <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                                <i class="fas fa-video"></i> --}}
+                {{--                                <span> @lang('videos.videos')</span> --}}
+                {{--                            </a> --}}
+                {{--                            <ul class="sub-menu" aria-expanded="false"> --}}
+                {{--                                <li><a href="{{ route('admin.videos.index') }}"> @lang('videos.show_videos')</a></li> --}}
+                {{--                                <li><a href="{{ route('admin.videos.create') }}"> @lang('videos.create_video')</a></li> --}}
+                {{--                            </ul> --}}
+                {{--                        </li> --}}
                 {{--                        --}}{{-- End videos ----------------------------------------------------------- --}}
 
 
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+                {{--                    </ul> --}}
+                {{--                </li> --}}
                 {{--                --}}{{-- End Blogs -------------------------------------------------------- --}}
 
 
@@ -254,17 +236,18 @@
 
 
                 {{-- orders ----------------------------------------------------------- --}}
-                {{--                <li>--}}
-                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>--}}
+                {{--                <li> --}}
+                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> --}}
 
-                {{--                        <span> @lang('admin.orders')</span>--}}
-                {{--                    </a>--}}
-                {{--                    <ul class="sub-menu" aria-expanded="false">--}}
-                @php $pending =  \App\Models\Order::where('status' , \App\Enums\OrderStatusEnum::PENDING)->count();  @endphp
-                <li><a href="{{ route('admin.orders.index') }}"> <i class="fa fa-shopping-cart"
-                                                                    aria-hidden="true"></i> @lang('admin.orders')
-                        <span data-toggle="tooltip" title="{{__('admin.pending')  . " : " . $pending}}" style="
+                {{--                        <span> @lang('admin.orders')</span> --}}
+                {{--                    </a> --}}
+                {{--                    <ul class="sub-menu" aria-expanded="false"> --}}
+                {{-- @php $pending =  \App\Models\Order::where('status' , \App\Enums\OrderStatusEnum::PENDING)->count();  @endphp
+                <li><a href="{{ route('admin.orders.index') }}"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        @lang('admin.orders')
+                        <span data-toggle="tooltip" title="{{ __('admin.pending') . ' : ' . $pending }}"
+                            style="
                             border-radius: 100px;
                             /*background-color: rgba(255, 255, 255, 0.3);*/
                             background-color: rgba(255,255,255,0.4);
@@ -276,12 +259,12 @@
                             padding-left: 5px;
                             padding-right: 5px;
                             font-size: 12px;
-                            "
-                        >{{$pending}}</span> </a>
-                </li>
+                            ">{{ $pending }}</span>
+                    </a>
+                </li> --}}
 
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+                {{--                    </ul> --}}
+                {{--                </li> --}}
                 {{-- End orders ----------------------------------------------------------- --}}
 
 
@@ -289,7 +272,7 @@
 
 
                 {{-- shop ----------------------------------------------------------- --}}
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                         <span> @lang('admin.shop')</span>
@@ -297,11 +280,12 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.product_category.index') }}"> @lang('admin.product_category')</a>
                         </li>
+
                         <li>
                             <a href="{{ route('admin.occasions_products_index.index') }}"> @lang('admin.occasions_products')</a>
                         </li>
 
-                        <li><a href="{{ route('admin.products.index') }}"> @lang('admin.products')</a></li>
+
                         <li>
                             <a href="{{ url('/admin/settings/view_setting') }}">@lang('admin.veiw_products')</a>
                         </li>
@@ -316,62 +300,25 @@
                         </li>
 
                         <li>
-                            
+
                             <a href="{{ route('admin.show_in_cart_product_list') }}"> @lang('admin.products_of_cart_only')</a>
                         </li>
                         <li><a href="{{ route('admin.rates.index') }}"> @lang('admin.rates')</a>
                         </li>
-                        {{-- End shop ----------------------------------------------------------- --}}
                     </ul>
-                </li>
+                </li> --}}
                 {{-- End shop ----------------------------------------------------------- --}}
 
 
 
 
 
-                {{-- services ----------------------------------------------------------- --}}
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fas fa-smile-beam"></i>
-                        <span> @lang('admin.services')</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-
-                        {{-- Events --------------------------------------------------------------- --}}
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                {{--                                <i class="fas fas fa-users"></i>--}}
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <span> @lang('admin.events')</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li>
-                                    <a href="{{ route('admin.occasions_services_index.index') }}"> @lang('admin.occasions_services') </a>
-                                </li>
-                                <li><a href="{{ route('admin.events.index')  }}">  @lang('admin.events_page')</a></li>
-                            </ul>
-                        </li>
-                        {{-- End Events ----------------------------------------------------------- --}}
-                        <li><a href="{{ route('admin.get_landscape.get' ) }}">
-                                <i class="fab fa-canadian-maple-leaf"></i>
-                                <span> @lang('admin.landscape_page')</span>
-                            </a>
-                        </li>
-                        {{--                        <li><a href="{{ route('admin.events.index') }}"> @lang('admin.events')</a></li>--}}
-
-
-
-
-                        {{-- End services ----------------------------------------------------------- --}}
-                    </ul>
-                </li>
-                {{-- End services ----------------------------------------------------------- --}}
+              
 
 
 
                 {{-- reports ----------------------------------------------------------- --}}
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                         <span> @lang('admin.reports')</span>
@@ -383,13 +330,13 @@
                             <a href="{{ route('admin.clients_reports.reports') }}"> @lang('admin.client_reports')</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- End reports ----------------------------------------------------------- --}}
 
 
 
                 {{-- main_page_gallery ----------------------------------------------------------- --}}
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-asterisk" aria-hidden="true"></i>
                         <span> @lang('admin.main_page_gallery')</span>
@@ -397,25 +344,85 @@
                     <ul class="sub-menu" aria-expanded="false">
 
                         <li>
-                            <a href="{{ route('admin.main_page_gallery.index' ) }}"> @lang('admin.main_page_gallery')</a>
+                            <a href="{{ route('admin.main_page_gallery.index') }}"> @lang('admin.main_page_gallery')</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- End main_page_gallery ----------------------------------------------------------- --}}
 
 
                 {{--   reviews --------------------------------------------------------------- --}}
-                {{--                <li>--}}
-                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
-                {{--                        <i class="fas fa-comments"></i>--}}
-                {{--                        <span> @lang('reviews.reviews')</span>--}}
-                {{--                    </a>--}}
-                {{--                    <ul class="sub-menu" aria-expanded="false">--}}
-              
-                <li><a href="{{ route('admin.about.edit') }}"><i
-                            class="fas fa-comments"></i> @lang('admin.about')</a></li>
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+                {{--                <li> --}}
+                {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect"> --}}
+                {{--                        <i class="fas fa-comments"></i> --}}
+                {{--                        <span> @lang('reviews.reviews')</span> --}}
+                {{--                    </a> --}}
+                {{--                    <ul class="sub-menu" aria-expanded="false"> --}}
+
+            {{-- Slider --------------------------------------------------------------- --}}
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="fa fa-sliders-h"></i>
+                                <span> @lang('admin.slider')</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('admin.slider.index') }}"> @lang('admin.slider_show')</a></li>
+                                <li><a href="{{ route('admin.slider.create') }}"> @lang('admin.slider_create')</a></li>
+                            </ul>
+                        </li>
+                        {{-- End Slider ----------------------------------------------------------- --}}
+                         {{-- Slider --------------------------------------------------------------- --}}
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="fa fa-question"></i>
+                                <span> @lang('admin.faqs')</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('admin.faqs.index') }}"> @lang('admin.faqs')</a></li>
+                                <li><a href="{{ route('admin.faq-categories.index') }}"> @lang('admin.faq-categories')</a></li>
+                            </ul>
+                        </li>
+                        {{-- End Slider ----------------------------------------------------------- --}}
+
+                {{--                      blog             --}}
+                <li>
+                    <a href="{{ url('/admin/blogs') }}">
+                        <i class="fa-brands fa-microblog"></i>
+                        @lang('admin.blogs')</a>
+                </li>
+
+                {{--           products             --}}
+
+                <li><a href="{{ route('admin.products.index') }}">
+                        <i class="fas fa-boxes"></i>
+                        @lang('admin.products')</a></li>
+                {{--         News             --}}
+
+                <li><a href="{{ route('admin.news.index') }}">
+                        <i class="fas fa-newspaper"></i>
+                        @lang('admin.newss')</a></li>
+
+                {{--         partners             --}}
+
+                <li><a href="{{ route('admin.partners.index') }}">
+                        <i class="fas fa-handshake"></i>
+                        @lang('admin.partners')</a></li>
+
+                {{--  about us --}}
+
+                <li><a href="{{ route('admin.about.edit') }}"><i class="fa fa-address-card" aria-hidden="true"></i>
+                        @lang('admin.about')</a></li>
+
+                              {{-- Contact Us ----------------------------------------------------------- --}}
+                        <li>
+                            <a href="{{ route('admin.contact-us.index') }}" class="waves-effect">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span>{{ trans('admin.contact_us') }}</span>
+                            </a>
+                        </li>
+                        {{-- End Contact Us ------------------------------------------------------- --}}
+                {{--                    </ul> --}}
+                {{--                </li> --}}
                 {{--    End reviews ----------------------------------------------------------- --}}
 
 
@@ -436,7 +443,7 @@
                                 </li>
                                 <li><a href="{{ route('admin.payment-methods.index') }}"> @lang('admin.payment_methods')</a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="{{ route('admin.home-settings.index') }}"> @lang('admin.setting_home')</a>
                                 </li>
@@ -473,9 +480,7 @@
 
 
 <script>
-
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
-
 </script>

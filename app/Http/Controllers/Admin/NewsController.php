@@ -13,8 +13,6 @@ class NewsController extends Controller
     {
         $query = News::query()->with('trans')->orderBy('id', 'ASC');
 
-
-    
         if($request->status  != ''){
             $query->where('status', $request->status );
         }
@@ -25,7 +23,6 @@ class NewsController extends Controller
    
         if($request->description != ''){
             $query = $query->orWhereTranslationLike('description', '%' . request()->input('description') . '%');
-
         }
         $items = $query->paginate($this->pagination_count);
         return view('admin.dashboard.news.index', compact('items'));
@@ -40,7 +37,6 @@ class NewsController extends Controller
     public function store(NewsRequest $request)
     {
         $data = $request->getSanitized();
-
         if ($request->hasFile('image')) {
             $data['image'] = $this->upload_file($request->file('image'), ('news'));
         }

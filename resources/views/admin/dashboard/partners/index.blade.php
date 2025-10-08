@@ -5,7 +5,34 @@
         <div class="mb-3">
             <a href="{{ route('admin.partners.create') }}" class="btn btn-success">@lang('partners.create_new')</a>
         </div>
+        {{-- Start Form search --}}
+        <form action="{{ route('admin.partners.index') }}" method="get">
+            @csrf
+            <div class="row mb-3">
+                <div class="col-md-3 mb-2">
+                    <input type="test" value="{{ old('title', request()->input('title')) }}" name="title"
+                        placeholder="{{ trans('admin.title') }}" class="form-control">
+                </div>
 
+                <div class="col-md-3 mb-2">
+                    <select class="form-select" name="status" aria-label=".form-select-sm example">
+                        <option selected value=""> @lang('admin.status') </option>
+                        <option value="1"{{ old('status', request()->input('status')) == 1 ? 'selected' : '' }}>
+                            @lang('admin.active') </option>
+                        <option value="0"
+                            {{ old('status', request()->input('status')) != 1 && old('status', request()->input('status')) != null ? 'selected' : '' }}>
+                            @lang('admin.dis_active') </option>
+                    </select>
+                </div>
+
+                <div class="search-input col-md-2">
+                    <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-search"> </i></button>
+                    <a class="btn btn-success btn-sm" href="{{ route('admin.partners.index') }}"><i
+                            class="refresh ion ion-md-refresh"></i></a>
+                </div>
+            </div>
+        </form>
+        {{-- End Form search --}}
         <div class="card">
             <div class="card-body">
                 <table class="table table-striped">

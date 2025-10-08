@@ -498,10 +498,15 @@ return [
     'order_email_2' => 'Order Email 2',
     'video' => 'Video',
     'slider_video' => 'Slider Video',
-    'about' => 'About',
+    'about' => 'About Us',
      'active' => ' Active',
     'dis_active' => ' Dis Active',
     'no_data' => ' No Data ',
+    'partners' => 'Partners' ,
+    'newss' => 'News' ,
+    'faqs' => 'Faqs',
+    'faq-categories' => 'Faq Categories',
+
     
 
 

@@ -11,9 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
 {
-    public function index()
+    public function index( Request $request)
     {
-        $partners = Partner::with('translations')->orderBy('sort')->paginate(15);
+         $query = Partner::query()->with('translations')->orderBy('id', 'ASC');
+          if($request->status  != ''){
+            $query->where('status', $request->status );
+        }
+        if ($request->title  != '') {  
+            $query = $query->orWhereTranslationLike('title', '%' . request()->input('title') . '%');
+        }
+        $partners = $query->paginate($this->pagination_count);
         return view('admin.dashboard.partners.index', compact('partners'));
     }
 

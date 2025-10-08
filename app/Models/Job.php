@@ -11,16 +11,18 @@ class Job extends Model
     use Translatable, SoftDeletes;
 
     public $translatedAttributes = [
-        'title', 'short_description', 'description', 'requirements', 'seo_title', 'seo_description'
+        'title', 
+        'short_description', 
+        'description', 
+        'requirements', 
+        'seo_title',
+         'seo_description'
     ];
 
     protected $fillable = [
         'slug','employment_type','location','image','status','sort','created_by','updated_by'
     ];
 
-    // public function tags()
-    // {
-    //     return $this->belongsToMany(Tag::class, 'job_tag', 'job_id', 'tag_id');
-    // }
+    
 }
 

@@ -47,94 +47,94 @@ class ProductController extends Controller
     }
 
 
-public function index(Request $request)
-{
-   
-    if ($request->input('export') === 'excel') {
-        return Excel::download(new ProductsExport($request), 'products.xlsx');
-    }
+    public function index(Request $request)
+    {
 
-    
-    $query = Product::query()
-        ->with(['translations' => function ($q) {
-            $q->where('locale', app()->getLocale());
-        }])
-        ->ordinary()
-        ->orderBy('id', 'DESC');
-
-    // status filter
-    if ($request->filled('status')) {
-        if ($request->status == 1) {
-            $query->where('status', 1);
-        } else {
-            $query->where('status', '!=', 1);
+        if ($request->input('export') === 'excel') {
+            return Excel::download(new ProductsExport($request), 'products.xlsx');
         }
-    }
 
-    // search by title (translations)
-    if ($request->filled('title')) {
-        $search = '%' . $request->title . '%';
-        $query->whereHas('translations', function ($q) use ($search) {
-            $q->where('locale', app()->getLocale())
-              ->where('title', 'LIKE', $search);
-        });
-    }
 
-    // search by description (translations)
-    if ($request->filled('description')) {
-        $search = '%' . $request->description . '%';
-        $query->whereHas('translations', function ($q) use ($search) {
-            $q->where('locale', app()->getLocale())
-              ->where('description', 'LIKE', $search);
-        });
-    }
+        $query = Product::query()
+            ->with(['translations' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }])
+            ->ordinary()
+            ->orderBy('id', 'DESC');
 
-    // search by care_tips (translations)
-    if ($request->filled('care_tips')) {
-        $search = '%' . $request->care_tips . '%';
-        $query->whereHas('translations', function ($q) use ($search) {
-            $q->where('locale', app()->getLocale())
-              ->where('care_tips', 'LIKE', $search);
-        });
-    }
+        // status filter
+        if ($request->filled('status')) {
+            if ($request->status == 1) {
+                $query->where('status', 1);
+            } else {
+                $query->where('status', '!=', 1);
+            }
+        }
 
-    // search by code (product column)
-    if ($request->filled('code')) {
-        $query->where('code', 'LIKE', '%' . $request->code . '%');
-    }
+        // search by title (translations)
+        if ($request->filled('title')) {
+            $search = '%' . $request->title . '%';
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('locale', app()->getLocale())
+                    ->where('title', 'LIKE', $search);
+            });
+        }
 
-    // price filters
-    if ($request->filled('from_price') && !$request->filled('to_price')) {
-        $query->where('price', '>=', $request->from_price);
-    }
-    if ($request->filled('to_price') && !$request->filled('from_price')) {
-        $query->where('price', '<=', $request->to_price);
-    }
-    if ($request->filled('from_price') && $request->filled('to_price')) {
-        $query->whereBetween('price', [$request->from_price, $request->to_price]);
-    }
+        // search by description (translations)
+        if ($request->filled('description')) {
+            $search = '%' . $request->description . '%';
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('locale', app()->getLocale())
+                    ->where('description', 'LIKE', $search);
+            });
+        }
 
-    // date filters
-    if ($request->filled('from_date') && $request->filled('to_date')) {
-        $from = Carbon::parse($request->from_date);
-        $to = Carbon::parse($request->to_date);
-        $query->whereBetween('created_at', [$from, $to]);
-    } elseif ($request->filled('from_date')) {
-        $from = Carbon::parse($request->from_date);
-        $query->whereDate('created_at', '>=', $from);
-    } elseif ($request->filled('to_date')) {
-        $to = Carbon::parse($request->to_date);
-        $query->whereDate('created_at', '<=', $to);
+        // search by care_tips (translations)
+        if ($request->filled('care_tips')) {
+            $search = '%' . $request->care_tips . '%';
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('locale', app()->getLocale())
+                    ->where('care_tips', 'LIKE', $search);
+            });
+        }
+
+        // search by code (product column)
+        if ($request->filled('code')) {
+            $query->where('code', 'LIKE', '%' . $request->code . '%');
+        }
+
+        // price filters
+        if ($request->filled('from_price') && !$request->filled('to_price')) {
+            $query->where('price', '>=', $request->from_price);
+        }
+        if ($request->filled('to_price') && !$request->filled('from_price')) {
+            $query->where('price', '<=', $request->to_price);
+        }
+        if ($request->filled('from_price') && $request->filled('to_price')) {
+            $query->whereBetween('price', [$request->from_price, $request->to_price]);
+        }
+
+        // date filters
+        if ($request->filled('from_date') && $request->filled('to_date')) {
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $query->whereBetween('created_at', [$from, $to]);
+        } elseif ($request->filled('from_date')) {
+            $from = Carbon::parse($request->from_date);
+            $query->whereDate('created_at', '>=', $from);
+        } elseif ($request->filled('to_date')) {
+            $to = Carbon::parse($request->to_date);
+            $query->whereDate('created_at', '<=', $to);
+        }
+
+        // pagination
+        $items = $query->paginate($this->pagination_count);
+
+
+        return view('admin/dashboard/products/index')->with([
+            'items' => $items,
+        ]);
     }
-
-    // pagination
-    $items = $query->paginate($this->pagination_count);
-
-   
-    return view('admin/dashboard/products/index')->with([
-        'items' => $items,
-    ]);
-}
 
 
 
@@ -185,34 +185,35 @@ public function index(Request $request)
 
         $this->saveModelTranslation($product, $data);
 
-    if ($request->has('has_pockets')) {
-        $product->has_pockets = true;
-        $product->save();
+        if ($request->has('has_pockets')) {
+            $product->has_pockets = true;
+            $product->save();
 
-        if (isset($request->pockets['en']) && isset($request->pockets['ar'])) {
-            foreach ($request->pockets['en'] as $index => $pocketNameEn) {
-                if (!isset($request->pockets['ar'][$index])) {
-                    continue; 
+            if (isset($request->pockets['en']) && isset($request->pockets['ar'])) {
+                foreach ($request->pockets['en'] as $index => $pocketNameEn) {
+                    if (!isset($request->pockets['ar'][$index])) {
+                        continue;
+                    }
+
+                    $pocketData = [
+                        'product_id' => $product->id,
+                        'price' => null,
+                    ];
+
+                    $pocket = ProductPocket::create($pocketData);
+
+                    $pocket->translations()->create([
+                        'locale' => 'en',
+                        'pocket_name' => $pocketNameEn,
+                    ]);
+
+                    $pocket->translations()->create([
+                        'locale' => 'ar',
+                        'pocket_name' => $request->pockets['ar'][$index],
+                    ]);
                 }
-
-                $pocketData = [
-                    'product_id' => $product->id,
-                ];
-
-                $pocket = ProductPocket::create($pocketData);
-
-                $pocket->translations()->create([
-                    'locale' => 'en',
-                    'pocket_name' => $pocketNameEn,
-                ]);
-
-                $pocket->translations()->create([
-                    'locale' => 'ar',
-                    'pocket_name' => $request->pockets['ar'][$index],
-                ]);
             }
         }
-    }
         if ($request->gallery_image) {
             $group = GalleryGroup::create([
                 'type' => 0,
@@ -301,78 +302,78 @@ public function index(Request $request)
         $product->update($data);
         $this->saveModelTranslation($product, $data);
 
-       if ($request->has('has_pockets')) {
-    $pocketIdsToKeep = [];
+        if ($request->has('has_pockets')) {
+            $pocketIdsToKeep = [];
 
-    
-    $pockets = $request->input('pockets', []);
-    $prices = is_array($pockets) && isset($pockets['price']) ? $pockets['price'] : [];
 
-    foreach ($prices as $index => $price) {
-        $pocketData = [
-            'product_id' => $product->id,
-            'price'      => $price ?? 0,
-        ];
+            $pockets = $request->input('pockets', []);
+            $prices = is_array($pockets) && isset($pockets['price']) ? $pockets['price'] : [];
 
-        $pocketId = $pockets['id'][$index] ?? null;
+            foreach ($prices as $index => $price) {
+                $pocketData = [
+                    'product_id' => $product->id,
+                    'price'      => $price ?? 0,
+                ];
 
-        // if ($request->hasFile("pockets.image.{$index}")) {
-        //     $images = [];
-        //     foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
-        //         if ($image && $image->isValid()) {
-        //             $images[] = $this->storePocketImage(
-        //                 $image,
-        //                 '/attachments/pockets/',
-        //                 $imgKey
-        //             );
-        //         }
-        //     }
-        //     $pocketData['image'] = !empty($images) ? json_encode($images) : null;
-        // } elseif ($pocketId && $pocketId !== 'new') {
-        //     $existingPocket = ProductPocket::find($pocketId);
-        //     if ($existingPocket) {
-        //         $pocketData['image'] = $existingPocket->image;
-        //     }
-        // }
+                $pocketId = $pockets['id'][$index] ?? null;
 
-        if ($pocketId && $pocketId !== 'new') {
-            $pocket = ProductPocket::find($pocketId);
-            if ($pocket) {
-                $pocket->update($pocketData);
-                $pocketIdsToKeep[] = $pocket->id;
-            } else {
-                // fallback: create if id provided but not found
-                $pocket = ProductPocket::create($pocketData);
-                $pocketIdsToKeep[] = $pocket->id;
+                // if ($request->hasFile("pockets.image.{$index}")) {
+                //     $images = [];
+                //     foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
+                //         if ($image && $image->isValid()) {
+                //             $images[] = $this->storePocketImage(
+                //                 $image,
+                //                 '/attachments/pockets/',
+                //                 $imgKey
+                //             );
+                //         }
+                //     }
+                //     $pocketData['image'] = !empty($images) ? json_encode($images) : null;
+                // } elseif ($pocketId && $pocketId !== 'new') {
+                //     $existingPocket = ProductPocket::find($pocketId);
+                //     if ($existingPocket) {
+                //         $pocketData['image'] = $existingPocket->image;
+                //     }
+                // }
+
+                if ($pocketId && $pocketId !== 'new') {
+                    $pocket = ProductPocket::find($pocketId);
+                    if ($pocket) {
+                        $pocket->update($pocketData);
+                        $pocketIdsToKeep[] = $pocket->id;
+                    } else {
+                        // fallback: create if id provided but not found
+                        $pocket = ProductPocket::create($pocketData);
+                        $pocketIdsToKeep[] = $pocket->id;
+                    }
+                } else {
+                    $pocket = ProductPocket::create($pocketData);
+                    $pocketIdsToKeep[] = $pocket->id;
+                }
+
+
+                $enName = $pockets['en'][$index] ?? null;
+                $arName = $pockets['ar'][$index] ?? null;
+
+                if ($enName !== null) {
+                    $pocket->translations()->updateOrCreate(
+                        ['locale' => 'en'],
+                        ['pocket_name' => $enName]
+                    );
+                }
+                if ($arName !== null) {
+                    $pocket->translations()->updateOrCreate(
+                        ['locale' => 'ar'],
+                        ['pocket_name' => $arName]
+                    );
+                }
             }
+
+            ProductPocket::where('product_id', $product->id)
+                ->whereNotIn('id', $pocketIdsToKeep)
+                ->delete();
         } else {
-            $pocket = ProductPocket::create($pocketData);
-            $pocketIdsToKeep[] = $pocket->id;
         }
-
-
-        $enName = $pockets['en'][$index] ?? null;
-        $arName = $pockets['ar'][$index] ?? null;
-
-        if ($enName !== null) {
-            $pocket->translations()->updateOrCreate(
-                ['locale' => 'en'],
-                ['pocket_name' => $enName]
-            );
-        }
-        if ($arName !== null) {
-            $pocket->translations()->updateOrCreate(
-                ['locale' => 'ar'],
-                ['pocket_name' => $arName]
-            );
-        }
-    }
-
-    ProductPocket::where('product_id', $product->id)
-        ->whereNotIn('id', $pocketIdsToKeep)
-        ->delete();
-} else {
-}
 
         if ($product->galleryGroup) {
             $groupGallery = $product->galleryGroup;

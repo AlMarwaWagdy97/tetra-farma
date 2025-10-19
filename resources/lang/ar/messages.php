@@ -244,6 +244,8 @@ return [
     'no_products_found' => 'لا توجد منتجات',
     'Our Products' => 'منتجاتنا',
     'our_products' => 'مكملات غذائية موثوقة لحياة أكثر صحة.',
+    'explore_product' => 'استكشف منتجاتنا',
+    'no_products' => 'لا توجد منتجات',
     
     
 

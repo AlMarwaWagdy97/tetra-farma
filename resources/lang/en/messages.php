@@ -252,7 +252,9 @@ return [
     'no_products_found' => 'No products found',
     'Our Products' => 'Our Products',
     'our_products' => 'Trusted supplements for a healthier life.',
-    ''
+    'explore_product' => 'Explore Our Products',
+    'no_products' => 'No Products',
+    
 
 
     

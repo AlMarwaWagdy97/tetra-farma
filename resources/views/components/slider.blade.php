@@ -18,7 +18,7 @@
                 {!! $firstVideoSlide->transNow?->description ??
                     (optional($firstVideoSlide->trans->where('locale', app()->getLocale())->first())->description ?? '') !!}
             </p>
-            <a href="./ProductPage/product.html"><button class="btn">Explore Our Products</button></a>
+            <a href="{{ route('site.products.index') }}"><button class="btn">{{ __('messages.explore_product') }}</button></a>
         </div>
     </div>
 @else

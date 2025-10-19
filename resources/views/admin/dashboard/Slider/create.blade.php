@@ -137,7 +137,7 @@
                                                                 <label for="example-number-input" col-form-label>
                                                                     @lang('admin.image'):</label>
                                                                 <div class="col-sm-12">
-                                                                    <span class="text-danger">@lang('admin.image_site', ['width' => '1600px', 'height' => '750px'])</span>
+                                                                    <span class="text-danger">@lang('admin.image_site', ['width' => '1600px', 'height' => '900px'])</span>
                                                                     <input class="form-control" type="file"
                                                                         id="example-number-input" name="image"
                                                                         value="{{ old('image') }}">

@@ -8,9 +8,9 @@
         <div class="row">
 
 
-            <h4 class="page-title navbar-custom-color">@lang('admin.orders')</h4>
+            {{-- <h4 class="page-title navbar-custom-color">@lang('admin.orders')</h4> --}}
             {{-- ---------------------------------------------start orders---------------------------------------------------------------------- --}}
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.orders.index') }}">
@@ -29,8 +29,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
+            </div> --}}
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.orders.index') . "?status=pending" }}">
@@ -50,8 +50,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
+            </div> --}}
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.orders.index')  . "?shipped_status=delivered"  }}">
@@ -71,7 +71,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- ---------------------------------------------end orders---------------------------------------------------------------------- --}}
 
 
@@ -80,7 +80,7 @@
 
             {{-- ---------------------------------------------products---------------------------------------------------------------------- --}}
             <h4 class="page-title navbar-custom-color">@lang('admin.products')</h4>
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.product_category.index') }}">
@@ -95,17 +95,17 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.products.index') }}">
                             <div class="mini-stat">
-                            <span class="mini-stat-icon bg-primary me-0 float-end"><i class="fab fa-pagelines"
-                                                                                    aria-hidden="true"></i>
+                                <span class="mini-stat-icon bg-primary me-0 float-end"><i class="fab fa-pagelines"
+                                        aria-hidden="true"></i>
 
 
-</span>
+                                </span>
                                 <div class="mini-stat-info">
                                     <span class="counter text-primary">{{ App\Models\Product::count() }}</span>
                                     @lang('admin.products')
@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ url( app()->getLocale() . '/admin/occasions_products') }}">
@@ -131,7 +131,8 @@
                         </a>
                     </div>
                 </div>
-            </div> <!-- End col -->
+            </div> --}}
+            <!-- End col -->
 
             {{-- ---------------------------------------------end products---------------------------------------------------------------------- --}}
 
@@ -139,19 +140,19 @@
 
 
 
-            {{--            /******************************services part *****************/--}}
-            <h4 class="page-title navbar-custom-color">
+            {{--            /******************************services part *****************/ --}}
+            {{-- <h4 class="page-title navbar-custom-color">
                 @lang('admin.services')
-            </h4>
+            </h4> --}}
 
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ url(app()->getLocale() . '/admin/events') }}">
                             <div class="mini-stat">
-                            <span class="mini-stat-icon bg-brown me-0 float-end"><i class="fa fa-calendar"
-                                                                                    aria-hidden="true"></i>
-</span>
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i class="fa fa-calendar"
+                                        aria-hidden="true"></i>
+                                </span>
                                 <div class="mini-stat-info">
                                     <span class="counter text-brown">1</span>
                                     {{ trans('admin.events') }}
@@ -160,8 +161,9 @@
                         </a>
                     </div>
                 </div>
-            </div> <!-- End col -->
-            <div class="col-md-6 col-xl-4">
+            </div> --}}
+             <!-- End col -->
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ url(app()->getLocale() . '/admin/landscape') }}">
@@ -175,42 +177,42 @@
                         </a>
                     </div>
                 </div>
-            </div> <!-- End col -->
-            <div class="col-md-6 col-xl-4">
+            </div>  --}}
+            <!-- End col -->
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{ url( app()->getLocale() . '/admin/occasions_services') }}">
+                        <a href="{{ url(app()->getLocale() . '/admin/occasions_services') }}">
                             <div class="mini-stat">
-                                <span class="mini-stat-icon bg-primary me-0 float-end"> <i
-                                        class="fas fa-smile"></i> </span>
+                                <span class="mini-stat-icon bg-primary me-0 float-end"> <i class="fas fa-smile"></i> </span>
                                 <div class="mini-stat-info">
                                     <span
-                                        class="counter text-primary">{{ App\Models\Occasion::where('type' , 1)->count() }}</span>
+                                        class="counter text-primary">{{ App\Models\Occasion::where('type', 1)->count() }}</span>
                                     {{ trans('admin.occasions_services') }}
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-            </div> <!-- End col -->
+            </div> --}}
+             <!-- End col -->
 
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{  route('admin.rates.index') }}">
+                        <a href="{{ route('admin.rates.index') }}">
                             <div class="mini-stat">
-                                <span class="mini-stat-icon bg-primary me-0 float-end"> <i
-                                        class="fas fa-star"></i> </span>
+                                <span class="mini-stat-icon bg-primary me-0 float-end"> <i class="fas fa-star"></i> </span>
                                 <div class="mini-stat-info">
-                                    <span
-                                        class="counter text-primary">{{ App\Models\Rate::count() }}</span>
+                                    <span class="counter text-primary">{{ App\Models\Rate::count() }}</span>
                                     {{ trans('admin.rates') }}
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-            </div> <!-- End col -->
+            </div> --}}
+             <!-- End col -->
             <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
@@ -228,28 +230,25 @@
                 </div>
             </div>
 
-            {{--            <div class="col-md-6 col-xl-4">--}}
-            {{--                <div class="card">--}}
-            {{--                    <div class="card-body">--}}
-            {{--                        <a href="{{ route('admin.gallery.index') }}">--}}
-            {{--                            <div class="mini-stat">--}}
-            {{--                                <span class="mini-stat-icon bg-brown me-0 float-end"><i--}}
-            {{--                                        class="fas fa-images"></i></span>--}}
-            {{--                                <div class="mini-stat-info">--}}
-            {{--                                    <span class="counter text-brown">{{ App\Models\Gallery::count() }}</span>--}}
-            {{--                                    @lang('admin.total_galleries')--}}
-            {{--                                </div>--}}
-            {{--                            </div>--}}
-            {{--                        </a>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
+            {{--            <div class="col-md-6 col-xl-4"> --}}
+            {{--                <div class="card"> --}}
+            {{--                    <div class="card-body"> --}}
+            {{--                        <a href="{{ route('admin.gallery.index') }}"> --}}
+            {{--                            <div class="mini-stat"> --}}
+            {{--                                <span class="mini-stat-icon bg-brown me-0 float-end"><i --}}
+            {{--                                        class="fas fa-images"></i></span> --}}
+            {{--                                <div class="mini-stat-info"> --}}
+            {{--                                    <span class="counter text-brown">{{ App\Models\Gallery::count() }}</span> --}}
+            {{--                                    @lang('admin.total_galleries') --}}
+            {{--                                </div> --}}
+            {{--                            </div> --}}
+            {{--                        </a> --}}
+            {{--                    </div> --}}
+            {{--                </div> --}}
+            {{--            </div> --}}
 
 
-            {{--            /******************************end blog part *****************/--}}
-
-
-
+            {{--            /******************************end blog part *****************/ --}}
 
 
 
@@ -261,16 +260,19 @@
 
 
 
-            {{--            /******************************system part *****************/--}}
+
+
+
+            {{--            /******************************system part *****************/ --}}
             <h4 class="page-title navbar-custom-color">@lang('admin.system')</h4>
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{ route('admin.whatsapp-contact.index')  }}">
+                        <a href="{{ route('admin.whatsapp-contact.index') }}">
                             <div class="mini-stat">
-                            <span class="mini-stat-icon bg-success me-0 float-end"><i class="fab fa-whatsapp"
-                                                                                    aria-hidden="true"></i>
-</span>
+                                <span class="mini-stat-icon bg-success me-0 float-end"><i class="fab fa-whatsapp"
+                                        aria-hidden="true"></i>
+                                </span>
                                 <div class="mini-stat-info">
                                     <span class="counter text-success">{{ App\Models\WhatsAppContact::count() }}</span>
                                     @lang('admin.whats_app_contacts')
@@ -279,7 +281,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-6 col-xl-4">
                 <div class="card">
@@ -306,8 +308,7 @@
                                 <span class="mini-stat-icon bg-blue-grey me-0 float-end"><i
                                         class="mdi mdi-email-outline"></i></span>
                                 <div class="mini-stat-info">
-                                    <span
-                                        class="counter text-blue-grey">{{ App\Models\Contactus::all()->count() }}</span>
+                                    <span class="counter text-blue-grey">{{ App\Models\Contactus::all()->count() }}</span>
                                     {{ trans('admin.total_meassges') }}
                                 </div>
 
@@ -321,8 +322,7 @@
                     <div class="card-body">
                         <a href="{{ route('admin.menus.index') }}">
                             <div class="mini-stat">
-                                <span class="mini-stat-icon bg-brown me-0 float-end"><i
-                                        class="fa fa-sitemap"></i></span>
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i class="fa fa-sitemap"></i></span>
                                 <div class="mini-stat-info">
                                     <span class="counter text-brown">{{ App\Models\Menue::main()->count() }}</span>
                                     {{ trans('admin.total_menues') }}
@@ -332,7 +332,7 @@
                     </div>
                 </div>
             </div> <!-- End col -->
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('admin.pages.index') }}">
@@ -346,7 +346,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--end col -->
             <div class="col-md-6 col-xl-4">
                 <div class="card">
@@ -356,7 +356,7 @@
                                 <span class="mini-stat-icon bg-purple me-0 float-end"><i
                                         class="fa fa-sliders-h"></i></span>
                                 <div class="mini-stat-info">
-                                    <span class="counter text-purple">{{ App\Models\Slider::count()}}</span>
+                                    <span class="counter text-purple">{{ App\Models\Slider::count() }}</span>
                                     {{ trans('admin.total_slider') }}
                                 </div>
                             </div>
@@ -365,7 +365,7 @@
                 </div>
             </div>
             <!--End col -->
-            {{--            /******************************end system part *****************/--}}
+            {{--            /******************************end system part *****************/ --}}
 
 
         </div> <!-- end row-->

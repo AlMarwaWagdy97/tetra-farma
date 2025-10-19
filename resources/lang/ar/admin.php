@@ -544,6 +544,7 @@ return [
     'category_in' => 'الفئة في ',
     'servings_in' => 'الحصص في ',
     'dispatch_in' => 'التوصيل في ',
+    'total_reviews' => 'التقييمات الكلية',
 
 
 

@@ -521,6 +521,7 @@ return [
     'category_in' => 'Category',
     'servings_in' => 'Servings',
     'dispatch_in' => 'Dispatch',
+    'total_reviews' => 'Total Reviews',
 
     
 

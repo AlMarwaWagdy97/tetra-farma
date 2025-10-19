@@ -63,7 +63,6 @@ class SliderController extends Controller
         $data = $request->getSanitized();
 
         if ($request->hasFile('image')) {
-            //            $data['image'] = $this->upload_file($request->file('image') , ('slider'));
 
             $data['image'] = $this->storeImage2($request, '/attachments/slider/', $request->image, 'image');
         }

@@ -44,7 +44,7 @@ class SliderStoreRequest extends FormRequest
             $req += [$locale . '.description' => 'nullable'];
         }
         $this->isMethod('POST') ?
-            $req += ['image' => 'required|' . ImageValidate()]
+            $req += ['image' => 'nullable|' . ImageValidate()]
             :
             $req += ['image' => 'nullable|' . ImageValidate()];
         $req += ['video' => 'nullable|mimes:mp4,mov,avi,wmv,webm|max:51200'];

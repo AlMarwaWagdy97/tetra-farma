@@ -12,34 +12,43 @@ class Footer extends Component
 {
     public $footerLinks;
     public $footerTitle;
+    public $tiktokLink;
+    public $linkedinLink;
     public $footerDescription;
     public $cards;
+    public $site_name;
+    public $maps;
+    public $logo;
+    public $mobile;
+    public $email;
+    public $address;
     public $settings;
-    public $facebookLink; // Added property for Facebook link
-    public $instagramLink; // Added property for Instagram link
+    public $facebookLink; 
+    public $instagramLink; 
 
     public function __construct()
     {
-        $this->footerLinks = Menue::with('trans')->footer()->active()->get();
 
         $currentLang = App::getLocale();
 
         $this->settings = SettingSingleton::getInstance();
 
-        $this->footerTitle = $this->settings->getItem('footer_title_' . $currentLang);
-        $this->footerDescription = $this->settings->getItem('footer_description_' . $currentLang);
+       
 
         $this->facebookLink = $this->settings->getItem('facebook') ?? 'not found';
         $this->instagramLink = $this->settings->getItem('instagram') ?? 'not found';
+        $this->tiktokLink = $this->settings->getItem('tiktok') ?? 'not found';
+        $this->linkedinLink = $this->settings->getItem('linkedin') ?? 'not found';
+        $this->site_name = $this->settings->getItem('site_name') ?? 'not found';
+        $this->maps = $this->settings->getItem('maps') ?? 'not found';
+        $this->logo = $this->settings->getItem('logo') ?? 'not found';
+        $this->address = $this->settings->getItem('address') ?? 'not found';
+        $this->mobile = $this->settings->getItem('mobile') ?? 'not found';
+        $this->email = $this->settings->getItem('email') ?? 'not found';
+        
 
-        $this->cards = [];
-        for ($i = 1; $i <= 4; $i++) {
-            $this->cards[$i] = [
-                'title' => $this->settings->getInfo("section{$i}_title" . $currentLang),
-                'image' => $this->settings->getInfo("section{$i}_image"),
-                'description' => $this->settings->getInfo("section{$i}_description" . $currentLang),
-            ];
-        }
+
+        
     }
 
     public function render()

@@ -3,10 +3,8 @@
 @section('content')
     <div class="container">
         <h1>{{ __('admin.blogs') }}</h1>
-        <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary mb-3">{{ __('admin.create_blog') }}</a>
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+        <a href="{{ route('admin.blogs.create') }}" class="btn btn-success mb-3">{{ __('admin.create_blog') }}</a>
+      
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -14,10 +12,12 @@
                     <th>{{ __('admin.title_en') }}</th>
                     <th>{{ __('admin.title_ar') }}</th>
                     <th>{{ __('admin.image') }}</th>
-                    <th>{{ __('admin.actions') }}</th>
+                    <th class="text-end">{{ __('admin.actions') }}</th>
                 </tr>
             </thead>
+
             <tbody>
+
                 @foreach ($blogs as $blog)
                     <tr>
                         <td>{{ $blog->id }}</td>
@@ -28,16 +28,20 @@
                                 <img src="{{ asset($blog->pathInView()) }}" width="80" alt="">
                             @endif
                         </td>
-                        <td>
-                            <a href="{{ route('admin.blogs.show', $blog) }}" class="btn btn-info btn-sm">{{ __('admin.show') }}</a>
-                            <a href="{{ route('admin.blogs.edit', $blog) }}" class="btn btn-warning btn-sm">{{ __('admin.edit') }}</a>
-                            <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" style="display:inline;">
-                                @csrf @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">{{ __('admin.delete') }}</button>
+
+                        <td class="text-end">
+                            <a href="{{ route('admin.blogs.show', $blog->id) }}" title="@lang('admin.show')"
+                                class="btn btn-xs btn-outline-info btn-sm m-1"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('admin.blogs.edit', $blog->id) }}" title="@lang('admin.edit')"
+                                class="btn btn-outline-primary btn-sm m-1"><i class="fas fa-pencil-alt"></i></a>
+                            <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST"
+                                class="d-inline-block" onsubmit="return confirm('Are you sure?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
-                    
                 @endforeach
             </tbody>
         </table>

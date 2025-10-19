@@ -11,7 +11,7 @@
             @endif
 
             <div class="row">
-                <div class="col-md-9">
+                {{-- <div class="col-md-9">
                     @foreach ($languages as $key => $locale)
                         <div class="accordion mb-3" id="acc{{ $key }}">
                             <div class="accordion-item">
@@ -34,16 +34,16 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
+                </div> --}}
 
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <div class="card p-3">
                         <div class="mb-3">
                             <label>@lang('partners.image')</label>
                             <input type="file" name="image" class="form-control" accept="image/*">
                             @if (isset($partner) && $partner->image)
                                 <img src="{{ asset('storage/attachments/partners/' . $partner->image) }}"
-                                    style="width:100%;margin-top:10px">
+                                    style="width:20%;margin-top:10px">
                             @endif
                         </div>
                         <div class="mb-3">

@@ -1,5 +1,4 @@
 <?php
-// app/Models/BlogTranslation.php
 
 namespace App\Models;
 

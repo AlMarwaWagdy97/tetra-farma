@@ -47,11 +47,21 @@ class ProductRequest extends FormRequest
             $arr += [$locale . '.slug' => 'required|min:1'];
             $arr += [$locale . '.description' => 'required|min:1'];
             $arr += [$locale . '.care_tips'=> 'nullable|min:1'];
+            $arr += [$locale . '.servings'=> 'nullable|min:1'];
+            $arr += [$locale . '.form'=> 'nullable|min:1'];
+            $arr += [$locale . '.category'=> 'nullable|min:1'];
+            $arr += [$locale . '.dispatch'=> 'nullable|min:1'];
+
+
             $arr += [$locale . '.meta_title' => 'nullable|min:1'];
             $arr += [$locale . '.meta_desc' => 'nullable|min:1'];
             $arr += [$locale . '.meta_key' => 'nullable|min:1'];
         }
         $arr += ['image' => 'nullable|' . ImageValidate()];
+
+        
+
+            $arr += ['url' => 'nullable|url'];
 
         $arr += ['price' => 'required|numeric|min:0'];
         $arr += ['sale' => 'nullable|numeric|min:0'];

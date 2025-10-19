@@ -11,18 +11,26 @@ class Job extends Model
     use Translatable, SoftDeletes;
 
     public $translatedAttributes = [
-        'title', 
-        'short_description', 
-        'description', 
-        'requirements', 
+        'title',
+        'short_description',
+        'description',
+        'requirements',
         'seo_title',
-         'seo_description'
+        'seo_description'
     ];
 
     protected $fillable = [
-        'slug','employment_type','location','image','status','sort','created_by','updated_by'
+        'slug',
+        'employment_type',
+        'location',
+        'image',
+        'status',
+        'sort',
+        'created_by',
+        'updated_by'
     ];
-
-    
+    public function cvs()
+    {
+        return $this->hasMany(Cv::class);
+    }
 }
-

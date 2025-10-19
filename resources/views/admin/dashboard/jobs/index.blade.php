@@ -20,7 +20,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('job.title')</th>
-                                {{-- <th>@lang('admin.image')</th> --}}
                                 <th>@lang('admin.status')</th>
                                 <th>@lang('admin.sort')</th>
                                 <th class="text-end">@lang('admin.actions')</th>
@@ -31,11 +30,7 @@
                             <tr>
                                 <td>{{ $job->id }}</td>
                                 <td>{{ optional($job->translate(app()->getLocale()))->title ?? '—' }}</td>
-                                {{-- <td style="width:150px">
-                                    @if($job->image)
-                                        <img src="{{ asset('storage/' . $job->image) }}" style="max-width:120px; height:auto" alt="">
-                                    @endif
-                                </td> --}}
+                          
                                 <td>
                                     @if($job->status)
                                         <span class="badge bg-success">@lang('admin.active')</span>

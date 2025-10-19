@@ -371,7 +371,51 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    @if ($product->galleryGroup && $product->galleryGroup->images && $product->galleryGroup->images->count())
+                                        {{-- images Gellary  --}}
+                                        <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample_image_old">
+                                            <div class="accordion-item border rounded">
+                                                <h2 class="accordion-header" id="headingImage2">
+                                                    <button class="accordion-button fw-medium" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseImage2"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                        @lang('admin.current_gallerys')
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseImage2" class="accordion-collapse collapse show mt-3"
+                                                    aria-labelledby="headingImage2"
+                                                    data-bs-parent="#accordionExample_image_old">
+                                                    <div class="accordion-body">
+                                                        <div class="row mb-3">
+                                                            <div class="row">
+                                                                @forelse($product->galleryGroup->images as $image)
+                                                                    <div class="col-4 p-5">
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                <img style="width: 100%; height:100px"
+                                                                                    src="{{ asset($image->pathInView('products')) }}">
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <h4>{{ $image->title }} </h4>
+                                                                                <h6> @lang('products.sort')
+                                                                                    : {{ $image->sort }} </h6>
+                                                                                <br>
+                                                                                <a class="btn btn-danger btn-sm"
+                                                                                    href="{{ \LaravelLocalization::localizeURL(route('admin.products.destroy_product_gallery_image', $image->id)) }}">
+                                                                                    <i class="fa fa-trash"></i> </a>
+                                                                                <br>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @empty
+                                                                @endforelse
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     {{-- images Gellary  --}}
                                     <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample_image">
@@ -432,9 +476,9 @@
                                             <div id="collapseOne" class="accordion-collapse collapse show"
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                             
 
-                                               
+
+
 
 
                                                     @if (@$product->image != null)
@@ -492,7 +536,18 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    {{-- URL ------------------------------------------------------------------------------------- --}}
+                                                    <div class="col-12">
+                                                        <div class="row mb-3">
+                                                            <label for="example-number-input" col-form-label>
+                                                                @lang('slider.url'):</label>
+                                                            <div class="col-sm-12">
+                                                                <input class="form-control" type="text"
+                                                                    id="example-number-input" name="url"
+                                                                    value="{{ @$product->url == 'javascript:void(0)' ? '' : @$product->url }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     {{-- feature ------------------------------------------------------------------------------------- --}}
                                                     <div class="col-12">
                                                         <label class="col-sm-2 col-form-label"
@@ -521,13 +576,254 @@
                                                                 data-off-label=" @lang('admin.no')"></label>
                                                         </div>
                                                     </div>
-                                             
+                                                    {{-- Pockets Section --}}
+                                                    <div class="accordion mt-4 mb-4" id="accordionPockets">
+                                                        <div class="accordion-item border rounded">
+                                                            <h2 class="accordion-header" id="headingPockets">
+                                                                <button class="accordion-button fw-medium" type="button"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapsePockets" aria-expanded="true"
+                                                                    aria-controls="collapsePockets">
+                                                                    @lang('products.medicine_feature')
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapsePockets"
+                                                                class="accordion-collapse collapse show mt-3"
+                                                                aria-labelledby="headingPockets"
+                                                                data-bs-parent="#accordionPockets">
+                                                                <div class="accordion-body">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-12 mb-3">
+                                                                            <label>@lang('products.medicine_feature')</label>
+                                                                            <input type="checkbox" name="has_pockets"
+                                                                                id="has_pockets"
+                                                                                {{ $product->has_pockets ? 'checked' : '' }}>
+                                                                        </div>
 
-                                        
+                                                                        <div id="pockets_section"
+                                                                            style="{{ $product->has_pockets ? '' : 'display:none;' }}">
+                                                                            @if ($product->has_pockets && $product->pockets->count())
+                                                                                @foreach ($product->pockets as $index => $pocket)
+                                                                                    <div class="pocket mb-4 p-3 border rounded"
+                                                                                        data-index="{{ $index }}">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12 mb-2">
+                                                                                                <label>@lang('products.feature_name_en')</label>
+                                                                                                <input type="text"
+                                                                                                    name="pockets[en][{{ $index }}]"
+                                                                                                    value="{{ @$pocket->translate('en')->pocket_name }}"
+                                                                                                    class="form-control"
+                                                                                                    required>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-12 mb-2">
+                                                                                                <label>@lang('products.feature_name_ar')</label>
+                                                                                                <input type="text"
+                                                                                                    name="pockets[ar][{{ $index }}]"
+                                                                                                    value="{{ @$pocket->translate('ar')->pocket_name }}"
+                                                                                                    class="form-control"
+                                                                                                    required>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-12 mb-2">
+                                                                                                {{-- <label>@lang('products.pocket_price')</label> --}}
+                                                                                                <input hidden
+                                                                                                    type="number"
+                                                                                                    name="pockets[price][{{ $index }}]"
+                                                                                                    value="{{ @$pocket->price }}"
+                                                                                                    class="form-control"
+                                                                                                    step="0.01">
+                                                                                            </div>
+
+                                                                                            {{-- @if ($pocket->image && ($images = json_decode($pocket->image)))
+                                                                                                <div class="col-12 mb-2">
+                                                                                                    <label>@lang('products.current_images')</label>
+                                                                                                    <div
+                                                                                                        class="d-flex flex-wrap">
+                                                                                                        @foreach ($images as $img)
+                                                                                                            <div class="position-relative me-2 mb-2"
+                                                                                                                style="width: 80px;">
+                                                                                                                <img src="{{ asset('attachments/pockets/' . $img) }}"
+                                                                                                                    class="img-thumbnail"
+                                                                                                                    style="max-width:80px; max-height:80px;">
+                                                                                                             
+                                                                                                            </div>
+                                                                                                        @endforeach
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif --}}
 
 
+                                                                                            {{-- <div class="col-md-12 mb-2">
+                                                                                                <label>@lang('products.new_pocket_images')</label>
+                                                                                                <input type="file"
+                                                                                                    name="pockets[image][{{ $index }}][]"
+                                                                                                    class="form-control"
+                                                                                                    accept="image/*"
+                                                                                                    multiple>
+                                                                                            </div> --}}
 
-                                               
+
+                                                                                            <input type="hidden"
+                                                                                                name="pockets[id][{{ $index }}]"
+                                                                                                value="{{ $pocket->id }}">
+
+
+                                                                                            <div
+                                                                                                class="col-md-4 text-end align-self-end mb-2">
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-danger delete_pocket">
+                                                                                                    <i
+                                                                                                        class="fa fa-trash"></i>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </div>
+
+                                                                        <div class="col-12">
+                                                                            {{-- <button type="button" id="add_pocket"
+                                                                                class="btn btn-success"
+                                                                                style="{{ $product->has_pockets ? '' : 'display:none;' }}">
+                                                                                <i class="fa fa-plus"></i>
+                                                                                @lang('products.add_pocket')
+                                                                            </button> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    @foreach ($languages as $key => $locale)
+                                                        @php  $trans =   $product->trans->where('locale', $locale)->first();  @endphp
+                                                        @if ($trans)
+                                                            {{-- form ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.form_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[form]"
+                                                                        value="{{ old($locale . '.form') ?? $trans->form }}"
+                                                                        id="form{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.form'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.form') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- category ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.category_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[category]"
+                                                                        value="{{ old($locale . '.category') ?? $trans->category }}"
+                                                                        id="category{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.category'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.category') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- servings ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.servings_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[servings]"
+                                                                        value="{{ old($locale . '.servings') ?? $trans->servings }}"
+                                                                        id="servings{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.servings'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.servings') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- dispatch ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.dispatch_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[dispatch]"
+                                                                        value="{{ old($locale . '.dispatch') ?? $trans->dispatch }}"
+                                                                        id="dispatch{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.dispatch'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.dispatch') }}</span>
+                                                                @endif
+                                                            </div>
+                                                        @else
+                                                            {{-- form ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.form_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[form]"
+                                                                        value="{{ old($locale . '.form')  }}"
+                                                                        id="form{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.form'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.form') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- category ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.category_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[category]"
+                                                                        value="{{ old($locale . '.category') }}"
+                                                                        id="category{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.category'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.category') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- servings ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.servings_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[servings]"
+                                                                        value="{{ old($locale . '.servings') }}"
+                                                                        id="servings{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.servings'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.servings') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- dispatch ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.dispatch_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[dispatch]"
+                                                                        value="{{ old($locale . '.dispatch') }}"
+                                                                        id="dispatch{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.dispatch'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.dispatch') }}</span>
+                                                                @endif
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+
                                                 </div>
                                             </div>
                                         </div>
@@ -566,7 +862,7 @@
                         <div class="row">
                             <div class="col-12">
                                     <label for="example-number-input"  > @lang('admin.image'):</label>
-                                <input type="file" name="gallery_image[]"   class="form-control" required>
+                                <input type="file" name="gallery_image[]"   class="form-control" >
                             </div>
                             <div class="col-3">
                                 <label for="example-number-input"  > @lang('admin.sort'):</label>
@@ -576,10 +872,7 @@
                                 <label for="example-number-input"  > @lang('admin.feature'):</label>
                                 <input    style="margin-top: 28px;" type="checkbox" name="gallery_feature[]" value="1"     >
                             </div>
-                             <div class="col-md-6 mb-2">
-                            <label>@lang('products.pocket_image')</label>
-                            <input type="file" name="pockets[image][]" class="form-control" accept="image/*">
-                        </div>
+                          
                             <div class="col-12 mt-3">
                                 <button class="btn btn-danger delete_img form-control"><i class="fa fa-trash"></i></button>
                             </div>
@@ -612,29 +905,21 @@
             });
 
             // Add new pocket section
-           $('#add_pocket').on('click', function() {
-            const currentIndex = pocketIndex++;
-            $('#pockets_section').append(`
+            $('#add_pocket').on('click', function() {
+                const currentIndex = pocketIndex++;
+                $('#pockets_section').append(`
                 <div class="pocket mb-4 p-3 border rounded" data-index="${currentIndex}">
                     <div class="row">
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-12 mb-2">
                             <label>@lang('products.pocket_name_en')</label>
                             <input type="text" name="pockets[en][${currentIndex}]" class="form-control" >
                         </div>
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-12 mb-2">
                             <label>@lang('products.pocket_name_ar')</label>
                             <input type="text" name="pockets[ar][${currentIndex}]" class="form-control" >
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label>@lang('products.pocket_price')</label>
-                            <input type="number" name="pockets[price][${currentIndex}]" class="form-control" step="0.01" >
-                        </div>
-                        <div class="col-md-12 mb-2">
-                            <label>@lang('products.new_pocket_images')</label>
-                            <input type="file" name="pockets[image][${currentIndex}][]" class="form-control" accept="image/*" multiple>
-                        </div>
                         <input type="hidden" name="pockets[id][${currentIndex}]" value="new">
-                        <div class="col-md-4 text-end align-self-end mb-2">
+                        <div class="col-md-12 text-end align-self-end mb-2">
                             <button type="button" class="btn btn-danger delete_pocket">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -642,7 +927,7 @@
                     </div>
                 </div>
             `);
-        });
+            });
 
             // Remove pocket section
             $('#pockets_section').on('click', '.delete_pocket', function() {

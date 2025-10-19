@@ -77,9 +77,9 @@
                         {{-- End Pages ------------------------------------------------------------ --}}
 
 
-                       
 
-                  
+
+
 
                         {{-- subscribes Us ----------------------------------------------------------- --}}
                         {{-- <li>
@@ -313,7 +313,7 @@
 
 
 
-              
+
 
 
 
@@ -359,30 +359,30 @@
                 {{--                    </a> --}}
                 {{--                    <ul class="sub-menu" aria-expanded="false"> --}}
 
-            {{-- Slider --------------------------------------------------------------- --}}
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fa fa-sliders-h"></i>
-                                <span> @lang('admin.slider')</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('admin.slider.index') }}"> @lang('admin.slider_show')</a></li>
-                                <li><a href="{{ route('admin.slider.create') }}"> @lang('admin.slider_create')</a></li>
-                            </ul>
-                        </li>
-                        {{-- End Slider ----------------------------------------------------------- --}}
-                         {{-- Slider --------------------------------------------------------------- --}}
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fa fa-question"></i>
-                                <span> @lang('admin.faqs')</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('admin.faqs.index') }}"> @lang('admin.faqs')</a></li>
-                                <li><a href="{{ route('admin.faq-categories.index') }}"> @lang('admin.faq-categories')</a></li>
-                            </ul>
-                        </li>
-                        {{-- End Slider ----------------------------------------------------------- --}}
+                {{-- Slider --------------------------------------------------------------- --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-sliders-h"></i>
+                        <span> @lang('admin.slider')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.slider.index') }}"> @lang('admin.slider_show')</a></li>
+                        <li><a href="{{ route('admin.slider.create') }}"> @lang('admin.slider_create')</a></li>
+                    </ul>
+                </li>
+                {{-- End Slider ----------------------------------------------------------- --}}
+                {{-- Slider --------------------------------------------------------------- --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-question"></i>
+                        <span> @lang('admin.faqs')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.faqs.index') }}"> @lang('admin.faqs')</a></li>
+                        <li><a href="{{ route('admin.faq-categories.index') }}"> @lang('admin.faq-categories')</a></li>
+                    </ul>
+                </li>
+                {{-- End Slider ----------------------------------------------------------- --}}
 
                 {{--                      blog             --}}
                 <li>
@@ -413,14 +413,24 @@
                 <li><a href="{{ route('admin.about.edit') }}"><i class="fa fa-address-card" aria-hidden="true"></i>
                         @lang('admin.about')</a></li>
 
-                              {{-- Contact Us ----------------------------------------------------------- --}}
-                        <li>
-                            <a href="{{ route('admin.contact-us.index') }}" class="waves-effect">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span>{{ trans('admin.contact_us') }}</span>
-                            </a>
-                        </li>
-                        {{-- End Contact Us ------------------------------------------------------- --}}
+                {{-- Contact Us ----------------------------------------------------------- --}}
+                <li>
+                    <a href="{{ route('admin.contact-us.index') }}" class="waves-effect">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span>{{ trans('admin.contact_us') }}</span>
+                    </a>
+                </li>
+                {{-- End Contact Us ------------------------------------------------------- --}}
+                {{--   reviews --------------------------------------------------------------- --}}
+                <li>
+                    <a href="{{ route('admin.reviews.index') }}" class="waves-effect">
+                        <i class="fas fa-comments"></i>
+                        <span> @lang('reviews.reviews')</span>
+                    </a>
+                </li>
+                {{-- End reviews ------------------------------------------------------- --}}
+
+
                 {{--                    </ul> --}}
                 {{--                </li> --}}
                 {{--    End reviews ----------------------------------------------------------- --}}
@@ -441,12 +451,12 @@
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('admin.settings.index') }}"> @lang('admin.app_setting')</a>
                                 </li>
-                                <li><a href="{{ route('admin.payment-methods.index') }}"> @lang('admin.payment_methods')</a>
-                                </li>
+                                {{-- <li><a href="{{ route('admin.payment-methods.index') }}"> @lang('admin.payment_methods')</a>
+                                </li> --}}
 
-                                <li>
+                                {{-- <li>
                                     <a href="{{ route('admin.home-settings.index') }}"> @lang('admin.setting_home')</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         {{-- Themes --------------------------------------------------------------- --}}

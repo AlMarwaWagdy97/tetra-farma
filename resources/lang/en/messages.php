@@ -249,6 +249,10 @@ return [
     "customer_review" => 'Customer Review',
     'no_reviews_yet' => 'No reviews yet. Be the first to review this product!',
     'leave_a_review' => 'Leave a Review',
+    'no_products_found' => 'No products found',
+    'Our Products' => 'Our Products',
+    'our_products' => 'Trusted supplements for a healthier life.',
+    ''
 
 
     

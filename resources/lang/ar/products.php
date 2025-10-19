@@ -48,15 +48,21 @@ return [
     'to_total' => '  الي مبلغ  ',
     'filters' => '  الفلاتر  ',
     'pocket_price' => 'سعر البوكيه',
-    'pocket_name_ar' => 'اسم البوكيه بالعربية',
-    'pocket_name_en' => 'اسم البوكيه بالانجليزية',
+    'feature_name_ar' => 'اسم الميزة بالعربية',
+    'feature_name_en' => 'اسم الميزة بالانجليزية',
     'care_tips' => 'نصائح العناية',
     "current_images" => "الصور الحالية",
     "new_pocket_images" => "صور  جديدة",
     "pocket_image" => "صور البوكيه",
     "pockets" => "البوكيهات",
     "add_pocket" => "اضافة بوكيه جديد",
-    "has_pockets" => "هذا المنتج يحتوي علي بوكيهات",
+    "medicine_feature" => "مميزات الدواء",
+    'add_feature' => 'اضافة ميزة',
+    'buy_now' => 'الشراء من امازون',
+    'form' => 'الشكل',
+    'servings' => 'الكمية',
+    'dispatch' => 'التوصيل',
+    
 
 
 ];

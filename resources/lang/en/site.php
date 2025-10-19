@@ -47,4 +47,8 @@ return [
     'more'              => 'More',
     'company_pro'       => 'Company Profile',
     'career'            => 'Career',
+    'our_partners'      => 'Our Partners',
+    'view_all_news'     => 'View All News',
+    'no_news'           => 'No News',
+    'latest_news'       => 'Latest News',
 ];

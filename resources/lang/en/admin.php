@@ -506,6 +506,21 @@ return [
     'newss' => 'News' ,
     'faqs' => 'Faqs',
     'faq-categories' => 'Faq Categories',
+    'applicant_name' => 'Applicant Name',
+    'job_title' => 'Job Title',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'status' => 'Status',
+    'pending' => 'Pending',
+    'reviewed' => 'Reviewed',
+    'accepted' => 'Accepted',
+    'download' => 'Download',
+    'no_data' => 'No data available',
+    'cv' => 'Cv',
+    'form_in' => 'Form',
+    'category_in' => 'Category',
+    'servings_in' => 'Servings',
+    'dispatch_in' => 'Dispatch',
 
     
 

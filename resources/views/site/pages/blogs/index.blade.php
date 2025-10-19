@@ -1,89 +1,39 @@
 @extends('site.app')
-
-@section('title', 'Dalia El Haggar' . ' | ' . 'Blogs');
-
-
+@section('title', 'Tetra Pharma' . ' | ' . 'Blogs')
 @section('content')
-    @php
-        $isRtl = app()->getLocale() === 'ar';
-    @endphp
-
-    <div class="container blogs py-5">
-
-        @if ($blogs->count())
-            @php
-                $first = $blogs->last();
-                $t0 = $first->transNow;
-            @endphp
-            <div class="featured-blog mb-5">
-                <h1 class="fw-bold">{{ @$t0->title }}</h1>
-                {!! @$t0->description !!}
-
-                <hr class="w-100 m-5 mx-auto" style="border-top: 3px solid #aaa9a9;">
-
-
-            </div>
-        @endif
-
-        <div class="row mt-5  content-blog g-4">
-            @foreach($blogs as $blog)
-            @if($blog->id === $first->id)
-                @continue
-            @endif
-
-             @php
-                $t = $blog->transNow;
-                $index = $loop->index + 1; 
-                $flexDirection = ($index % 2 === 0)
-                    ? ($isRtl ? 'flex-md-row-reverse' : 'flex-md-row')
-                    : ($isRtl ? 'flex-md-row' : 'flex-md-row-reverse');
-            @endphp
-
-                <div class="col-12">
-                    <div
-                        class="card mb-5 border-0 d-flex justify-content-center align-items-center gap-4 flex-column {{ $flexDirection }}">
-                        @if ($blog->image)
-                            <div style="flex: 0 0 40%;">
-                                <img src="{{ asset($blog->pathInView()) }}"
-                                    class="img-fluid img-blog object-fit-cover rounded-start" alt="no blog">
-                            </div>
-                        @endif
-
-                        <div class="card-bodyy d-flex flex-column">
-                            <a class="text-decoration-none link-blog  " href="{{ route('site.site.blogs.show', $blog) }}">
-                            <h2 class="card-title title-blog text-dark fw-bold">{{ $t?->title }}</h2>
-
-                            </a>
-                            <p class="card-text fs-5 desc-blog text-muted flex-grow-1">
-                                {!! \Illuminate\Support\Str::limit(@$t->description, 270, '...') !!} </p>
-                            <a href="{{ route('site.site.blogs.show', $blog) }}"
-                                class=" text-decoration-none see-blog fw-bold main-color text-primary align-self-start">
-                                {{ __('messages.see_more') }} &rarr;
+    <header class="hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+        <div class="container">
+            <h1 class="color_blue">@lang('blogs.take_a_look_at_our_blogs')</h1>
+            <p class="lead">@lang('blogs.blogs_p')</p>
+            <p class="breadcrumb"><a class="color_red" href="{{ route('site.home') }}">@lang('blogs.home')</a>
+                @lang('blogs.blogs')</p>
+        </div>
+    </header>
+    <section class="section" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+        <div class="container">
+            <div class="blog-grid">
+                @forelse ($blogs as $blog)
+                    <article class="post-card">
+                        <img class="card-img" src="{{ asset($blog->pathInView()) }}" alt="Science-based approach">
+                        <div class="card-body">
+                            <h4 class="">{{ $blog->title }}</h4>
+                            <p id="ex1" class="excerpt exp-text" data-lines="3">
+                                {!! Str::limit($blog->description, 200) !!}
+                            </p>
+                            <a href="{{ route('site.site.blogs.show', $blog->id) }}"> <button class="btn ghost exp-toggle" data-target="#ex1"
+                                    aria-expanded="false">@lang('blogs.read_more')</button>
                             </a>
                         </div>
-                    </div>
-                </div>
-
-                      {{-- @empty
-                <div class="col-12">
-                    <p class="text-center text-muted">{{ __('messages.no_blogs_found') }}</p>
-                </div>
-            @endforelse --}}
-            @endforeach
+                    </article>
+                @empty
+                    <h3>@lang('blogs.no_blogs')</h3>
+                @endforelse
+            </div>
         </div>
-
-        <div class="mt-5 d-flex justify-content-center">
-            {{ $blogs->links() }}
-        </div>
-    </div>
+    </section>
 @endsection
-
 <style>
-    .link-blog:hover {
-        text-decoration-line: underline   !important;
-       color: #000000 !important;
-    }
-    .see-blog:hover {
-        /* color: #d3f745 !important; */
+    .hero{
+        margin-top: 60px !important;
     }
 </style>

@@ -8,18 +8,17 @@ use App\Models\ProductPocket;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Messaging\V1\LinkshorteningMessagingServiceDomainAssociationInstance;
 
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::active()
-            ->with(['transNow', 'rates'])
-            ->where('show_in_cart', 0)   
-            ->get();
+       $products = Product::with('transNow')->active()->get();
+
             
-        return view('products.index', compact('products'));
+        return view('site.pages.products.index', compact('products'));
     }
 
     public function mostSelling()
@@ -36,34 +35,10 @@ class ProductController extends Controller
         return view('components.mostselling', compact('mostSellingProducts'));
     }
 
-    public function show($id)
-    {
-        $product = Product::active()
-            ->with(['transNow', 'rates', 'galleryGroup.images', 'pockets']) 
-            ->findOrFail($id);
-    
-        $similarProducts = Product::active()
-            ->where('id', '!=', $product->id) 
-            ->with(['transNow', 'rates'])
-            ->inRandomOrder()  
-            ->get();
-    
-        $averageRating = $product->rates()->avg('rating_value') ?? 0;  
-        $reviewCount = $product->rates()->count();
-        $ratingDistribution = $product->rates()
-            ->select('rating_value', DB::raw('count(*) as count'))
-            ->groupBy('rating_value')
-            ->pluck('count', 'rating_value')
-            ->toArray();
-        $totalReviews = array_sum($ratingDistribution);
-        $percentages = [];
-        for ($i = 1; $i <= 5; $i++) {
-            $count = $ratingDistribution[$i] ?? 0;
-            $percentages[$i] = $totalReviews > 0 ? ($count / $totalReviews) * 100 : 0;
-        }
-    
-        return view('site.pages.products.show', compact('product', 'similarProducts', 'averageRating', 'reviewCount', 'percentages'));
-    }
-
+   public function show($id)
+{
+    $product = Product::with(['transNow', 'pockets.translations', 'galleryGroup.images'])->findOrFail($id);
+    return view('site.pages.products.show', compact('product'));
+}
     
 }

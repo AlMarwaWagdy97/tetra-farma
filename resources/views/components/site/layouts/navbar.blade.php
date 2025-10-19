@@ -1,7 +1,21 @@
-<header id="mainNav" class="site-nav overlay   {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" data-overlay="true" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<header id="mainNav" class="site-nav overlay {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}
+      @if (Route::is('site.products.show') ||
+        Route::is('site.products.index') ||
+        Route::is('site.contact-us') ||
+        Route::is('site.faq-questions') ||
+        Route::is('site.about-us') ||
+        Route::is('site.news.index') ||
+        Route::is('site.news.show') ||
+        Route::is('site.jobs.index') ||
+        Route::is('site.jobs.show') ||
+        Route::is('site.jobs.apply') ||
+        Route::is('site.site.blogs.index') ||
+        Route::is('site.site.blogs.show'))  othernav navbar-shadow @endif
+    
+    " data-overlay="true" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="nav-inner">
         <div class="logo">
-            <a href="{{ route('site.home') }}">
+            <a class="navImg-a" href="{{ route('site.home') }}">
                 <img class="navImg"
                     src="{{ asset($settings->getItem(app()->getLocale() == 'en' ? 'logo_en' : 'logo_ar')) }}"
                     alt="Tetra Pharma">
@@ -108,4 +122,27 @@
 .dropdown  {
     font-size: 22px !important;
 }
+@media (min-width: 960px) {
+    #mainNav .navImg-a {
+        margin: -60px !important;
+}
+
+
+}
+.othernav{
+    position: fixed !important;
+  background:#FFFFFF !important;
+  a{
+        color: #1157a4 !important;
+  }
+  .links a{
+    color: #1157a4 !important;
+  }
+  .site-nav.overlay:not(.scrolled) .links a {
+    color: #1157a4 !important;
+}
+  
+}
+
+
 </style>

@@ -49,17 +49,17 @@ class ProductController extends Controller
 
 public function index(Request $request)
 {
-    // export (اختياري)
+   
     if ($request->input('export') === 'excel') {
         return Excel::download(new ProductsExport($request), 'products.xlsx');
     }
 
-    // Base query: جلب المنتجات مع ترجمة اللغة الحالية فقط
+    
     $query = Product::query()
         ->with(['translations' => function ($q) {
             $q->where('locale', app()->getLocale());
         }])
-        ->ordinary() // حسب كودك الأصلي؛ احذفها لو ما تحتاجها
+        ->ordinary()
         ->orderBy('id', 'DESC');
 
     // status filter
@@ -130,7 +130,7 @@ public function index(Request $request)
     // pagination
     $items = $query->paginate($this->pagination_count);
 
-    // رجّع الـ view مع المنتجات فقط (بدون occasions/cats/filters)
+   
     return view('admin/dashboard/products/index')->with([
         'items' => $items,
     ]);
@@ -180,48 +180,39 @@ public function index(Request $request)
         $data = $request->getSanitized();
 
         $data['image'] = $this->storeImage2($request, $this->productPath, $request->image, 'image');
+        $data['url'] = $request->url;
         $product = Product::create($data);
 
         $this->saveModelTranslation($product, $data);
 
+    if ($request->has('has_pockets')) {
+        $product->has_pockets = true;
+        $product->save();
 
-        if ($request->has('has_pockets')) {
-            $product->has_pockets = true;
-            $product->save();
+        if (isset($request->pockets['en']) && isset($request->pockets['ar'])) {
+            foreach ($request->pockets['en'] as $index => $pocketNameEn) {
+                if (!isset($request->pockets['ar'][$index])) {
+                    continue; 
+                }
 
-            foreach ($request->pockets['price'] as $index => $price) {
                 $pocketData = [
                     'product_id' => $product->id,
-                    'price'      => $price,
                 ];
-
-                if ($request->hasFile("pockets.image.{$index}")) {
-                    $images = [];
-                    foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
-                        if ($image->isValid()) {
-                            $images[] = $this->storePocketImage(
-                                $image,
-                                '/attachments/pockets/',
-                                $imgKey
-                            );
-                        }
-                    }
-                    $pocketData['image'] = json_encode($images);
-                }
 
                 $pocket = ProductPocket::create($pocketData);
 
-                // $pocket->translations()->create([
-                //     'locale'      => 'en',
-                //     'pocket_name' => $request->pockets['en'][$index],
-                // ]);
+                $pocket->translations()->create([
+                    'locale' => 'en',
+                    'pocket_name' => $pocketNameEn,
+                ]);
 
-                // $pocket->translations()->create([
-                //     'locale'      => 'ar',
-                //     'pocket_name' => $request->pockets['ar'][$index],
-                // ]);
+                $pocket->translations()->create([
+                    'locale' => 'ar',
+                    'pocket_name' => $request->pockets['ar'][$index],
+                ]);
             }
         }
+    }
         if ($request->gallery_image) {
             $group = GalleryGroup::create([
                 'type' => 0,
@@ -288,10 +279,6 @@ public function index(Request $request)
         }])->get();
 
 
-
-
-
-
         return view('admin/dashboard/products/edit')->with(['product' => $product, 'occasions' => $occasions, 'cats' => $cats, 'filters' => $filters]);
     }
 
@@ -303,6 +290,7 @@ public function index(Request $request)
         if ($request->hasFile('image')) {
             $data['image'] = $this->updateImage($request, $product, $product->path('products'), $request->image, 'image');
         }
+        $data['url'] = $request->url;
 
         if ($request->has('filters')) {
             $product->filters()->sync($request->filters);
@@ -323,29 +311,29 @@ public function index(Request $request)
     foreach ($prices as $index => $price) {
         $pocketData = [
             'product_id' => $product->id,
-            'price'      => $price,
+            'price'      => $price ?? 0,
         ];
 
         $pocketId = $pockets['id'][$index] ?? null;
 
-        if ($request->hasFile("pockets.image.{$index}")) {
-            $images = [];
-            foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
-                if ($image && $image->isValid()) {
-                    $images[] = $this->storePocketImage(
-                        $image,
-                        '/attachments/pockets/',
-                        $imgKey
-                    );
-                }
-            }
-            $pocketData['image'] = !empty($images) ? json_encode($images) : null;
-        } elseif ($pocketId && $pocketId !== 'new') {
-            $existingPocket = ProductPocket::find($pocketId);
-            if ($existingPocket) {
-                $pocketData['image'] = $existingPocket->image;
-            }
-        }
+        // if ($request->hasFile("pockets.image.{$index}")) {
+        //     $images = [];
+        //     foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
+        //         if ($image && $image->isValid()) {
+        //             $images[] = $this->storePocketImage(
+        //                 $image,
+        //                 '/attachments/pockets/',
+        //                 $imgKey
+        //             );
+        //         }
+        //     }
+        //     $pocketData['image'] = !empty($images) ? json_encode($images) : null;
+        // } elseif ($pocketId && $pocketId !== 'new') {
+        //     $existingPocket = ProductPocket::find($pocketId);
+        //     if ($existingPocket) {
+        //         $pocketData['image'] = $existingPocket->image;
+        //     }
+        // }
 
         if ($pocketId && $pocketId !== 'new') {
             $pocket = ProductPocket::find($pocketId);
@@ -428,28 +416,28 @@ public function index(Request $request)
         return redirect()->back();
     }
 
-    public function deletePocketImage($pocketId, $imageName)
-    {
-        $pocket = ProductPocket::findOrFail($pocketId);
+    // public function deletePocketImage($pocketId, $imageName)
+    // {
+    //     $pocket = ProductPocket::findOrFail($pocketId);
 
-        $imagePath = public_path('attachments/pockets/' . $imageName);
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        }
+    //     $imagePath = public_path('attachments/pockets/' . $imageName);
+    //     if (file_exists($imagePath)) {
+    //         unlink($imagePath);
+    //     }
 
-        $images = json_decode($pocket->image, true) ?? [];
-        $updatedImages = array_filter($images, fn($img) => $img !== $imageName);
+    //     $images = json_decode($pocket->image, true) ?? [];
+    //     $updatedImages = array_filter($images, fn($img) => $img !== $imageName);
 
-        if (empty($updatedImages)) {
-            $pocket->image = null;
-        } else {
-            $pocket->image = json_encode(array_values($updatedImages));
-        }
+    //     if (empty($updatedImages)) {
+    //         $pocket->image = null;
+    //     } else {
+    //         $pocket->image = json_encode(array_values($updatedImages));
+    //     }
 
-        $pocket->save();
+    //     $pocket->save();
 
-        return response()->json(['success' => true]);
-    }
+    //     return response()->json(['success' => true]);
+    // }
     public function destroy(Product $product)
     {
 

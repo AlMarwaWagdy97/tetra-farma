@@ -329,9 +329,7 @@ class SettingSingleton
             case 'openTime':
                 $value = $this->siteSetting?->where('key', 'open_' . app()->getLocale())->first()?->value;
                 break;
-            case 'footer_description':
-                $value = $this->siteSetting?->where('key', 'footer_description_' . app()->getLocale())->first()?->value;
-                break;
+          
             default:
                 if (substr($val, -3) == "_en" || substr($val, -2) ==  "_ar") {
                     $val = substr($val, 0, -3) . '_' . app()->getLocale();

@@ -15,8 +15,10 @@ use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ThemesController;
+use App\Http\Controllers\Admin\AdminCvController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReviewsController;
@@ -43,7 +45,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\Authorizations\RolesController;
 use App\Http\Controllers\Admin\ServiceCategoryEventsController;
 use App\Http\Controllers\Admin\Authorizations\PermissionsController;
-use App\Http\Controllers\Admin\PartnerController;
 
 
 /*
@@ -214,6 +215,8 @@ Route::group([
                 Route::get('services/update-featured/{id}', [ServicesController::class, 'update_featured'])->name('services.update-featured');
                 // ----- End Services -------------------------------------------
 
+                // ----- Cv -----------------------------------------------
+                Route::get('/cvs', [AdminCvController::class, 'index'])->name('cvs.index');
                 // ----- faqs -----------------------------------------------
                 Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
                 Route::get('faqs/{faq}/toggle-status', [App\Http\Controllers\Admin\FaqController::class, 'toggleStatus'])->name('faqs.toggle-status');

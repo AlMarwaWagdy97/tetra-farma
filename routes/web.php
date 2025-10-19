@@ -3,28 +3,31 @@
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Site\JobController;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\CardController;
+
 use App\Http\Controllers\Site\CartController;
-
 use App\Http\Controllers\Site\HomeController;
+
+
 use App\Http\Controllers\Site\PageController;
-
-
 use App\Http\Controllers\Site\ShopController;
 use App\Http\Controllers\Site\LoginController;
-use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Site\AboutController;
+
 use App\Http\Controllers\Site\ReviewController;
 
 use App\Http\Controllers\Site\SearchController;
 
 use App\Http\Controllers\Site\ProductController;
-
 use App\Http\Controllers\Site\ProfileController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\RegisterController;
 use App\Http\Controllers\Site\ServicesController;
 use App\Http\Controllers\Site\ContactUsController;
+use App\Http\Controllers\Site\FaqController;
+use App\Http\Controllers\Site\NewController;
 use App\Http\Controllers\Site\SubscribeController;
 use App\Http\Controllers\Site\ServiceCategoryController;
 use App\Http\Controllers\Site\WhatsAppContactController;
@@ -80,10 +83,12 @@ Route::group([
     Route::controller(PageController::class)->group(function () {
         Route::get('pages/{slug}', 'show')->name('pages.show');
 
-        Route::get('contact-us', 'contactUs')->name('contact-us');
-
-        Route::post('contact-us', 'store')->name('contact.store');
     });
+    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us');
+    Route::post('contact-us', [ContactUsController::class, 'store'])->name('contact.store');
+
+    Route::get('faq-questions', [FaqController::class, 'index'])->name('faq-questions');
+    Route::get('about-us', [AboutController::class, 'index'])->name('about-us');
 
 
 
@@ -92,7 +97,10 @@ Route::group([
     Route::get('/blogs/{blog}', [BlogController::class, 'show'])
         ->name('site.blogs.show');
 
-
+    Route::get('/news', [NewController::class, 'index'])
+        ->name('news.index');
+    Route::get('/news/{news}', [NewController::class, 'show'])
+        ->name('news.show');
 
 
     Route::controller(ServicesController::class)->group(function () {
@@ -109,7 +117,9 @@ Route::group([
     Route::post('/subscribe', [SubscribeController::class, 'store'])->name('subscribe.store');
 
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/Products', [ProductController::class, 'index'])->name('products.index');
+
+    Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
     Route::get('/whatsapp', [WhatsAppContactController::class, 'index'])->name('site.whatsapp');
 
@@ -118,7 +128,6 @@ Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->
         Route::get('/', [CartController::class, 'index'])->name('cart');
 
         Route::post('/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
-        // Route::post('cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 
         Route::delete('/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
     });
@@ -127,7 +136,7 @@ Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->
 
     Route::get('search/results', [SearchController::class, 'results'])->name('search.results');
 
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');  
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('/orders/{order}', function (App\Models\Order $order) {
@@ -138,4 +147,8 @@ Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->
 
     Route::get('/landscape', [ServiceCategoryController::class, 'showLandscapePage'])->name('landscape');
     Route::get('events', [ServiceCategoryController::class, 'showEventPage'])->name('events');
+
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+    Route::get('/jobs/{slug}', [JobController::class, 'show'])->name('jobs.show');
+    Route::post('/jobs/{slug}/apply', [JobController::class, 'apply'])->name('jobs.apply');
 });

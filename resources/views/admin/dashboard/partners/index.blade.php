@@ -40,7 +40,7 @@
                         <tr>
                             <th>#</th>
                             <th>@lang('partners.image')</th>
-                            <th>@lang('partners.title')</th>
+                            {{-- <th>@lang('partners.title')</th> --}}
                             <th>@lang('partners.status')</th>
                             <th class="text-end">@lang('admin.actions')</th>
                         </tr>
@@ -53,8 +53,8 @@
                                     <img src="{{ asset('storage/attachments/partners/' . $p->image) }} " style="height:60px"
                                         alt="" />
                                 </td>
-                                <td>{{ $p->translate(app()->getLocale())->title ?? $p->translate(config('app.fallback_locale'))->title }}
-                                </td>
+                                {{-- <td>{{ $p->translate(app()->getLocale())->title ?? $p->translate(config('app.fallback_locale'))->title }}
+                                </td> --}}
                                 <td>
                                     @if ($p->status)
                                         <span class="badge bg-success">@lang('admin.active')</span>
@@ -62,18 +62,7 @@
                                         <span class="badge bg-warning">@lang('admin.dis_active')</span>
                                     @endif
                                 </td>
-                                {{-- <td>
-                                    <a href="{{ route('admin.partners.edit', $p->id) }}"
-                                        class="btn btn-sm btn-info">Edit</a>
-                                    <form action="{{ route('admin.partners.destroy', $p->id) }}" method="POST"
-                                        style="display:inline-block">
-                                        @csrf @method('DELETE')
-                                        <button class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Delete?')">Delete</button>
-                                    </form>
-                                    <a href="{{ route('admin.partners.toggle-status', $p->id) }}"
-                                        class="btn btn-sm btn-warning">Toggle</a>
-                                </td> --}}
+                         
 
                                 <td class="text-end">
 

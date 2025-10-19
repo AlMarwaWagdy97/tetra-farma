@@ -5,41 +5,39 @@
     <x-slider />
     <!-- End Slider -->
 
-    @include('site.pages.annual-occasion')
 
-    <!-- Categories Swiper -->
+   <!-- About -->
+    @include('site.pages.about')
 
-    @include('site.pages.categories.index')
-    <!-- End Categories Swiper -->
-
-       <!-- copoun -->
-    @include('site.pages.copoun')
-    <!-- End copoun -->
-
+    <!-- Products -->
+    @include('site.pages.products')
 
     
-    <!-- Occasions Swiper -->
-    <x-occasion-slider />
-    <!-- End Occasions Swiper -->
-    
-    <!-- categories Swiper -->
-    <x-Categories/>
-    <!-- End categories Swiper -->
+    <!-- Jobs -->
+    @include('site.pages.careere')
 
-    <!-- Most Selling -->
-    <x-most-selling />
-    <!-- End Most Selling -->
 
-    <!-- Offers -->
-    <x-offers/>
-    <!-- End Offers -->
+        <!-- Blogs -->
+    @include('site.pages.blogs')
 
-    <!-- Plants -->
-    @include('site.pages.categories.featured')
-     <!-- End Plants -->
+        <!-- our-partner -->
+    @include('site.pages.our-partner')
+        <!-- news -->
+    @include('site.pages.news')
+        <!-- contact us -->
+    @include('site.pages.contact-us.home')
 
-    <!-- Reviews -->
+        <!-- Reviews -->
     <x-reviews :limit="10" />
     <!-- End Reviews -->
+        <!-- FAQ -->
+    @include('site.pages.faq_questions')
+
+
+
+
+
+
+
     
 @endsection

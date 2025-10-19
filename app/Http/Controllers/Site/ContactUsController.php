@@ -1,28 +1,30 @@
 <?php
-// Artisan command to generate controller:
-// php artisan make:controller Site/ContactUsController
 
-// File: app/Http/Controllers/Site/ContactUsController.php
 
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\ContactUSRequest;
 use Illuminate\Http\Request;
 use App\Models\Contactus;
 use Illuminate\Support\Facades\Auth;
 
 class ContactUsController extends Controller
 {
-    /**
-     * Show the contact us form.
-     */
+
     public function index()
     {
-        return view('site.pages.contactus');
+        return view('site.pages.contact-us.index');
     }
 
-    /**
-     * Handle form submission and save message.
-     */
+    public function store(ContactUSRequest $request)
+    {
+      
+      $data = $request->getSanitized();
 
+        Contactus::create($data);
+       
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
 }

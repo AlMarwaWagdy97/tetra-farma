@@ -230,7 +230,7 @@
 
 
                                     {{-- images Gellary  --}}
-                                    {{-- <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample">
+                                    <div class="accordion mt-4 mb-4 bg-danger" id="accordionExample">
                                         <div class="accordion-item border rounded">
                                             <h2 class="accordion-header" id="headingImage">
                                                 <button class="accordion-button fw-medium" type="button"
@@ -272,7 +272,7 @@
                                             </div>
                                         </div>
 
-                                    </div> --}}
+                                    </div>
 
                                 </div>
 
@@ -353,7 +353,7 @@
                                                             @endif
                                                         </div>
                                                     </div> --}}
-                                                    
+
                                                     {{-- image --}}
 
                                                     <div class="col-12">
@@ -368,7 +368,8 @@
                                                             </div>
                                                         </div>
                                                         @if ($errors->has('image'))
-                                                            <span class="missiong-spam">{{ $errors->first('image') }}</span>
+                                                            <span
+                                                                class="missiong-spam">{{ $errors->first('image') }}</span>
                                                         @endif
                                                     </div>
 
@@ -402,11 +403,23 @@
                                                                 value="{{ old('sort') }}">
                                                         </div>
                                                         @if ($errors->has('sort'))
-                                                            <span class="missiong-spam">{{ $errors->first('sort') }}</span>
+                                                            <span
+                                                                class="missiong-spam">{{ $errors->first('sort') }}</span>
                                                         @endif
                                                     </div>
 
-
+                                                    {{-- URL ------------------------------------------------------------------------------------- --}}
+                                                    <div class="col-12">
+                                                        <div class="row mb-3">
+                                                            <label for="example-number-input" col-form-label>
+                                                                @lang('slider.url'):</label>
+                                                            <div class="col-sm-12">
+                                                                <input class="form-control" type="text"
+                                                                    id="example-number-input" name="url"
+                                                                    value="{{ old('url') }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     {{-- feature ------------------------------------------------------------------------------------- --}}
                                                     <div class="col-12">
                                                         <label class="col-sm-12 col-form-label"
@@ -436,7 +449,8 @@
                                                                 data-off-label=" @lang('admin.no')"></label>
                                                         </div>
                                                         @if ($errors->has('status'))
-                                                            <span class="missiong-spam">{{ $errors->first('status') }}</span>
+                                                            <span
+                                                                class="missiong-spam">{{ $errors->first('status') }}</span>
                                                         @endif
                                                     </div>
 
@@ -492,7 +506,7 @@
                                                         @endif
                                                     </div> --}}
 
-                                                                                                        {{-- user_input ------------------------------------------------------------------------------------- --}}
+                                                    {{-- user_input ------------------------------------------------------------------------------------- --}}
 
                                                     {{-- <div class="col-12">
                                                         <label class="col-sm-12 col-form-label"
@@ -528,9 +542,9 @@
                                                     </div> --}}
 
                                                     {{-- has_pockets --}}
-                                                    {{-- <div class="col-12">
+                                                    <div class="col-12">
                                                         <label class="col-sm-12 col-form-label"
-                                                            for="has_pockets">{{ trans('products.has_pockets') }}</label>
+                                                            for="has_pockets">{{ trans('products.medicine_feature') }}</label>
                                                         <div class="col-sm-10">
                                                             <input class="form-check form-switch" name="has_pockets"
                                                                 type="checkbox" id="switch_has_pockets" switch="success"
@@ -540,17 +554,83 @@
                                                                 data-off-label="@lang('admin.no')"></label>
                                                         </div>
                                                         @if ($errors->has('has_pockets'))
-                                                            <span class="missiong-spam">{{ $errors->first('has_pockets') }}</span>
+                                                            <span
+                                                                class="missiong-spam">{{ $errors->first('has_pockets') }}</span>
                                                         @endif
-                                                    </div> --}}
+                                                    </div>
 
-                                                    {{-- <div id="pockets_section" style="display: none;">
-                                                        <h4>{{ trans('products.pockets') }}</h4>
+                                                    <div id="pockets_section" style="display: none;">
+                                                        <h4>{{ trans('products.medicine_feature') }}</h4>
                                                         <div id="pockets_inputs"></div>
-                                                        <button type="button" class="btn btn-success mt-3" id="add_pocket">
-                                                            <i class="fa fa-plus"></i> {{ trans('products.add_pocket') }}
+                                                        <button type="button" class="btn btn-success mt-3"
+                                                            id="add_pocket">
+                                                            <i class="fa fa-plus"></i> {{ trans('products.add_feature') }}
                                                         </button>
-                                                    </div> --}}
+                                                    </div>
+                                                    @foreach ($languages as $key => $locale)
+                                                   
+                                                            {{-- form ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.form_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[form]"
+                                                                        value="{{ old($locale . '.form') }}"
+                                                                        id="form{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.form'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.form') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- category ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.category_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[category]"
+                                                                        value="{{ old($locale . '.category') }}"
+                                                                        id="category{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.category'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.category') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- servings ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.servings_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[servings]"
+                                                                        value="{{ old($locale . '.servings') }}"
+                                                                        id="servings{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.servings'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.servings') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            {{-- dispatch ------------------------------------------------------------------------------------- --}}
+                                                            <div class="row mb-3">
+                                                                <label for="example-text-input"
+                                                                    class="col-sm-12 col-form-label">{{ trans('admin.dispatch_in') . trans('lang.' . Locale::getDisplayName($locale)) }}</label>
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text"
+                                                                        name="{{ $locale }}[dispatch]"
+                                                                        value="{{ old($locale . '.dispatch') }}"
+                                                                        id="dispatch{{ $key }}">
+                                                                </div>
+                                                                @if ($errors->has($locale . '.dispatch'))
+                                                                    <span
+                                                                        class="missiong-spam">{{ $errors->first($locale . '.dispatch') }}</span>
+                                                                @endif
+                                                            </div>
+                                                        
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -581,10 +661,10 @@
 @section('style')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
-   <script>
-$(document).ready(function() {
-    $('#add_images_section').on('click', function() {
-        $('#images_section').append(`
+    <script>
+        $(document).ready(function() {
+            $('#add_images_section').on('click', function() {
+                $('#images_section').append(`
             <div class="images">
                 <div class="row">
                     <div class="col-12">
@@ -608,19 +688,19 @@ $(document).ready(function() {
                 <hr>
             </div>
         `);
-    });
+            });
 
-    $('#images_section').on('click', '.delete_img', function() {
-        $(this).closest('.images').remove();
-    });
-   let pocketIndex = 0; 
-    $('#switch_has_pockets').on('change', function() {
-        $('#pockets_section').toggle(this.checked);
-    });
+            $('#images_section').on('click', '.delete_img', function() {
+                $(this).closest('.images').remove();
+            });
+            let pocketIndex = 0;
+            $('#switch_has_pockets').on('change', function() {
+                $('#pockets_section').toggle(this.checked);
+            });
 
-    $('#add_pocket').on('click', function() {
-        const currentIndex = pocketIndex++;
-        $('#pockets_inputs').append(`
+            $('#add_pocket').on('click', function() {
+                const currentIndex = pocketIndex++;
+                $('#pockets_inputs').append(`
             <div class="pocket-row mb-3 p-3 border rounded">
                 <div class="row">
                     <div class="col-md-12 mb-2">
@@ -628,7 +708,7 @@ $(document).ready(function() {
                             type="text"
                             name="pockets[en][${currentIndex}]"
                             class="form-control col-md-12"
-                            placeholder="{{ trans('products.pocket_name_en') }}"
+                            placeholder="{{ trans('products.feature_name_en') }}"
                             required
                         >
                     </div>
@@ -637,30 +717,12 @@ $(document).ready(function() {
                             type="text"
                             name="pockets[ar][${currentIndex}]"
                             class="form-control"
-                            placeholder="{{ trans('products.pocket_name_ar') }}"
+                            placeholder="{{ trans('products.feature_name_ar') }}"
                             required
                         >
                     </div>
-                    <div class="col-md-12 mb-2">
-                        <input
-                            type="number"
-                            name="pockets[price][${currentIndex}]"
-                            class="form-control"
-                            placeholder="{{ trans('products.pocket_price') }}"
-                            step="0.01"
-                            required
-                        >
-                    </div>
-                        <div class="col-md-12 mb-2">
-                        <label>{{ trans('products.pocket_image') }}</label>
-                        <input 
-                            type="file" 
-                            name="pockets[image][${currentIndex}][]" 
-                            class="form-control" 
-                            accept="image/*" 
-                            multiple 
-                        >
-                    </div>
+                   
+                   
                     <div class="col-md-12 text-end align-self-end mb-2">
                         <button type="button" class="btn btn-danger remove_pocket">
                             <i class="fa fa-trash"></i>
@@ -669,13 +731,12 @@ $(document).ready(function() {
                 </div>
             </div>
         `);
-    });
+            });
 
-    // --- إزالة صف جيب ---
-    $('#pockets_inputs').on('click', '.remove_pocket', function() {
-        $(this).closest('.pocket-row').remove();
-    });
-});
-</script>
+            $('#pockets_inputs').on('click', '.remove_pocket', function() {
+                $(this).closest('.pocket-row').remove();
+            });
+        });
+    </script>
 
 @endsection

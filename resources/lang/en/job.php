@@ -51,5 +51,15 @@ return [
     'unpublished' => 'Unpublished',
     'active' => 'Active',
    'slug' => 'Slug',
+    'apply' => 'Apply Now',
+    'careers' => 'Careers',
+    'we_are_hiring' => 'We are hiring',
+    'career_p' => 'Build your career with a science-driven company dedicated to innovation and health. Be part of a team that improves lives every day.',
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'cv_file' => 'CV File',
+    'send' => 'Send',
+    'build_career' => 'Build Your <span>Career</span> With Tetra Pharma',
 
 ];

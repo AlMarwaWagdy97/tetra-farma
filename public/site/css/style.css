@@ -61,13 +61,11 @@ html,body{margin:0}
 .links a.active{ color:var(--active) }
 .links a.active::after{ background:var(--active); transform:scaleX(1) }
 
-/* overlay فوق الهيرو */
 .site-nav.overlay:not(.scrolled){ background:transparent; border-color:transparent }
-.site-nav.overlay:not(.scrolled) .links a{ color:#fff !important }
+.site-nav.overlay:not(.scrolled) .links a{ color:#fff  }
 .site-nav.overlay:not(.scrolled) .links a::after{ background:#fff }
 .site-nav.overlay:not(.scrolled) .navImg{ filter:drop-shadow(0 0 6px rgba(0,0,0,.35)) }
 
-/* بعد السكروول */
 .site-nav.scrolled{ background:#fff; border-color:var(--border); box-shadow:var(--shadow)  }
 
 /* Actions */
@@ -1080,7 +1078,7 @@ body.nav-open .backdrop{ display:block }
 }
 
 .latestnews {
-    padding: 80px 20px;
+    padding: 0px 20px;
     background: #fff;
 }
 

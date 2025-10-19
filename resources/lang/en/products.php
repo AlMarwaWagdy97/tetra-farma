@@ -55,7 +55,17 @@ return [
     "pocket_image" => "Pocket Image",
     "pockets" => "Pockets",
     "add_pocket" => "Add Pocket",
-    "has_pockets" => "This product has pockets",
+    "medicine_feature" => "Medicine Feature",
+    'add_feature' => 'Add Feature',
+    'has_pockets' => 'This product has pockets', 
+    'feature_name_en' => 'Feature Name in English',
+    'feature_name_ar' => 'Feature Name in Arabic',
+    'buy_now' => 'Buy In Amazon',
+    'form' => 'Form',
+    'servings' => 'Servings',
+    'dispatch' => 'Dispatch',
+
+
     
 
 ];

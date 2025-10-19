@@ -1,47 +1,3 @@
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang))</title>
-    <meta name="title" content="@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang) ?? 'Dalia El Haggar')" />
-    <meta name="keywords" content="@yield('meta_key', $settings->getMeta($pageName . '_meta_key_' . $currentLang) ?? 'flowers, beauty, blooms')">
-    <meta name="description" content="@yield('meta_description', $settings->getMeta($pageName . '_meta_description_' . $currentLang) ?? 'Discover the beauty of Dalia El Haggar')">
-    <link rel="canonical" href="{{ url()->current() }}" />
-
-    <meta property="og:title" content="{{ $title }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ url()->current() }}" />
-    <meta name="og:image" content="{{ asset($settings->getItem('logo') ?? 'site/img/logos/logo.png') }}">
-    <!-- Google Fonts: Dancing Script -->
-    <link rel="stylesheet" href="{{ asset('site/fonts/css2.css') }}" />
-    <link href="{{ $settings->getItem('icon') ? asset($settings->getItem('icon')) : asset('site/img/logos/logo.png') }}"
-        rel="icon">
-    @if (app()->getLocale() == 'ar')
-        <link rel="stylesheet" href="{{ asset('site/css/bootstrap.rtl.min.css') }}" />
-    @else
-        <link rel="stylesheet" href="{{ asset('site/css/bootstrap.min.css') }}" />
-    @endif
-    <link rel="stylesheet" href="{{ asset('site/fonts/all.min.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="{{ asset('site/fonts/nouislider.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/animate.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/swiper.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/style.css?v=0.0.47') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/custom.css?v=0.0.49') }}" />
-
-
-    {!! \App\Settings\SettingSingleton::getInstance()->getScript('header_script') !!}
-
-
-    @yield('style')
-
-    @livewireStyles
-</head>
-<body>
-    
-{!! \App\Settings\SettingSingleton::getInstance()->getScript('body_script') !!}
-
 
 <head>
 	<meta charset="UTF-8">
@@ -265,6 +221,13 @@
     <link rel="stylesheet" href="{{ asset('site/css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/custom.css') }}" />
+	 <link rel="stylesheet" href="{{ asset('site/css/career.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/Blog.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/news.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/contact.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/Faq.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/about.css') }}" />
+
 
 
     {!! \App\Settings\SettingSingleton::getInstance()->getScript('header_script') !!}

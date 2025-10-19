@@ -18,6 +18,7 @@ class Product extends Model
         'image',
         'price',
         'sale',
+        'url',
         'price_after_sale',
         'most_selling',
         'best_offer',

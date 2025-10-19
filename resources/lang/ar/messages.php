@@ -241,6 +241,11 @@ return [
     'customer_review' => 'تقييم العملاء',
     'no_reviews_yet' => 'لا توجد تقييمات حتى الآن. كن أول من يقيم هذا المنتج!',
     'leave_a_review' => 'اترك تقييم',
+    'no_products_found' => 'لا توجد منتجات',
+    'Our Products' => 'منتجاتنا',
+    'our_products' => 'مكملات غذائية موثوقة لحياة أكثر صحة.',
+    
+    
 
 
 

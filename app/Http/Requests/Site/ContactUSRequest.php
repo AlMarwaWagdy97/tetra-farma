@@ -28,6 +28,7 @@ class ContactUSRequest extends FormRequest
             'email' => 'required|email',
             'subject' => 'nullable',
             'message' => 'nullable',
+            'phone' => 'nullable',
             'city' => 'nullable',
             'type' => 'nullable',
             'status' => 'nullable',

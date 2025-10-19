@@ -21,7 +21,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
 
-           $contacts = WhatsAppContact::active()->with('transNow')->get();
+        $contacts = WhatsAppContact::active()->with('transNow')->get();
 
         view()->share('contacts', $contacts);
      

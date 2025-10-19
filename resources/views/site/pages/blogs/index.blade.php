@@ -5,7 +5,7 @@
         <div class="container">
             <h1 class="color_blue">@lang('blogs.take_a_look_at_our_blogs')</h1>
             <p class="lead">@lang('blogs.blogs_p')</p>
-            <p class="breadcrumb"><a class="color_red" href="{{ route('site.home') }}">@lang('blogs.home')</a>
+            <p class="breadcrumb"><a class="color_red" href="{{ route('site.home') }}">@lang('blogs.home')</a> / 
                 @lang('blogs.blogs')</p>
         </div>
     </header>

@@ -31,7 +31,7 @@
                 }
             @endphp
             @include('site.layouts.menuItem')
-            <a class="career_btn" href="career.html" target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }} </a>
         </nav>
         <div class="right">
              <div class="dropdown"> 
@@ -60,11 +60,11 @@
     <aside id="offcanvas" class="offcanvas" aria-hidden="true">
         <nav class="mobile-links" aria-label="Mobile menu">
             @include('site.layouts.menuItem')
-            <a class="career_btn" href="./career page/career.html" target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }} </a>
         </nav>
 
         <div class="mobile-actions">
-            <a class="career_btn" href="career.html" target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}"  target="_blank"> {{ __(key: 'site.career') }} </a>
         </div>
     </aside>
 
@@ -141,8 +141,15 @@
   .site-nav.overlay:not(.scrolled) .links a {
     color: #1157a4 !important;
 }
+
   
 }
 
+@media (max-width: 560px) {
+.othernav .burger span {
+    background: #1157a4 !important;
 
+
+}
+}
 </style>

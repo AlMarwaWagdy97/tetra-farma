@@ -17,9 +17,6 @@
         @lang('job.career_p')
       </p>
     </div>
-
-
-
     <!-- Job Openings -->
   <div id="openings" class="jobopening">
     @forelse ($jobs as $job)
@@ -27,11 +24,11 @@
             <div class="jobdesc">{{ $job->employment_type }} • {{ $job->location }}</div>
             <h3 class="job_h3"> {{ optional($job->translate(app()->getLocale()))->title ?? '—' }}</h3>
             <p class="job_P">{{ optional($job->translate(app()->getLocale()))->short_description ?? '—' }}</p>
-            <div class="field_title">
+            {{-- <div class="field_title">
                 @foreach (explode(',',optional($job->translate(app()->getLocale()))->description ) as $requirement)
                     <span class="fieldspan">{!!   trim($requirement) !!}</span>
                 @endforeach
-            </div>
+            </div> --}}
             <a class="Cv_btn" href="{{ route('site.jobs.show', $job->slug) }}">@lang('job.apply')</a>
         </article>
     @empty

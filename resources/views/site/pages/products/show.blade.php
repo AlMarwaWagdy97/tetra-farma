@@ -20,10 +20,10 @@
         <aside class="panel">
             <div class="price">
                 @if ($product->price_after_sale !== $product->price)
-                    <div class="main">{{ $product->price_after_sale }}</div>
-                    <div class="pricediv text-decoration-line-through">{{ $product->price }}</div>
+                    <div class="main">{{ $product->price_after_sale }} EGP </div>
+                    <div class="pricediv text-decoration-line-through">{{ $product->price }} EGP</div>
                 @else
-                    <div class="main">{{ $product->price }}</div>
+                    <div class="main">{{ $product->price }} EGP </div>
                 @endif
             </div>
             @if ($product->has_pockets && $product->pockets->count())

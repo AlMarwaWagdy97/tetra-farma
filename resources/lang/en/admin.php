@@ -522,6 +522,8 @@ return [
     'servings_in' => 'Servings',
     'dispatch_in' => 'Dispatch',
     'total_reviews' => 'Total Reviews',
+    'jobs' => 'Jobs',
+    'cvs' => 'Cvs',
 
     
 

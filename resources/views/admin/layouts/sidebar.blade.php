@@ -396,11 +396,22 @@
                 <li><a href="{{ route('admin.products.index') }}">
                         <i class="fas fa-boxes"></i>
                         @lang('admin.products')</a></li>
+
                 {{--         News             --}}
 
                 <li><a href="{{ route('admin.news.index') }}">
                         <i class="fas fa-newspaper"></i>
                         @lang('admin.newss')</a></li>
+
+
+                {{--         jobs             --}}
+                <li><a href="{{ route('admin.jobs.index') }}">
+                        <i class="fas fa-briefcase"></i>
+                        @lang('admin.jobs')</a></li>
+                {{--         jobs             --}}
+                <li><a href="{{ route('admin.cvs.index') }}">
+                        <i class="fas fa-id-card"></i>
+                        @lang('admin.cvs')</a></li>
 
                 {{--         partners             --}}
 

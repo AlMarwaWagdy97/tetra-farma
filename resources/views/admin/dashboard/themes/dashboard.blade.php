@@ -90,19 +90,17 @@
                                                         {{-- End login logo image ------------------------------------------------------------------------------------- --}}
                                                         
                                                         {{-- login background image ----------------------------------------------------------------------------------- --}}
-                                                            <div class="row mt-3">
-                                                                <div class="col-sm-4 col-md-4">
-                                                                    <a href="{{ asset(@$loginTheme->background ) }}" target="_blank">
-                                                                        <img src="{{ asset(@$loginTheme->background) }}" alt=""  width="25%">
-                                                                    </a>
-                                                                </div>
-                                                            
+                                                            <div class="row mt-3">                                                               
                                                                 <div class="col-sm-4 col-md-4 ">
                                                                     <a href="{{ asset( @$loginTheme->logo_image ) }}" target="_blank">
                                                                         <img src="{{ asset( @$loginTheme->logo_image ) }}" alt=""  width="25%">
                                                                     </a>
                                                                 </div>
-
+                                                                <div class="col-sm-4 col-md-4">
+                                                                    <a href="{{ asset(@$loginTheme->background ) }}" target="_blank">
+                                                                        <img src="{{ asset(@$loginTheme->background) }}" alt=""  width="25%">
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         {{-- End login background image -------------------------------------------------------------------------------- --}}
                                                             

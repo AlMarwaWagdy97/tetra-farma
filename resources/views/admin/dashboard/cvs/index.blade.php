@@ -41,7 +41,7 @@
                                         <td>{{ $cv->email }}</td>
                                         <td>{{ $cv->phone ?? '—' }}</td>
                                         <td class="text-end">
-                                            <a href="{{ asset('storage/cvs/' . $cv->cv_file) }}" class="btn btn-info btn-sm"
+                                            <a href="{{ asset('storage/' . $cv->cv_file) }}" class="btn btn-info btn-sm"
                                                 target="_blank"><i class="fas fa-download"></i></a>
                                         </td>
 

@@ -28,7 +28,7 @@ class CheckAdminAuthenticate
         }
        
         $theme = Themes::query();
-        $adminDashboardTheme = json_decode((clone @$theme)->dashboard()->get()->first()->value);
+        $adminDashboardTheme = json_decode((clone @$theme)->dashboard()?->get()?->first()?->value);
         view()->share('adminDashboardTheme' , $adminDashboardTheme);
         
         return $next($request);

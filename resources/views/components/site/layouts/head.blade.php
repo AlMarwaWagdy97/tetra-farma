@@ -226,7 +226,7 @@
     <link rel="stylesheet" href="{{ asset('site/css/news.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/contact.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/Faq.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/about.css') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/About.css') }}" />
 
 
 

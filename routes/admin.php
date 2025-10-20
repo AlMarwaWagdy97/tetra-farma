@@ -217,6 +217,7 @@ Route::group([
 
                 // ----- Cv -----------------------------------------------
                 Route::get('/cvs', [AdminCvController::class, 'index'])->name('cvs.index');
+              
                 // ----- faqs -----------------------------------------------
                 Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
                 Route::get('faqs/{faq}/toggle-status', [App\Http\Controllers\Admin\FaqController::class, 'toggleStatus'])->name('faqs.toggle-status');

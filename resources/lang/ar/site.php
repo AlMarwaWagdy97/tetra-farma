@@ -51,6 +51,8 @@ return [
     'view_all_news'       => 'مشاهدة كل الاخبار',
     'no_news'       => 'لا يوجد اخبار',
     'latest_news'       => 'اخر الاخبار',
+    'view_all_products'       => 'مشاهدة كل المنتجات',
+    'view_all_blogs'       => 'مشاهدة كل المدونات',
     
     
     

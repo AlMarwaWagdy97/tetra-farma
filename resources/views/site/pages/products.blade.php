@@ -26,4 +26,10 @@
             @endforelse
         </div>
     </div>
+      <div class="viewall">
+             <a class="viewnews" href="{{ route('site.products.index') }}">
+                 <span class="viewnewstext">@lang('site.view_all_products')</span>
+                 <span class="viewnewsspan">→</span>
+             </a>
+         </div>
 </section>

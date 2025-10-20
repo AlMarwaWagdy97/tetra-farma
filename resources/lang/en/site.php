@@ -51,4 +51,6 @@ return [
     'view_all_news'     => 'View All News',
     'no_news'           => 'No News',
     'latest_news'       => 'Latest News',
+    'view_all_products' => 'View All Products',
+    'view_all_blogs'    => 'View All Blogs',
 ];

@@ -20,9 +20,9 @@
           </div>
 
           <ul class="contact-list">
-            <li><span class="icon">📍</span> <a class="nv-noninteractive" href="#">{{ $settings->getItem('address') }}</a></li>
-            <li><span class="icon">✉️</span> <a href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a></li>
-            <li><span class="icon">📞</span> <a href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a></li>
+            <li class="d-flex align-items-center"> <span class="icon">📍</span> <a class="nv-noninteractive" href="#">{{ $settings->getItem('address') }}</a></li>
+            <li class="d-flex align-items-center"><span class="icon">✉️</span> <a href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a></li>
+            <li class="d-flex align-items-center"><span class="icon">📞</span> <a href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a></li>
           </ul>
 
           <div class="contactDiv">@lang('home.social')</div>

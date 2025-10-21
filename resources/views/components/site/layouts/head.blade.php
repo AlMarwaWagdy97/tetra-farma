@@ -3,9 +3,9 @@
 	<meta charset="UTF-8">
 
     <title>@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang))</title>
-      <meta name="title" content="@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang) ?? 'Dalia El Haggar')" />
-    <meta name="keywords" content="@yield('meta_key', $settings->getMeta($pageName . '_meta_key_' . $currentLang) ?? 'flowers, beauty, blooms')">
-    <meta name="description" content="@yield('meta_description', $settings->getMeta($pageName . '_meta_description_' . $currentLang) ?? 'Discover the beauty of Dalia El Haggar')">
+      <meta name="title" content="@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang) ?? 'Tetra Pharma ')" />
+    <meta name="keywords" content="@yield('meta_key', $settings->getMeta($pageName . '_meta_key_' . $currentLang) ?? 'Tetra Pharma, Pharmaceuticals, Healthcare')">
+    <meta name="description" content="@yield('meta_description', $settings->getMeta($pageName . '_meta_description_' . $currentLang) ?? 'Discover the excellence of Tetra Pharma in pharmaceuticals and healthcare.')">
     <link rel="canonical" href="{{ url()->current() }}" />
      <meta property="og:title" content="{{ $title }}" />
     <meta property="og:type" content="website" />
@@ -181,7 +181,6 @@
 	<link rel="alternate" title="JSON" type="application/json"
 		href="https://snapster.foxthemes.me/wp-json/wp/v2/pages/7" />
 	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://snapster.foxthemes.me/xmlrpc.php?rsd" />
-
 	<link rel="canonical" href="https://snapster.foxthemes.me/" />
 	<link rel='shortlink' href='https://snapster.foxthemes.me/' />
 	<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed"
@@ -192,9 +191,9 @@
 	</noscript>
 	<meta name="generator"
 		content="Elementor 3.30.1; features: additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
-	<link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="32x32" />
+	{{-- <link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="32x32" />
 	<link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="192x192" />
-	<link rel="apple-touch-icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" />
+	<link rel="apple-touch-icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" /> --}}
 	<meta name="msapplication-TileImage"
 		content="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -205,7 +204,7 @@
         rel="icon">
 
     @if (app()->getLocale() == 'ar')
-        <link rel="stylesheet" href="{{ asset('site/css/bootstrap.rtl.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('site/css/bootstrap.rtl.min.css') }}"/>
     @else
         <link rel="stylesheet" href="{{ asset('site/css/bootstrap.min.css') }}" />
     @endif

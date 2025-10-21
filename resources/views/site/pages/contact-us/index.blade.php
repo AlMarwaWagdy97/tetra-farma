@@ -12,6 +12,6 @@
 @endsection
 <style>
     .page-hero{
-      margin-top: 80px !important;
+      margin-top: 80px !important; 
     }
 </style>

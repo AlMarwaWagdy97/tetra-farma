@@ -152,4 +152,7 @@
 
 }
 }
+.dropdown-item{
+        margin: 0 0px !important;
+}
 </style>

@@ -3,7 +3,9 @@
     <div class="container">
         <div class="text-center mb-4">
             <h2 class="section-title">@lang('messages.Our Products')</h2>
-            <p class="section-sub">@lang('messages.our_products')</p>
+            <div class="DivNews">
+             </div>
+            <p class="section-sub pt-2">@lang('messages.our_products')</p>
         </div>
         <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
             @forelse ($products as $product)
@@ -26,7 +28,7 @@
             @endforelse
         </div>
     </div>
-      <div class="viewall">
+      <div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
              <a class="viewnews" href="{{ route('site.products.index') }}">
                  <span class="viewnewstext">@lang('site.view_all_products')</span>
                  <span class="viewnewsspan">→</span>

@@ -1,5 +1,5 @@
  <!-- news -->
- <section class="latestnews" id="latest-news" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"  >
+ <section class="latestnews" id="latest-news" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
      <div class="news">
          <div class="newstitle">
              <h2 class="newsh2">@lang('site.latest_news')</h2>
@@ -16,7 +16,7 @@
                              <h3 class="newh3">
                                  {{ $new->title }}
                              </h3>
-                             <a href="{{ route('site.news.index') }}" class="newbtn">
+                             <a href="{{ route('site.news.show', $new->id) }}') }}" class="newbtn">
                                  <span class="NewBtn">
                                      @lang('site.read_more') </span>
                              </a>
@@ -30,7 +30,7 @@
          </div>
 
 
-         <div class="viewall">
+         <div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
              <a class="viewnews" href="{{ route('site.news.index') }}">
                  <span class="viewnewstext">@lang('site.view_all_news')</span>
                  <span class="viewnewsspan">→</span>

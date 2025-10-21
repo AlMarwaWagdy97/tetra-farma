@@ -13,20 +13,13 @@
                  </div>
 
                  <!-- Contact blocks -->
-                 <ul class="ContactDiv">
-                     <li class="ContactLi">
-                         <span class="color_blue">📍</span>
-                         <span>{{ $address }}</span>
-                     </li>
-                     <li class="lispan">
-                         <span class="color_blue">📞</span>
-                         <a href="tel:{{ $mobile }}"
-                             style="color:#334155; text-decoration:none;">{{ $mobile }}</a>
-                     </li>
-                     <li class="lispan">
-                         <span class="color_blue">✉️</span>
-                         <a href="mailto:info@tetrapharma.com" class="Email">{{ $email }}</a>
-                     </li>
+                 <ul class="contact-list">
+                     <li class="d-flex align-items-center"> <span class="icon">📍</span> <a class="nv-noninteractive"
+                             href="#">{{ $settings->getItem('address') }}</a></li>
+                     <li class="d-flex align-items-center"><span class="icon">✉️</span> <a
+                             href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a></li>
+                     <li class="d-flex align-items-center"><span class="icon">📞</span> <a
+                             href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a></li>
                  </ul>
                  <!-- Social -->
                  <div class="social">
@@ -68,7 +61,7 @@
      <!-- bottom bar -->
      <div class="bottomBar">
          <div class="bottom1">
-             <span class="footerBottom">© <span id="y_foot">2025</span>@lang( 'home.all_rights_reserved')</span>
+             <span class="footerBottom">© <span id="y_foot">2025</span>@lang('home.all_rights_reserved')</span>
              <div class="Footerbtm"></div>
          </div>
      </div>

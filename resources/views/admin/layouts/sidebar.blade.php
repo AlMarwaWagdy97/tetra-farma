@@ -479,7 +479,7 @@
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('admin.themes.dashboard') }}"> @lang('admin.dashboard_theme')</a>
                                 </li>
-                                <li><a href="{{ route('admin.themes.site') }}"> @lang('admin.site_theme')</a></li>
+                                {{-- <li><a href="{{ route('admin.themes.site') }}"> @lang('admin.site_theme')</a></li> --}}
 
                             </ul>
                         </li>

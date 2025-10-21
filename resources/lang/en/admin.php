@@ -524,6 +524,8 @@ return [
     'total_reviews' => 'Total Reviews',
     'jobs' => 'Jobs',
     'cvs' => 'Cvs',
+    'themes' => 'Themes',
+    'dashboard_theme' => 'Dashboard theme',
 
     
 

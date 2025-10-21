@@ -23,8 +23,8 @@ class Footer extends Component
     public $email;
     public $address;
     public $settings;
-    public $facebookLink; 
-    public $instagramLink; 
+    public $facebookLink;
+    public $instagramLink;
 
     public function __construct()
     {
@@ -33,7 +33,8 @@ class Footer extends Component
 
         $this->settings = SettingSingleton::getInstance();
 
-       
+        $this->footerLinks = Menue::with('trans')->footer()->active()->get();
+
 
         $this->facebookLink = $this->settings->getItem('facebook') ?? 'not found';
         $this->instagramLink = $this->settings->getItem('instagram') ?? 'not found';
@@ -45,10 +46,6 @@ class Footer extends Component
         $this->address = $this->settings->getItem('address') ?? 'not found';
         $this->mobile = $this->settings->getItem('mobile') ?? 'not found';
         $this->email = $this->settings->getItem('email') ?? 'not found';
-        
-
-
-        
     }
 
     public function render()

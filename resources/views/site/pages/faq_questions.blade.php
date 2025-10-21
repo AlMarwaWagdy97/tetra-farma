@@ -1,13 +1,11 @@
 	<!-- FAQ Section--------------------------------- -->
-	<section id="tetra-faq" class="faqsec">
+	<section id="tetra-faq" class="faqsec" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 		<div class="faqdiv">
 			<div class="faq1">
 				<div class="faqtitle">@lang('home.faq')</div>
 				<h2 class="faq2">@lang('home.faq_title')</h2>
 				<p faqP>@lang('home.faq_p')</p>
 			</div>
-
-
 			@forelse ( $faq_questions as $question )
 					<div class="tf-item faqitem">
 				<button class="tf-q faqbtn" type="button" aria-expanded="false" aria-controls="tf-a-1" id="tf-q-1">
@@ -23,13 +21,6 @@
 			@empty
 				<p>@lang('home.no_faq')</p>
 			@endforelse
-		
-
-		
-
-		
-
-		
 		</div>
 	</section>
 	<!-- faq end -->

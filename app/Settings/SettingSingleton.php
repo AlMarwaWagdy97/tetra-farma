@@ -109,6 +109,9 @@ class SettingSingleton
             case 'address':
                 $value = $this->siteSetting?->where('key', 'address_' . app()->getLocale())->first()?->value;
                 break;
+            case 'footer_description':
+                $value = $this->siteSetting?->where('key', 'footer_description_' . app()->getLocale())->first()?->value;
+                break;
             case 'categories':
                 $value = $this->siteSetting?->where('key', 'categories_' . app()->getLocale())->first()?->value;
                 break;

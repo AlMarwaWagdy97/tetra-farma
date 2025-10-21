@@ -1,69 +1,101 @@
  <!-- =============== FOOTER =============== -->
- <footer class="footerClass" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-     <div class="footercard">
-         <div class="footer">
-
-             <!-- LEFT: brand + contact + socials + career -->
-             <div>
-                 <!-- Logo + name -->
+ @php
+     $settings = \App\Settings\SettingSingleton::getInstance();
+     $footer_description = $settings->getItem('footer_description');
+ @endphp
+ <footer dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}  h-25 ">
+     <div class="container-fluid">
+         <div class="row  ">
+             <div class=" col-md-4 text-center">
                  <div class="logoContent">
                      <img class="LogoImg"
                          src="{{ asset($settings->getItem(app()->getLocale() == 'en' ? 'logo_en' : 'logo_ar')) }}"
                          alt="Tetra Pharma">
                  </div>
-
-                 <!-- Contact blocks -->
-                 <ul class="contact-list">
-                     <li class="d-flex align-items-center"> <span class="icon">📍</span> <a class="nv-noninteractive"
-                             href="#">{{ $settings->getItem('address') }}</a></li>
-                     <li class="d-flex align-items-center"><span class="icon">✉️</span> <a
-                             href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a></li>
-                     <li class="d-flex align-items-center"><span class="icon">📞</span> <a
-                             href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a></li>
-                 </ul>
-                 <!-- Social -->
-                 <div class="social">
-                     <div class="socialDiv color_blue">@lang('home.social')</div>
-                     <div class="socials">
-                         <a class="Social1 color_blue" href="{{ $facebookLink }}">@lang('home.facebook')</a>
-                         <a class="Social2 color_blue" href="{{ $instagramLink }}">@lang('home.instagram')</a>
-                         <a class="Social3 color_blue" href="{{ $tiktokLink }}">@lang('home.tiktok')</a>
-                         <a class="Social4 color_blue" href="{{ $linkedinLink }}">@lang('home.linkedin')</a>
+                 <div class="p-3">
+                     <h5>
+                         {{ $settings->getItem('footer_description') }}
+                     </h5>
+                 </div>
+                 <div class="social d-flex justify-content-center">
+                     {{-- <div class="socialDiv color_blue">@lang('home.social')</div> --}}
+                     <div class="socials ">
+                         <a class="Social1 color_blue" href="{{ $facebookLink }}"><i
+                                 class="fa-brands fa-facebook"></i></a>
+                         <a class="Social2 color_blue" href="{{ $instagramLink }}"><i
+                                 class="fa-brands fa-instagram"></i></a>
+                         <a class="Social3 color_blue" href="{{ $tiktokLink }}"><i
+                                 class="fa-brands fa-tiktok"></i></a>
+                         <a class="Social4 color_blue" href="{{ $linkedinLink }}"><i
+                                 class="fa-brands fa-linkedin"></i></a>
                      </div>
                  </div>
-                 <!-- Career CTA -->
-                 <div class="career">
-                     <div class="career1">@lang('job.we_are_hiring')</div>
-                     <a href="{{ route('site.jobs.index') }}" class="btn-career">@lang('job.apply')</a>
-                 </div>
              </div>
-             <!-- RIGHT: Google map -->
-             <div>
-                 <div class="map">
-                     <section class="map1">
-                         <div class="map2">
-                             <div class="map3">
-                                 <iframe class="Iframe" title="Tetra pharma Ltd. location" src="{{ $maps }}"
-                                     loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
-                                 </iframe>
-                             </div>
-                             <div class="google">
-                                 <a class="google_Link" href="{{ $maps }}" target="_blank">
-                                     @lang('home.google_map')
+             <div class=" col-md-4 text-center">
+                 <!-- Contact blocks -->
+                 <div class="socialDiv color_blue">@lang('home.contact_information')</div>
+
+                 <ul class="contact-list d-flex flex-column align-items-center">
+                     <li class="d-flex align-items-center"> <span class="icon">📍</span> <a
+                             class="nv-noninteractive fw-bold" href="#">{{ $settings->getItem('address') }}</a>
+                     </li>
+                     <li class="d-flex align-items-center"><span class="icon">✉️</span> <a class="fw-bold"
+                             href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a>
+                     </li>
+                     <li class="d-flex align-items-center"><span class="icon">📞</span> <a class="fw-bold"
+                             href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a>
+                     </li>
+                 </ul>
+             </div>
+             <div class="col-md-4 text-center">
+                 <div class="socialDiv color_blue">@lang('home.links')</div>
+
+                 <div class="Links text-center">
+                     <ul class="d-flex flex-column align-items-center fw-bold">
+                         @foreach ($footerLinks as $link)
+                             <li class="" >
+                                 <a href="{{ $link->type === 'static' && $link->url ? url($link->url) : ($link->dynamic_url ? url($link->dynamic_url) : '#') }}"
+                                     style="color: #000000;">
+                                     {{ $link->trans->where('locale', app()->getLocale())->first()->title ?? 'No Title' }}
                                  </a>
-                             </div>
-                         </div>
-                     </section>
+                             </li>
+                         @endforeach
+                     </ul>
                  </div>
              </div>
-         </div>
-     </div>
-     <!-- bottom bar -->
-     <div class="bottomBar">
-         <div class="bottom1">
-             <span class="footerBottom">© <span id="y_foot">2025</span>@lang('home.all_rights_reserved')</span>
-             <div class="Footerbtm"></div>
          </div>
      </div>
  </footer>
+
  <!-- ============ /FOOTER ============ -->
+
+ <style>
+     footer {
+         padding: 30px !important
+     }
+
+     .map {
+         height: 200px !important;
+     }
+
+     .footer-content {
+         display: flex !important;
+         justify-content: space-between !important;
+         align-items: center !important;
+     }
+
+     .Links ul {
+
+         list-style: circle !important;
+         text-align: center !important;
+
+
+     }
+     .Links ul li {
+
+        text-align: center !important;
+         margin-bottom: 10px !important;
+
+
+     }
+ </style>

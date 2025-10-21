@@ -90,9 +90,9 @@ body {
   }
   .bigline em{color:var(--pink); font-style:normal; text-decoration:underline; text-decoration-thickness:2px}
   .contact-list{
-    margin:18px 0; padding:0; list-style:none; color:var(--text);
+     padding:0; list-style:none; color:var(--text);
   }
-  .contact-list li{margin:10px 0; display:flex; gap:10px; align-items:flex-start}
+  .contact-list li{ display:flex; gap:10px; align-items:flex-start}
   .contact-list span.icon{color:var(--blue)}
   .socials{display:flex; gap:10px; margin-top:10px; flex-wrap:wrap}
   .chip{
@@ -100,7 +100,7 @@ body {
     color:var(--blue); border-radius:999px; font-weight:700; font-size:14px;
   }
 
-  .form-wrap{padding:24px}
+  /* .form-wrap{padding:24px} */
   .form-row{margin-bottom:16px}
   .label{display:block; margin-bottom:8px; font-weight:700; color:var(--ink)}
   .input, .textarea{

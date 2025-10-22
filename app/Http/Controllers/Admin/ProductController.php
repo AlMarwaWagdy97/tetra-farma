@@ -54,13 +54,18 @@ class ProductController extends Controller
             return Excel::download(new ProductsExport($request), 'products.xlsx');
         }
 
-
-        $query = Product::query()
+        $cats = ProductCategory::with([
+            'trans' => function ($q) {
+                $q->where('locale', app()->getLocale());
+            }
+        ])->active()->latest()->get();
+        $query = Product::query()->with('productCategoriesProducts')
             ->with(['translations' => function ($q) {
                 $q->where('locale', app()->getLocale());
             }])
             ->ordinary()
             ->orderBy('id', 'DESC');
+        $cats = ProductCategory::all();
 
         // status filter
         if ($request->filled('status')) {
@@ -132,7 +137,7 @@ class ProductController extends Controller
 
 
         return view('admin/dashboard/products/index')->with([
-            'items' => $items,
+            'items' => $items, 'cats' => $cats
         ]);
     }
 

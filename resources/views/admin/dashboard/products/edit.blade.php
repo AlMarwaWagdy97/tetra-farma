@@ -477,7 +477,25 @@
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
 
-
+                                                    <div class="row mb-3">
+                                                        <label for="example-text-input"
+                                                            class="col-sm-12 col-form-label">{{ trans('products.categories') }}</label>
+                                                        <div class="col-sm-12">
+                                                            <select class="form-select form-select-sm select2" multiple
+                                                                name="categories[]">
+                                                                @forelse($cats as $key2 => $val2)
+                                                                    <option value="{{ $val2->id }}"
+                                                                        {{ in_array($val2->id, $product->productCategoriesProducts->pluck('id')->toArray()) || old('categories.' . $key2) == $val2->id ? 'selected' : '' }}>
+                                                                        {{ isset($val2->transNow) ? $val2->transNow->title : '' }}
+                                                                    @empty
+                                                                @endforelse
+                                                            </select>
+                                                        </div>
+                                                        @if ($errors->has('categories'))
+                                                            <span
+                                                                class="missiong-spam">{{ $errors->first($locale . '.status') }}</span>
+                                                        @endif
+                                                    </div>
 
 
 
@@ -768,7 +786,7 @@
                                                                 <div class="col-sm-12">
                                                                     <input class="form-control" type="text"
                                                                         name="{{ $locale }}[form]"
-                                                                        value="{{ old($locale . '.form')  }}"
+                                                                        value="{{ old($locale . '.form') }}"
                                                                         id="form{{ $key }}">
                                                                 </div>
                                                                 @if ($errors->has($locale . '.form'))

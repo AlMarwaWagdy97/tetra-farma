@@ -32,7 +32,7 @@
                                         name="description" placeholder="{{ trans('products.description') }}"
                                         class="form-control">
                                 </div>
-                                {{-- <div class="col-md-2 mb-2">
+                                <div class="col-md-2 mb-2">
                                     <select class="form-select" name="cat_id" aria-label=".form-select-sm example">
                                         <option selected value=""> @lang('admin.product_categories') </option>
                                         @forelse($cats as $key => $specialty)
@@ -44,7 +44,7 @@
                                         @empty
                                         @endforelse
                                     </select>
-                                </div> --}}
+                                </div>
 
                                 {{-- <div class="col-md-2 mb-2">
                                     <select class="form-select" name="occasions" aria-label=".form-select-sm example">
@@ -172,9 +172,9 @@
                                         <th>@lang('admin.image')</th>
 
                                         <th>@lang('admin.title')</th>
-                                        {{-- <th> @lang('products.occasions') </th>
+                                         {{-- <th> @lang('products.occasions') </th> --}}
                                         <th> @lang('products.categories') </th>
-                                        <th>@lang('products.filters')</th> --}}
+                                        {{-- <th>@lang('products.filters')</th>  --}}
 
                                         <th>@lang('products.price')</th>
                                         {{-- <th>@lang('articles.sort')</th> --}}
@@ -214,7 +214,7 @@
                                                 @endforelse
 
                                             </td> --}}
-                                            {{-- <td>
+                                            <td>
                                                 @forelse($item->productCategoriesProducts as $cat)
                                                     <span class="badge bg-success">
                                                         {{ $cat->transNow->title ?? ' no title ' }} </span>
@@ -222,7 +222,7 @@
                                                 @empty
                                                 @endforelse
 
-                                            </td> --}}
+                                            </td>
                                             {{-- <td>
                                                 @forelse($item->filters as $filter)
                                                     <span

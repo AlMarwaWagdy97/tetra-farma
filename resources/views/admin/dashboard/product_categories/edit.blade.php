@@ -786,12 +786,11 @@
                                                     </div>
 
                                                     {{-- annual-occasion--}}
-
+{{-- 
                                                     <div class="col-12">
                                                         <label class="col-sm-12 col-form-label"
                                                                for="available">{{ trans('admin.annual_occasion') }}</label>
                                                         <div class="col-sm-10">
-                                                            {{-- <input type="hidden" name="annual_occasion" value="0"> --}}
 
                                                             <input class="form-check form-switch" name="annual_occasion"
                                                                    type="checkbox" id="switch5" switch="success" value="1"
@@ -800,15 +799,14 @@
                                                                    data-on-label=" @lang('admin.yes') "
                                                                    data-off-label=" @lang('admin.no')"></label>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                      {{-- show_in_bottom--}}
 
-                                                     <div class="col-12">
+                                                     {{-- <div class="col-12">
                                                         <label class="col-sm-12 col-form-label"
                                                                for="available">{{ trans('admin.show_in_bottom') }}</label>
                                                         <div class="col-sm-10">
-                                                            {{-- <input type="hidden" name="show_in_bottom" value="0"> --}}
 
                                                             <input class="form-check form-switch" name="show_in_bottom"
                                                                    type="checkbox" id="switch6" switch="success" value="1"
@@ -817,7 +815,7 @@
                                                                    data-on-label=" @lang('admin.yes') "
                                                                    data-off-label=" @lang('admin.no')"></label>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
 
                                                     {{--  --}}

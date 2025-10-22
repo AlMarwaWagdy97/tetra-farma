@@ -293,7 +293,7 @@
                                                 <div class="accordion-body">
 
                                                     {{-- cats --}}
-                                                    {{-- <div class="row mb-3">
+                                                    <div class="row mb-3">
                                                         <label for="example-text-input"
                                                             class="col-sm-4 col-form-label">{{ trans('products.categories') }}</label>
                                                         <div class="col-sm-8">
@@ -313,7 +313,7 @@
                                                                 class="missiong-spam">{{ $errors->first('categories') }}</span>
                                                         @endif
                                                     </div>
-                                                    <div class="row mb-3">
+                                                    {{-- <div class="row mb-3">
                                                         <label for="example-text-input"
                                                             class="col-sm-4 col-form-label">{{ trans('products.occasions') }}</label>
                                                         <div class="col-sm-8">
@@ -352,7 +352,7 @@
                                                                 <span class="text-danger">{{ $errors->first('filters') }}</span>
                                                             @endif
                                                         </div>
-                                                    </div> --}}
+                                                    </div>  --}}
 
                                                     {{-- image --}}
 

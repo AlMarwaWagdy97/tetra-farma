@@ -397,6 +397,12 @@
                         <i class="fas fa-boxes"></i>
                         @lang('admin.products')</a></li>
 
+                {{--           categories             --}}
+
+                <li><a href="{{ route('admin.product_category.index') }}">
+                        <i class="fas fa-tags"></i>
+                        @lang('admin.product_category')</a></li>
+ 
                 {{--         News             --}}
 
                 <li><a href="{{ route('admin.news.index') }}">

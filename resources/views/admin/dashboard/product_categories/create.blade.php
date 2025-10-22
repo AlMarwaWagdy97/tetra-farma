@@ -347,7 +347,7 @@
                                                     </div>
 
                                                     {{-- Annual occasion --}}
-                                                    <div class="row col-12">
+                                                    {{-- <div class="row col-12">
                                                         <label class="col-md-6"
                                                             for="example-number-input">{{ trans('admin.annual_occasion') }}</label>
                                                         <div class="col-sm-6">
@@ -362,10 +362,10 @@
                                                         @error('annual_occasion')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
-                                                    </div>
+                                                    </div> --}}
 
                                                     {{-- show_in_bottom --}}
-                                                    <div class="row col-12">
+                                                    {{-- <div class="row col-12">
                                                         <label class="col-md-6"
                                                             for="example-number-input">{{ trans('admin.show_in_bottom') }}</label>
                                                         <div class="col-sm-6">
@@ -380,7 +380,7 @@
                                                         @error('show_in_bottom')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
-                                                    </div>
+                                                    </div> --}}
 
 
                                                     {{--                                                    <div class="row mb-3"> --}}

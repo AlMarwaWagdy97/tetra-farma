@@ -37,23 +37,28 @@
 
                  <ul class="contact-list d-flex flex-column align-items-center">
                      <li class="d-flex align-items-center"> <span class="icon">📍</span> <a
-                             class="nv-noninteractive fw-bold" href="#">{{ $settings->getItem('address') }}</a>
+                             class="nv-noninteractive fw-bold fs-5" href="#">{{ $settings->getItem('address') }}</a>
                      </li>
-                     <li class="d-flex align-items-center"><span class="icon">✉️</span> <a class="fw-bold"
+                     <li class="d-flex align-items-center"><span class="icon">✉️</span> <a class="fw-bold fs-5"
                              href="mailto:{{ $settings->getItem('email') }}">{{ $settings->getItem('email') }}</a>
                      </li>
-                     <li class="d-flex align-items-center"><span class="icon">📞</span> <a class="fw-bold"
+                     <li class="d-flex align-items-center"><span class="icon">📞</span> <a class="fw-bold fs-5"
                              href="tel:{{ $settings->getItem('mobile') }}">{{ $settings->getItem('mobile') }}</a>
                      </li>
                  </ul>
+                 <div class="col-12 text-center">
+                     <p class="copyright mb-0">
+                         @lang('home.copyright', ['year' => date('Y'), 'company' => 'Tetra Pharma'])
+                     </p>
+                 </div>
              </div>
              <div class="col-md-4 text-center">
                  <div class="socialDiv color_blue">@lang('home.links')</div>
 
-                 <div class="Links text-center">
+                 <div class="Link text-center">
                      <ul class="d-flex flex-column align-items-center fw-bold">
                          @foreach ($footerLinks as $link)
-                             <li class="" >
+                             <li class="">
                                  <a href="{{ $link->type === 'static' && $link->url ? url($link->url) : ($link->dynamic_url ? url($link->dynamic_url) : '#') }}"
                                      style="color: #000000;">
                                      {{ $link->trans->where('locale', app()->getLocale())->first()->title ?? 'No Title' }}
@@ -84,18 +89,30 @@
          align-items: center !important;
      }
 
-     .Links ul {
+     .Link ul {
 
-         list-style: circle !important;
+         list-style: none !important;
          text-align: center !important;
 
 
      }
-     .Links ul li {
 
-        text-align: center !important;
+     .Link ul li {
+
+         text-align: center !important;
          margin-bottom: 10px !important;
+     }
 
+     .copyright {
+         font-size: 1.1rem;
+         color: #1d1c1c;
+         padding-top: 45px !important;
 
+     }
+
+     @media (max-width: 576px) {
+         .copyright {
+             font-size: 0.8rem;
+         }
      }
  </style>

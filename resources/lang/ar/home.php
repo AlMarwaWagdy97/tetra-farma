@@ -28,6 +28,7 @@ return [
     'contact-us_p' => 'أرسل لنا رسالة، أو استخدم المعلومات أدناه للوصول إلى فريقنا.',
     'contact_information' => 'معلومات الاتصال',
     'links' => 'الروابط',
+    'copyright' => 'جميع الحقوق محفوظة &copy; :year :company',
     
 
 ];

@@ -45,8 +45,9 @@ return [
     'tetra_pharma' => 'Tetra Pharma',
     'about_us' => 'About Us',
     'about_us_p' => 'We pioneer science-backed wellness for Egyptians through high-quality, research-driven pharmaceuticals and food supplements tailored to local needs.',
-     'core_values_title' => 'The principles that guide our work ',
-     'our_products' => ' Explore our products',
-     'our_blog' => ' Read our latest blogs',
-        'see_more' => 'Read more',
+    'core_values_title' => 'The principles that guide our work ',
+    'our_products' => ' Explore our products',
+    'our_blog' => ' Read our latest blogs',
+    'see_more' => 'Read more',
+    'ceo_image' => 'CEO Image',
 ];

@@ -526,6 +526,7 @@ return [
     'cvs' => 'Cvs',
     'themes' => 'Themes',
     'dashboard_theme' => 'Dashboard theme',
+    'create_menus' => 'Create Menus',
 
     
 

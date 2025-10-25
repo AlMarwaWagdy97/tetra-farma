@@ -22,6 +22,7 @@ class AboutController extends Controller
             $about = About::create([
                 'image' => null,
                 'image_background' => null,
+                'ceo_image' => null,
                 'status' => true,
                 'sort' => 0,
                 'created_by' => Auth::id(),
@@ -53,6 +54,10 @@ class AboutController extends Controller
         if ($request->hasFile('image_background')) {
             if ($about->image_background) Storage::disk('public')->delete($about->image_background);
             $about->image_background = $request->file('image_background')->store('attachments/abouts', 'public');
+        }
+        if ($request->hasFile('ceo_image')) {
+            if ($about->ceo_image) Storage::disk('public')->delete($about->ceo_image);
+            $about->ceo_image = $request->file('ceo_image')->store('attachments/abouts', 'public');
         }
 
         $about->status = isset($data['status']) ? (bool)$data['status'] : $about->status;

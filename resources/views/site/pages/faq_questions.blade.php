@@ -22,5 +22,11 @@
 				<p>@lang('home.no_faq')</p>
 			@endforelse
 		</div>
+		<div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
+             <a class="viewnews" href="{{ route('site.faq-questions') }}">
+                 <span class="viewnewstext">@lang('site.view_all_faq_questions')</span>
+                 <span class="viewnewsspan">→</span>
+             </a>
+         </div>
 	</section>
 	<!-- faq end -->

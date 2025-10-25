@@ -53,4 +53,5 @@ return [
     'latest_news'       => 'Latest News',
     'view_all_products' => 'View All Products',
     'view_all_blogs'    => 'View All Blogs',
+    'view_all_faq_questions'       => 'View All FAQ Questions',
 ];

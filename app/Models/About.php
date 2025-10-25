@@ -13,6 +13,7 @@ class About extends Model
     protected $fillable = [
         'image',
         'image_background',
+        'ceo_image',
         'status',
         'sort',
         'created_by',
@@ -65,6 +66,14 @@ class About extends Model
     {
         if ($this->image_background && file_exists(public_path($this->path() . $this->image_background))) {
             return $this->path() . $this->image_background;
+        }
+        return null;
+    }
+
+    public function ceoImageInView()
+    {
+        if ($this->ceo_image && file_exists(public_path($this->path() . $this->ceo_image))) {
+            return $this->path() . $this->ceo_image;
         }
         return null;
     }

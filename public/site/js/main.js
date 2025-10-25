@@ -73,7 +73,7 @@
   };
   document.querySelectorAll('.dropdown.lang').forEach(bindDropdown);
 
-  // Active link (اختياري)
+ 
   const markActive = () => {
     const here = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.links a, .mobile-links a').forEach(a=>{
@@ -83,6 +83,27 @@
   };
   markActive();
 })();
+
+const swiperReview = new Swiper(".ReviewSlider", {
+    // Optional parameters
+    loop: true,
+    autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+    },
+    breakpoints: {
+        320: {
+            slidesPerView: 1,
+        },
+        768: {
+            slidesPerView: 3,
+        },
+        1024: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+        },
+    },
+});
 
 // Simple carousel logic (safe init)
 window.addEventListener('DOMContentLoaded', () => {

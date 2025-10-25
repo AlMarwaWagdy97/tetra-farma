@@ -25,6 +25,7 @@ class Reviews extends Component
             ->orderByDesc('created_at')
             ->take($limit)
             ->get();
+            // dd($this->reviews);
 
         if ($this->reviews->isEmpty()) {
             $this->reviews = collect();

@@ -61,9 +61,9 @@ html,body{margin:0}
 .links a.active{ color:var(--active) }
 .links a.active::after{ background:var(--active); transform:scaleX(1) }
 
-.site-nav.overlay:not(.scrolled){ background:transparent; border-color:transparent }
-.site-nav.overlay:not(.scrolled) .links a{ color:#fff  }
-.site-nav.overlay:not(.scrolled) .links a::after{ background:#fff }
+.site-nav.overlay:not(.scrolled){ background:#fff ; border-color:#fff  }
+.site-nav.overlay:not(.scrolled) .links a{ color: #1157a4 }
+.site-nav.overlay:not(.scrolled) .links a::after{ background:#1157a4 }
 .site-nav.overlay:not(.scrolled) .navImg{ filter:drop-shadow(0 0 6px rgba(0,0,0,.35)) }
 
 .site-nav.scrolled{ background:#fff; border-color:var(--border); box-shadow:var(--shadow)  }
@@ -204,18 +204,16 @@ body.nav-open .backdrop{ display:block }
 }
 
 #mainNav a {
-    color: #fff;
-    /* قبل السكروول: أبيض */
+    color: #1157a4;
     transition: color .25s ease;
     text-decoration: none;
     margin: 0 12px;
     font-weight: 600;
 }
 
-/* بعد السكروول */
 #mainNav.scrolled a {
     color: #1157a4 !important;
-    /* أزرق */
+   
 }
 
 #mainNav.scrolled .career_btn {
@@ -226,14 +224,14 @@ body.nav-open .backdrop{ display:block }
     position: absolute;
 }
 
-/* اختياري: خلفية وشادو للناف بعد السكروول */
+
 #mainNav.scrolled {
     background: #fff;
     box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
 }
 
 .links a {
-    color: white !important;
+    color: #0556a4 !important;
 }
 
 .links a:hover {
@@ -645,7 +643,7 @@ body.nav-open .backdrop{ display:block }
     transition: transform .2s ease, background .2s ease;
 }
 
-/* === Home ثابت بلون #d6103d مع أندرلاين بنفس اللون === */
+
 #mainNav .links a[href$="index.html"] {
     color: #d6103d !important;
 }
@@ -655,7 +653,7 @@ body.nav-open .backdrop{ display:block }
     transform: scaleX(1);
 }
 
-/* (اختياري) خلي الـhover لأي لينك نفس لون الأكتيف */
+
 #mainNav .links a:hover,
 #mainNav .links a:focus-visible {
     color: #d6103d;
@@ -667,7 +665,7 @@ body.nav-open .backdrop{ display:block }
     transform: scaleX(1);
 }
 
-/* زر Career يفضل زرار بدون أندرلاين */
+
 #mainNav .links .career_btn::after {
     display: none;
 }

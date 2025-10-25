@@ -138,6 +138,16 @@
                         <h5>@lang('admin.settings')</h5>
 
                         <div class="mb-3">
+                            <label class="form-label">@lang('about.ceo_image')</label>
+                            @if ($about->ceo_image)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $about->ceo_image) }}"
+                                        style="width:100%; max-height:150px; object-fit:cover;">
+                                </div>
+                            @endif
+                            <input type="file" name="ceo_image" class="form-control" accept="ceo_image/*">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">@lang('about.image')</label>
                             @if ($about->image)
                                 <div class="mb-2">
@@ -180,8 +190,8 @@
                 </div>
                 <div class="row mb-3 text-end">
                     <div>
-                        <a href="{{ route('admin.slider.index') }}"
-                            class="btn btn-primary waves-effect waves-light ml-3 btn-sm">@lang('button.cancel')</a>
+                        {{-- <a href="{{ route('admin') }}"
+                            class="btn btn-primary waves-effect waves-light ml-3 btn-sm">@lang('button.cancel')</a> --}}
                         <button type="submit"
                             class="btn btn-outline-success waves-effect waves-light ml-3 btn-sm">@lang('button.save')</button>
                     </div>

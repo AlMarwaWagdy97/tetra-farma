@@ -53,6 +53,7 @@ return [
     'latest_news'       => 'اخر الاخبار',
     'view_all_products'       => 'مشاهدة كل المنتجات',
     'view_all_blogs'       => 'مشاهدة كل المدونات',
+    '.view_all_faq_questions'       => 'مشاهدة كل الاسئلة الشائعة',
     
     
     

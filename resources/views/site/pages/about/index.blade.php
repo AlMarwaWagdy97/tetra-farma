@@ -46,23 +46,7 @@
     <section class="section about-cards" id="story" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
         <div class="container ac-grid">
             <!-- Card 1: Our Story -->
-            <article class="ac-card">
-                <div class="ac-head">
-                    <span class="ac-badge">@lang('about.our_story')</span>
-                    <h3 class="ac-title"> {{ $about->our_story_title }}</h3>
-                </div>
 
-
-                <div class="ac-body">
-                    <p>
-                        {{ $about->our_story_description }}
-                    </p>
-                </div>
-
-                <button class="ac-toggle" aria-expanded="false" type="button">@lang('about.see_more')</button>
-            </article>
-
-            <!-- Card 2: CEO Message -->
             <article class="ac-card">
                 <div class="ac-head">
                     <span class="ac-badge">@lang('about.ceo_message')</span>
@@ -79,6 +63,13 @@
 
                 <button class="ac-toggle" aria-expanded="false" type="button">@lang('about.see_more')</button>
             </article>
+            <!-- Card 2: CEO Message -->
+            <article class="ac-card">
+                <div>
+                    <img src="{{ asset('storage/' . $about->ceo_image) }}" alt="ceo_image">
+                </div>
+            </article>
+
         </div>
     </section>
 
@@ -121,22 +112,21 @@
 
             <div class="cv-grid">
                 <!-- 1 -->
-    @forelse ($coreValues as $item)
-
-                <article class="cv-item">
-                    <div class="cv-icon" aria-hidden="true">
-                        <!-- Star -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3z" />
-                        </svg>
-                    </div>
-                    <div class="cv-text">
-                        <h3>{{ $item['title'] }}</h3>
-                        <p>{{ $item['description'] }}</p>
-                    </div>
-                </article>
+                @forelse ($coreValues as $item)
+                    <article class="cv-item">
+                        <div class="cv-icon" aria-hidden="true">
+                            <!-- Star -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3z" />
+                            </svg>
+                        </div>
+                        <div class="cv-text">
+                            <h3>{{ $item['title'] }}</h3>
+                            <p>{{ $item['description'] }}</p>
+                        </div>
+                    </article>
                 @empty
-                <p> @lang('No products available') </p>
+                    <p> @lang('No products available') </p>
                 @endforelse
             </div>
 
@@ -149,7 +139,7 @@
 @endsection
 
 <style>
-    .hero{
+    .hero {
         margin-top: 70px !important;
     }
 </style>

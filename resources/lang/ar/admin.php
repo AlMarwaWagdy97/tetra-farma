@@ -549,6 +549,7 @@ return [
     'cvs' => 'السير الذاتية',
     'themes' => 'السمات',
     'dashboard_theme' => 'السمات لوحه التحكم',
+    'create_menus' => 'اضافة قوائم',
 
 
 

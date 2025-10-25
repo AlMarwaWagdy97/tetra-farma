@@ -8,15 +8,16 @@ class AboutRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // عدّل لو عندك سياسات صلاحيات
+        return true;
     }
 
     public function rules()
     {
         $locales = config('translatable.locales', ['en']);
         $rules = [
-            'image' => 'nullable|image|max:5120', // 5MB
+            'image' => 'nullable|image|max:5120', 
             'image_background' => 'nullable|image|max:5120',
+            'ceo_image' => 'nullable|image|max:5120',
             'sort' => 'nullable|integer',
             'status' => 'nullable|boolean',
         ];

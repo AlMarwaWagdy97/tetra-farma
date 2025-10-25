@@ -37,23 +37,9 @@
 </div>
 
 
-    <!-- General application -->
-    <div class="application">
-      Didn’t find your role?  
-      <a href="mailto:careers@tetrapharma.com?subject=Open%20Application" style="color:#d41943; text-decoration:none;">
-        Send a general application
-      </a>
-      and let’s stay connected.
-    </div>
+   
   </div>
-      <img 
-  loading="lazy" 
-  decoding="async" 
-  width="352" 
-  height="375"
-  src="../images/new logo icon gray.png"
-  alt="logo watermark"
-  class="appImg"/>
+ 
 </section>
 
 @endsection

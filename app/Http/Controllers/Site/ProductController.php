@@ -15,9 +15,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-       $products = Product::with('transNow')->active()->get();
+        $products = Product::with('transNow')->active()->get();
 
-            
+
         return view('site.pages.products.index', compact('products'));
     }
 
@@ -29,16 +29,21 @@ class ProductController extends Controller
                 $query->select(DB::raw('SUM(quantity)'));
             }])
             ->orderByDesc('total_sold')
-            ->where('show_in_cart', 0)   
+            ->where('show_in_cart', 0)
             ->get();
 
         return view('components.mostselling', compact('mostSellingProducts'));
     }
 
-   public function show($id)
-{
-    $product = Product::with(['transNow', 'pockets.translations', 'galleryGroup.images'])->findOrFail($id);
-    return view('site.pages.products.show', compact('product'));
-}
-    
+    public function show($id)
+    {
+        if (is_numeric($id)) {
+            $product = Product::with(['transNow', 'pockets.translations', 'galleryGroup.images', 'paymentLine', 'tips', 'info'])->findOrFail($id);
+        } else {
+            $product = Product::with(['transNow', 'pockets.translations', 'galleryGroup.images', 'paymentLine', 'tips', 'info'])->WhereTranslation('slug', $id)->get()->first();
+            if ($product == null) abort('404');
+        }
+
+        return view('site.pages.products.show', compact('product'));
+    }
 }

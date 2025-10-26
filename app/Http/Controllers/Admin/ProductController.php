@@ -200,9 +200,10 @@ class ProductController extends Controller
             foreach ($data['lines'] as $lines) {
                 $lineData = [
                     'product_id' => $product->id,
+                    'links' => $lines['links'],
                     'color' => $lines['color'],
                     'sort' => $lines['sort'],
-                    'status' => $lines['status'],
+                    'status' => $lines['status'] ?? 1,
                     'en' =>  ['title' => @$lines['title']['en']],
                     'ar' =>  ['title' => @$lines['title']['ar']],
                 ];
@@ -215,7 +216,7 @@ class ProductController extends Controller
                 $tipsData = [
                     'product_id' => $product->id,
                     'sort' => $tips['sort'],
-                    'status' => $tips['status'],
+                    'status' => $tips['status'] ?? 1,
                     'en' =>  [
                         'title' => @$tips['title']['en'],
                         'description' => @$tips['description']['en']
@@ -234,7 +235,7 @@ class ProductController extends Controller
                 $infoData = [
                     'product_id' => $product->id,
                     'sort' => $info['sort'],
-                    'status' => $info['status'],
+                    'status' => $info['status'] ?? 1,
                     'en' =>  [
                         'title' => @$info['title']['en'],
                         'description' => @$info['description']['en']
@@ -245,6 +246,35 @@ class ProductController extends Controller
                     ],
                 ];
                 $info = ProductInfo::create($infoData);
+            }
+        }
+
+        if ($request->has('has_pockets')) {
+            $product->has_pockets = true;
+            $product->save();
+
+            if (isset($request->pockets['en']) && isset($request->pockets['ar'])) {
+                foreach ($request->pockets['en'] as $index => $pocketNameEn) {
+                    if (!isset($request->pockets['ar'][$index])) {
+                        continue;
+                    }
+                    $pocketData = [
+                        'product_id' => $product->id,
+                        'price' => null,
+                    ];
+
+                    $pocket = ProductPocket::create($pocketData);
+
+                    $pocket->translations()->create([
+                        'locale' => 'en',
+                        'pocket_name' => $pocketNameEn,
+                    ]);
+
+                    $pocket->translations()->create([
+                        'locale' => 'ar',
+                        'pocket_name' => $request->pockets['ar'][$index],
+                    ]);
+                }
             }
         }
 
@@ -331,7 +361,7 @@ class ProductController extends Controller
         $product->update($data);
         $this->saveModelTranslation($product, $data);
 
-        // ProductLine ---------------------------------------------------
+        // paymentLine ---------------------------------------------------
         if ($request->has('lines')) {
             $submittedLineIds = collect($data['lines'])
                 ->pluck('id')
@@ -346,8 +376,9 @@ class ProductController extends Controller
                 $tipAttributes = [
                     'product_id' => $product->id,
                     'color' => @$tipData['color'],
+                    'links' => @$tipData['links'],
                     'sort' => @$tipData['sort'],
-                    'status' => @$tipData['status'],
+                    'status' => @$tipData['status'] ?? 1,
                 ];
                 $translations = [
                     'en' => [
@@ -372,7 +403,7 @@ class ProductController extends Controller
         } else {
             ProductPaymentLine::where('product_id', $product->id)->delete();
         }
-        // ProductLine ---------------------------------------------------
+        // paymentLine ---------------------------------------------------
 
 
         // Product Tips ---------------------------------------------------
@@ -390,7 +421,7 @@ class ProductController extends Controller
                 $tipAttributes = [
                     'product_id' => $product->id,
                     'sort' => @$tipData['sort'],
-                    'status' => @$tipData['status'],
+                    'status' => @$tipData['status']?? 1,
                 ];
                 $translations = [
                     'en' => [
@@ -418,7 +449,7 @@ class ProductController extends Controller
         // Product Tips ---------------------------------------------------
 
          // Product Tips ---------------------------------------------------
-         if ($request->has('info')) {
+        if ($request->has('info')) {
             $submittedTipIds = collect($data['info'])
                 ->pluck('id')
                 ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
@@ -432,7 +463,7 @@ class ProductController extends Controller
                 $tipAttributes = [
                     'product_id' => $product->id,
                     'sort' => @$tipData['sort'],
-                    'status' => @$tipData['status'],
+                    'status' => @$tipData['status']?? 1,
                 ];
                 $translations = [
                     'en' => [
@@ -459,6 +490,56 @@ class ProductController extends Controller
         }
         // Product Tips ---------------------------------------------------
 
+        if ($request->has('has_pockets')) {
+            $pocketIdsToKeep = [];
+            
+            
+            $pockets = $request->input('pockets', []);
+            
+            foreach ($pockets['en'] as $index => $item) {
+                $pocketData = [
+                    'product_id' => $product->id,
+                    'price'      =>  0,
+                ];
+
+                $pocketId = $pockets['id'][$index] ?? null;
+                if ($pocketId && $pocketId !== 'new') {
+                    $pocket = ProductPocket::find($pocketId);
+                    if ($pocket) {
+                        $pocket->update($pocketData);
+                        $pocketIdsToKeep[] = $pocket->id;
+                    } else {
+                        // fallback: create if id provided but not found
+                        $pocket = ProductPocket::create($pocketData);
+                        $pocketIdsToKeep[] = $pocket->id;
+                    }
+                } else {
+                    $pocket = ProductPocket::create($pocketData);
+                    $pocketIdsToKeep[] = $pocket->id;
+                }
+
+
+                $enName = $pockets['en'][$index] ?? null;
+                $arName = $pockets['ar'][$index] ?? null;
+
+                if ($enName !== null) {
+                    $pocket->translations()->updateOrCreate(
+                        ['locale' => 'en'],
+                        ['pocket_name' => $enName]
+                    );
+                }
+                if ($arName !== null) {
+                    $pocket->translations()->updateOrCreate(
+                        ['locale' => 'ar'],
+                        ['pocket_name' => $arName]
+                    );
+                }
+            }
+
+            ProductPocket::where('product_id', $product->id)
+                ->whereNotIn('id', $pocketIdsToKeep)
+                ->delete();
+        } 
 
         if ($product->galleryGroup) {
             $groupGallery = $product->galleryGroup;

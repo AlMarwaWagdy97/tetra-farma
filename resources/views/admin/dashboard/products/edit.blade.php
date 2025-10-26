@@ -483,6 +483,62 @@
                                                     </div>
                                                 </div>
 
+
+
+                                                <hr>
+                                                {{-- Pockets Section --}}
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-12 col-form-label" for="available">{{ trans('products.medicine_feature') }}</label>
+                                                    <div class="col-sm-12">
+                                                        <input class="form-check form-switch" name="has_pockets" type="checkbox" id="has_pockets" switch="success" {{ @$product->has_pockets  ? 'checked' : '' }} value="1">
+                                                        <label class="form-label" for="has_pockets" data-on-label=" @lang('admin.yes')" data-off-label=" @lang('admin.no')"></label>
+                                                    </div>
+
+
+                                                    <div id="pockets_section" style="{{ $product->has_pockets ? '' : 'display:none;' }}">
+                                                        @if ($product->has_pockets && $product->pockets->count())
+                                                        @foreach ($product->pockets as $index => $pocket)
+                                                        <div class="pocket mb-4 p-3 border rounded" data-index="{{ $index }}">
+                                                            <div class="row">
+                                                                <div class="col-md-12 mb-2">
+                                                                    <label>@lang('products.feature_name_en')</label>
+                                                                    <input type="text" name="pockets[en][{{ $index }}]" value="{{ @$pocket->translate('en')->pocket_name }}" class="form-control" required>
+                                                                </div>
+
+                                                                <div class="col-md-12 mb-2">
+                                                                    <label>@lang('products.feature_name_ar')</label>
+                                                                    <input type="text" name="pockets[ar][{{ $index }}]" value="{{ @$pocket->translate('ar')->pocket_name }}" class="form-control" required>
+                                                                </div>
+
+                                                                <div class="col-md-12 mb-2">
+                                                                    <input hidden type="number" name="pockets[price][{{ $index }}]" value="{{ @$pocket->price }}" class="form-control" step="0.01">
+                                                                </div>
+
+
+                                                                <input type="hidden" name="pockets[id][{{ $index }}]" value="{{ $pocket->id }}">
+
+
+                                                                <div class="col-md-4 text-end align-self-end mb-2">
+                                                                    <button type="button" class="btn btn-danger delete_pocket">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <button type="button" id="add_pocket" class="btn btn-success" style="{{ $product->has_pockets ? '' : 'display:none;' }}">
+                                                            <i class="fa fa-plus"></i>
+                                                            @lang('products.add_pocket')
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -501,8 +557,8 @@
                                             <div id="collapsePockets" class="accordion-collapse collapse show mt-3" aria-labelledby="headingPockets" data-bs-parent="#accordionPockets">
                                                 <div class="accordion-body">
                                                     <div class="row mb-3">
-                                                        @if ($product->productLine)
-                                                        @forelse($product->productLine as $keyLine => $line)
+                                                        @if ($product->paymentLine)
+                                                        @forelse($product->paymentLine as $keyLine => $line)
                                                         <div class="payment_lines-row mb-4 p-4 border border-gray-200 rounded-xl shadow-sm bg-white transition duration-150 ease-in-out">
                                                             <div class="row g-3">
                                                                 <input type="hidden" name="lines[{{ $keyLine }}][id]" value="{{ $line->id }}">
@@ -518,6 +574,10 @@
                                                                         <span class="input-group-text bg-indigo-50 border-r-0">AR</span>
                                                                         <input type="text" name="lines[{{ $keyLine }}][title][ar]" value="{{ @$line->trans?->where('locale', 'ar')?->first()?->title }}" class="form-control" placeholder="{{ trans('products.feature_name_ar') }}" required>
                                                                     </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="form-label text-sm mb-1">links</label>
+                                                                    <input type="text" name="lines[{{ $keyLine }}][links]" value="{{ @$line->links}}" class="form-control" required>
                                                                 </div>
 
                                                                 <!-- Static Fields (Split Layout) -->
@@ -726,12 +786,12 @@
                                                             <div class="col-md-3 pt-2 border-t border-gray-100 mt-2">
                                                                 <label class="form-label text-sm font-semibold me-4">Status:</label>
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="info[{{ $keyInfo }}][status]" id="status_active_" value="1" @if(@$tip->status == '0') checked @endif>
+                                                                    <input class="form-check-input" type="radio" name="info[{{ $keyInfo }}][status]" id="status_active_" value="1" @if(@$info->status == '1') checked @endif>
                                                                     <label class="form-check-label"> Active </label>
                                                                 </div>
                                     
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="info[{{ $keyInfo }}][status]" id="status_inactive_" value="0" @if(@$tip->status == '0') checked @endif>
+                                                                    <input class="form-check-input" type="radio" name="info[{{ $keyInfo }}][status]" id="status_inactive_" value="0" @if(@$info->status == '0') checked @endif>
                                                                     <label class="form-check-label"> Inactive </label>
                                                                 </div>
                                                             </div>
@@ -837,6 +897,11 @@
                                 <span class="input-group-text bg-indigo-50 border-r-0">AR</span>
                                 <input type="text" name="lines[${currentaymentLineIndex}][title][ar]" class="form-control" placeholder="{{ trans('products.feature_name_ar') }}" required >
                             </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label text-sm mb-1">links</label>
+                            <input type="text" name="lines[${currentaymentLineIndex}][links]" class="form-control" required>
                         </div>
 
                         <!-- Static Fields (Split Layout) -->
@@ -1044,7 +1109,11 @@
         //  END Payment INFO -----------------------------------------------------------------------------------------------------------------------------
 
 
+
+        //  Start Pockets  -----------------------------------------------------------------------------------------------------------------------------
         // Toggle pockets section based on checkbox
+        let pocketIndex = {{ $product->pockets->count() }};
+
         function togglePocketsSection() {
             if ($('#has_pockets').is(':checked')) {
                 $('#pockets_section').show();
@@ -1054,17 +1123,20 @@
                 $('#add_pocket').hide();
             }
         }
-
         togglePocketsSection();
-
+        
         $('#has_pockets').on('change', function() {
             togglePocketsSection();
         });
 
+        $('#switch_has_pockets').on('change', function() {
+            $('#pockets_section').toggle(this.checked);
+        })
+
         // Add new pocket section
         $('#add_pocket').on('click', function() {
-            const currentIndex = pocketIndex++;
-            $('#pockets_section').append(`
+                const currentIndex = pocketIndex++;
+                $('#pockets_section').append(`
                 <div class="pocket mb-4 p-3 border rounded" data-index="${currentIndex}">
                     <div class="row">
                         <div class="col-md-12 mb-2">
@@ -1090,6 +1162,9 @@
         $('#pockets_section').on('click', '.delete_pocket', function() {
             $(this).closest('.pocket').remove();
         });
+
+        //  End Pockets -----------------------------------------------------------------------------------------------------------------------------
+
     });
 
 </script>

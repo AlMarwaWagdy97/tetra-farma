@@ -88,7 +88,7 @@ class Product extends Model
         return $this->hasMany(ProductPocket::class, 'product_id')->with('translations');
     }
 
-    public function productLine()
+    public function paymentLine()
     {
         return $this->hasMany(ProductPaymentLine::class, 'product_id');
     }
@@ -99,6 +99,20 @@ class Product extends Model
     public function info()
     {
         return $this->hasMany(ProductInfo::class, 'product_id');
+    }
+
+
+    public function paymentLineActive()
+    {
+        return $this->hasMany(ProductPaymentLine::class, 'product_id')->active()->orderBy('id', 'ASC');
+    }
+    public function tipsActive()
+    {
+        return $this->hasMany(ProductTips::class, 'product_id')->active()->orderBy('id', 'ASC');
+    }
+    public function infoActive()
+    {
+        return $this->hasMany(ProductInfo::class, 'product_id')->active()->orderBy('id', 'ASC');
     }
 
     /**

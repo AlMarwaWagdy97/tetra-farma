@@ -316,6 +316,37 @@
                                                     <span class="missiong-spam">{{ $errors->first('status') }}</span>
                                                     @endif
                                                 </div>
+
+                                                <hr>
+                                                {{-- has_pockets --}}
+                                                <div class="col-12">
+                                                    <label class="col-sm-12 col-form-label"
+                                                        for="has_pockets">{{ trans('products.medicine_feature') }}</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-check form-switch" name="has_pockets"
+                                                            type="checkbox" id="switch_has_pockets" switch="success"
+                                                            {{ old('has_pockets') == 'on' ? 'checked' : '' }}>
+                                                        <label class="form-label" for="switch_has_pockets"
+                                                            data-on-label="@lang('admin.yes')"
+                                                            data-off-label="@lang('admin.no')"></label>
+                                                    </div>
+                                                    @if ($errors->has('has_pockets'))
+                                                        <span
+                                                            class="missiong-spam">{{ $errors->first('has_pockets') }}</span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-12 col-sm-12">
+                                                    <div id="pockets_section" style="display: none;">
+                                                        <h4>{{ trans('products.medicine_feature') }}</h4>
+                                                        <div id="pockets_inputs"></div>
+                                                        <button type="button" class="btn btn-success mt-3"
+                                                            id="add_pocket">
+                                                            <i class="fa fa-plus"></i> {{ trans('products.add_feature') }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -488,6 +519,11 @@
                             </div>
                         </div>
 
+                        <!-- Static Fields (Split Layout) -->
+                        <div class="col-md-12">
+                            <label class="form-label text-sm mb-1">links</label>
+                            <input type="text" name="lines[${currentaymentLineIndex}][links]" class="form-control" required>
+                        </div>
                         <!-- Static Fields (Split Layout) -->
                         <div class="col-md-4">
                             <label class="form-label text-sm mb-1">Sort Order</label>
@@ -690,11 +726,60 @@
             $(this).closest('.payment_info-row').remove();
         });
         //  END Payment INFO -----------------------------------------------------------------------------------------------------------------------------
+        
+        
+        
+        //  Start Pockets  -----------------------------------------------------------------------------------------------------------------------------
+        let pocketIndex = 0;
+        $('#switch_has_pockets').on('change', function() {
+            $('#pockets_section').toggle(this.checked);
+        });
 
+        $('#has_pockets').on('change', function() {
+            togglePocketsSection();
+        });
 
+        // Add new pocket section
+        $('#add_pocket').on('click', function() {
+            const currentIndex = pocketIndex++;
+            $('#pockets_inputs').append(`
+                <div class="pocket-row mb-3 p-3 border rounded">
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <input
+                                type="text"
+                                name="pockets[en][${currentIndex}]"
+                                class="form-control col-md-12"
+                                placeholder="{{ trans('products.feature_name_en') }}"
+                                required
+                            >
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <input
+                                type="text"
+                                name="pockets[ar][${currentIndex}]"
+                                class="form-control"
+                                placeholder="{{ trans('products.feature_name_ar') }}"
+                                required
+                            >
+                        </div>
+                    
+                    
+                        <div class="col-md-12 text-end align-self-end mb-2">
+                            <button type="button" class="btn btn-danger remove_pocket">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `);
+        });
 
-
-
+        // Remove pocket section
+        $('#pockets_section').on('click', '.delete_pocket', function() {
+            $(this).closest('.pocket').remove();
+        });
+        //  End Pockets -----------------------------------------------------------------------------------------------------------------------------
 
 
     });

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id'); 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('links')->nullable();
+            $table->text('links')->nullable();
             $table->string('color')->nullable();
             $table->integer('sort')->default(0);
             $table->boolean('status')->default(true);

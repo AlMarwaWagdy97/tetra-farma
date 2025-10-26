@@ -117,7 +117,7 @@ html,body{margin:0}
   transition:transform .2s ease, opacity .2s ease, background .2s ease
 }
 .burger span + span{ margin-top:6px }
-.site-nav.overlay:not(.scrolled) .burger span{ background:#fff }
+.site-nav.overlay:not(.scrolled) .burger span{ background:#1157a4 }
 .site-nav.scrolled .burger span{ background:#1157a4 }
 .burger.is-open span:nth-child(1){ transform:translateY(9px) rotate(45deg); background:var(--active) }
 .burger.is-open span:nth-child(2){ opacity:0 }

@@ -1,18 +1,20 @@
-<header id="mainNav" class="site-nav overlay {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}
+<header id="mainNav"
+    class="site-nav overlay {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}
       @if (Route::is('site.products.show') ||
-        Route::is('site.products.index') ||
-        Route::is('site.contact-us') ||
-        Route::is('site.faq-questions') ||
-        Route::is('site.about-us') ||
-        Route::is('site.news.index') ||
-        Route::is('site.news.show') ||
-        Route::is('site.jobs.index') ||
-        Route::is('site.jobs.show') ||
-        Route::is('site.jobs.apply') ||
-        Route::is('site.site.blogs.index') ||
-        Route::is('site.site.blogs.show'))  othernav navbar-shadow @endif
+              Route::is('site.products.index') ||
+              Route::is('site.contact-us') ||
+              Route::is('site.faq-questions') ||
+              Route::is('site.about-us') ||
+              Route::is('site.news.index') ||
+              Route::is('site.news.show') ||
+              Route::is('site.jobs.index') ||
+              Route::is('site.jobs.show') ||
+              Route::is('site.jobs.apply') ||
+              Route::is('site.site.blogs.index') ||
+              Route::is('site.site.blogs.show')) othernav navbar-shadow @endif
     
-    " data-overlay="true" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+    "
+    data-overlay="true" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="nav-inner">
         <div class="logo">
             <a class="navImg-a" href="{{ route('site.home') }}">
@@ -31,10 +33,11 @@
                 }
             @endphp
             @include('site.layouts.menuItem')
-            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }}
+            </a>
         </nav>
         <div class="right">
-             <div class="dropdown"> 
+            <div class="dropdown d-none d-sm-block">
                 <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="fa-solid fa-globe main-color m-0 p-0 "></i>
                     {{ strtoupper(app()->getLocale()) }}
@@ -42,9 +45,8 @@
                 <ul class="dropdown-menu main-color-bg">
                     @foreach ($locals as $lang)
                         <li class="text-center ">
-                            <a class="dropdown-item"
-                                href=" {{ LaravelLocalization::getLocalizedURL($lang)}} ">  
-                                {{ $lang == 'en' ? 'English' : 'العربية' }} 
+                            <a class="dropdown-item" href=" {{ LaravelLocalization::getLocalizedURL($lang) }} ">
+                                {{ $lang == 'en' ? 'English' : 'العربية' }}
                             </a>
                         </li>
                     @endforeach
@@ -60,12 +62,33 @@
     <aside id="offcanvas" class="offcanvas" aria-hidden="true">
         <nav class="mobile-links" aria-label="Mobile menu">
             @include('site.layouts.menuItem')
-            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }}
+            </a>
+            <div class="dropdown">
+                <button class="dropdown-toggle btn text-white bg-body" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa-solid fa-globe text-white main-color m-0 p-0 "></i>
+                    {{ strtoupper(app()->getLocale()) }}
+                </button>
+                <ul class="dropdown-menu text-center  main-color-bg">
+                    @foreach ($locals as $lang)
+                        <li class="text-center  ">
+                            <a class="dropdown-item text-center"
+                                href="{{ LaravelLocalization::getLocalizedURL($lang) }}">
+                                {{ $lang == 'en' ? 'English' : 'العربية' }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </nav>
 
         <div class="mobile-actions">
-            <a class="career_btn" href="{{ route('site.jobs.index') }}"  target="_blank"> {{ __(key: 'site.career') }} </a>
+            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }}
+            </a>
+
         </div>
+
     </aside>
 
     <div class="backdrop" hidden></div>
@@ -87,72 +110,102 @@
         outline: 0;
         transition: transform .3s ease-in-out;
     }
+
     li a {
         text-decoration: none;
         color: black !important;
         padding: 10px 15px;
         display: block;
     }
+
     #mainNav .links a {
         font-size: 17px !important;
     }
-    #mainNav .links .career_btn{
+
+    #mainNav .links .career_btn {
         color: #fff !important;
         background: #0F5DA8 !important;
-    
+
     }
-    #mainNav .links a:hover , #mainNav .links a:focus-visible {
-    color: #d6103d;
-}
 
-.site-nav .nav-inner {
-    max-width: 1180px !;
-    margin: 0 auto;
-    height: 68px !important;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px !important;
-    overflow: visible;
-}
-.navImg {
-    height: 50px !important;
-    width: auto !important;
-}
-.dropdown  {
-    font-size: 22px !important;
-}
-@media (min-width: 960px) {
-    #mainNav .navImg-a {
-        margin: -60px !important;
-}
+    #mainNav .links a:hover,
+    #mainNav .links a:focus-visible {
+        color: #d6103d;
+    }
 
+    .site-nav .nav-inner {
+        max-width: 1180px !;
+        margin: 0 auto;
+        height: 68px !important;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px !important;
+        overflow: visible;
+    }
 
-}
-.othernav{
-    position: fixed !important;
-  background:#FFFFFF !important;
-  a{
-        color: #1157a4 !important;
-  }
-  .links a{
-    color: #1157a4 !important;
-  }
-  .site-nav.overlay:not(.scrolled) .links a {
-    color: #1157a4 !important;
-}
+    .navImg {
+        height: 50px !important;
+        width: auto !important;
+    }
 
-  
-}
+    .dropdown {
+        font-size: 22px !important;
+    }
 
-@media (max-width: 560px) {
-.othernav .burger span {
-    background: #1157a4 !important;
+    .dropdown-menu {
+        text-align: center !important;
+        min-width: 100px !important;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+    }
 
 
-}
-}
-.dropdown-item{
+    @media (min-width: 960px) {
+        #mainNav .navImg-a {
+            margin: -60px !important;
+        }
+
+
+    }
+
+    .othernav {
+        position: fixed !important;
+        background: #FFFFFF !important;
+
+        a {
+            color: #1157a4 !important;
+        }
+
+        .links a {
+            color: #1157a4 !important;
+        }
+
+        .site-nav.overlay:not(.scrolled) .links a {
+            color: #1157a4 !important;
+        }
+
+
+    }
+
+    @media (max-width: 560px) {
+        .othernav .burger span {
+            background: #1157a4 !important;
+
+
+        }
+
+
+    }
+
+    .dropdown-item {
         margin: 0 0px !important;
+    }
+
+  @media (max-width: 767px) {
+  header.site-nav.rtl .burger {
+    padding-right: 76px !important;
+  }
 }
+
 </style>

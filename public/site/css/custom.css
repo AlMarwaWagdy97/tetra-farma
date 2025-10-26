@@ -454,7 +454,7 @@
 
   @media (max-width: 767px) {
   header.site-nav.rtl .burger {
-    padding-right: 76px !important;
+    padding-right:  197px !important;
   }
 }
 #mainNav.scrolled a.career_btn:hover {

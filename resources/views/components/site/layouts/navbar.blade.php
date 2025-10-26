@@ -96,6 +96,4 @@
 
 </header>
 
-<style>
-   
-</style>
+

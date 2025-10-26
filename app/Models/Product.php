@@ -51,7 +51,7 @@ class Product extends Model
         'meta_key',
     ];
 
-    
+
     public function trans()
     {
         return $this->hasMany(ProductTranslation::class, 'product_id', 'id');
@@ -73,19 +73,33 @@ class Product extends Model
             ->withPivot('quantity', 'price')
             ->withTimestamps();
     }
-     public function categories()
+    public function categories()
     {
         return $this->belongsToMany(
             ProductCategory::class,
             'product_category_products',
-            'product_id',                
-            'product_category_id'       
+            'product_id',
+            'product_category_id'
         );
     }
+
     public function pockets()
-{
-    return $this->hasMany(ProductPocket::class, 'product_id')->with('translations');
-}
+    {
+        return $this->hasMany(ProductPocket::class, 'product_id')->with('translations');
+    }
+
+    public function productLine()
+    {
+        return $this->hasMany(ProductPaymentLine::class, 'product_id');
+    }
+    public function tips()
+    {
+        return $this->hasMany(ProductTips::class, 'product_id');
+    }
+    public function info()
+    {
+        return $this->hasMany(ProductInfo::class, 'product_id');
+    }
 
     /**
      * Get the order details associated with the product.
@@ -108,10 +122,10 @@ class Product extends Model
             ->where('type', 0)
             ->orderBy('sort', 'ASC');
     }
-//     public function occasions()
-// {
-//     return $this->belongsToMany(Occasion::class, 'products_occassions', 'product_id', 'occassion_id');
-// }
+    //     public function occasions()
+    // {
+    //     return $this->belongsToMany(Occasion::class, 'products_occassions', 'product_id', 'occassion_id');
+    // }
 
 
     public function createdBy()
@@ -144,7 +158,7 @@ class Product extends Model
     {
         return $this->hasMany(Cart::class, 'product_id');
     }
-    
+
 
     public function productCategoriesProducts()
     {
@@ -186,10 +200,10 @@ class Product extends Model
         // });
     }
 
-public function getAverageRatingAttribute()
-{
-    return $this->rates->avg('rating_value') ?? 0;
-}
+    public function getAverageRatingAttribute()
+    {
+        return $this->rates->avg('rating_value') ?? 0;
+    }
 
     public static function staticPath()
     {

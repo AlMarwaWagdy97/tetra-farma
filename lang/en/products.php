@@ -40,11 +40,15 @@ return [
     'created_by' => 'Created by',
     'updated_by' => 'Updated by',
     'after_sale' => 'Price after sale',
-
+    
+    'product' => 'Product',
     'meta_info' => ' Meta  ',
     'price_after_sale' => 'Price after sale',
     'from_total' => 'From Total',
     'to_total' => 'To Total',
+    'payment_lines' => 'Payment Lines',
+    'product_tips' => 'Payment Tips',
+    'product_info' => 'Payment Info',
 
 ];
 

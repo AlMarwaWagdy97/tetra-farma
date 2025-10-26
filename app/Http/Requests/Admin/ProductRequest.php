@@ -45,7 +45,7 @@ class ProductRequest extends FormRequest
         foreach (config('translatable.locales') as $locale) {
             $arr += [$locale . '.title' => 'required|min:1'];
             $arr += [$locale . '.slug' => 'required|min:1'];
-            $arr += [$locale . '.description' => 'required|min:1'];
+            $arr += [$locale . '.description' => 'nullable|min:1'];
             $arr += [$locale . '.care_tips'=> 'nullable|min:1'];
             $arr += [$locale . '.servings'=> 'nullable|min:1'];
             $arr += [$locale . '.form'=> 'nullable|min:1'];
@@ -81,18 +81,40 @@ class ProductRequest extends FormRequest
         $arr += ['categories.*' => 'nullable|exists:product_categories,id'];
         $arr += ['occasions' => 'nullable|array'];
         $arr += ['occasions.*' => 'nullable|exists:occassions,id'];
+        
+        
+        $arr += ['lines.*.id' => 'nullable'];
+        $arr += ['lines.*.title' => 'nullable|array'];
+        $arr += ['lines.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['lines.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['lines.*.color' => 'nullable'];
+        $arr += ['lines.*.sort' => 'nullable'];
+        $arr += ['lines.*.status' => 'nullable'];
+        
+        $arr += ['tips.*.id' => 'nullable'];
+        $arr += ['tips.*.title' => 'nullable|array'];
+        $arr += ['tips.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['tips.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['tips.*.description' => 'nullable|array'];
+        $arr += ['tips.*.description.en' => 'nullable|string'];
+        $arr += ['tips.*.description.ar' => 'nullable|string'];
+        $arr += ['tips.*.sort' => 'nullable'];
+        $arr += ['tips.*.status' => 'nullable'];
+
+        $arr += ['info.*.id' => 'nullable'];
+        $arr += ['info.*.title' => 'nullable|array'];
+        $arr += ['info.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['info.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['info.*.description' => 'nullable|array'];
+        $arr += ['info.*.description.en' => 'nullable|string'];
+        $arr += ['info.*.description.ar' => 'nullable|string'];
+        $arr += ['info.*.sort' => 'nullable'];
+        $arr += ['info.*.status' => 'nullable'];
 
 
         if (request()->isMethod('POST')) {
             $arr['image'] = 'required|' . ImageValidate();
         }
-         if ($this->has('pockets')) {
-        $arr['pockets.price.*'] = 'nullable|numeric|min:0';
-        $arr['pockets.en.*']    = 'required|string|max:255';
-        $arr['pockets.ar.*']    = 'required|string|max:255';
-           $arr['pockets.image.*'] = 'nullable|array';
-        $arr['pockets.image.*.*'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
-    }
 
         return $arr;
     }

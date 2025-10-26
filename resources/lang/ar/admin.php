@@ -551,6 +551,10 @@ return [
     'dashboard_theme' => 'السمات لوحه التحكم',
     'create_menus' => 'اضافة قوائم',
 
+    'product' => 'منتج',
+    'payment_lines' => 'خط البيع',
+    'product_tips' => 'نصائح المنتج',
+    'product_info' => 'معلومات المنتج',
 
 
 

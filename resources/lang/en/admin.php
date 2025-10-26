@@ -526,8 +526,15 @@ return [
     'cvs' => 'Cvs',
     'themes' => 'Themes',
     'dashboard_theme' => 'Dashboard theme',
+<<<<<<< HEAD
     'create_menus' => 'Create Menus',
 
+=======
+    'product' => 'Product',
+    'payment_lines' => 'Payment Lines',
+    'product_tips' => 'Product Tips',
+    'product_info' => 'Product Info',
+>>>>>>> 720ae5d (prodct informations)
     
 
 

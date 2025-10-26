@@ -29,6 +29,7 @@ return [
     'contact_information' => 'معلومات الاتصال',
     'links' => 'الروابط',
     'copyright' => 'جميع الحقوق محفوظة &copy; :year :company',
+    'sending' => 'جاري الإرسال...',
     
 
 ];

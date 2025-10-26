@@ -32,5 +32,6 @@ return [
     'contact_information' => 'Contact Information',
     'links' => 'Links',
     'copyright' => 'All Rights Reserved &copy; :year :company',
+    'sending' => 'Sending...',
 ];
 ?>

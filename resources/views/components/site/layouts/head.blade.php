@@ -192,7 +192,7 @@
 	<meta name="generator"
 		content="Elementor 3.30.1; features: additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
 	{{-- <link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="32x32" />
-	<link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="192x192" />
+	<link rel="icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" sizes="192x192"/>
 	<link rel="apple-touch-icon" href="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" /> --}}
 	<meta name="msapplication-TileImage"
 		content="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" />

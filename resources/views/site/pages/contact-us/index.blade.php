@@ -14,4 +14,7 @@
     .page-hero{
       margin-top: 80px !important; 
     }
+    .subtitle{
+      color: #000 !important;
+    }
 </style>

@@ -241,7 +241,7 @@ body.nav-open .backdrop{ display:block }
 }
 
 .links a:hover {
-    color: #d6103d;
+    color: #0556a4 !important;
 }
 
 .navBtn {

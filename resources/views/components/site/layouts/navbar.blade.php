@@ -84,8 +84,8 @@
         </nav>
 
         <div class="mobile-actions">
-            <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }}
-            </a>
+            {{-- <a class="career_btn" href="{{ route('site.jobs.index') }}" target="_blank"> {{ __(key: 'site.career') }}
+            </a> --}}
 
         </div>
 
@@ -97,115 +97,5 @@
 </header>
 
 <style>
-    .offcanvas {
-        position: fixed;
-        bottom: 0;
-        z-index: 2000 !important;
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        visibility: visible;
-        background-color: #fff;
-        background-clip: padding-box;
-        outline: 0;
-        transition: transform .3s ease-in-out;
-    }
-
-    li a {
-        text-decoration: none;
-        color: black !important;
-        padding: 10px 15px;
-        display: block;
-    }
-
-    #mainNav .links a {
-        font-size: 17px !important;
-    }
-
-    #mainNav .links .career_btn {
-        color: #fff !important;
-        background: #0F5DA8 !important;
-
-    }
-
-    #mainNav .links a:hover,
-    #mainNav .links a:focus-visible {
-        color: #d6103d;
-    }
-
-    .site-nav .nav-inner {
-        max-width: 1180px !;
-        margin: 0 auto;
-        height: 68px !important;
-        padding: 0 16px;
-        display: flex;
-        align-items: center;
-        gap: 16px !important;
-        overflow: visible;
-    }
-
-    .navImg {
-        height: 50px !important;
-        width: auto !important;
-    }
-
-    .dropdown {
-        font-size: 22px !important;
-    }
-
-    .dropdown-menu {
-        text-align: center !important;
-        min-width: 100px !important;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-    }
-
-
-    @media (min-width: 960px) {
-        #mainNav .navImg-a {
-            margin: -60px !important;
-        }
-
-
-    }
-
-    .othernav {
-        position: fixed !important;
-        background: #FFFFFF !important;
-
-        a {
-            color: #1157a4 !important;
-        }
-
-        .links a {
-            color: #1157a4 !important;
-        }
-
-        .site-nav.overlay:not(.scrolled) .links a {
-            color: #1157a4 !important;
-        }
-
-
-    }
-
-    @media (max-width: 560px) {
-        .othernav .burger span {
-            background: #1157a4 !important;
-
-
-        }
-
-
-    }
-
-    .dropdown-item {
-        margin: 0 0px !important;
-    }
-
-  @media (max-width: 767px) {
-  header.site-nav.rtl .burger {
-    padding-right: 76px !important;
-  }
-}
-
+   
 </style>

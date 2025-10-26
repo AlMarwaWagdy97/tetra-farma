@@ -2,6 +2,7 @@
     @php
         $totalChildren = $item->children()->count();
         $isActive = LaravelLocalization::getCurrentLocale() . '/' . ltrim($item->dynamic_url, '/') == Request::path();
+        
     @endphp
 
     @if ($totalChildren)

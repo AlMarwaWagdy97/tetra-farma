@@ -218,8 +218,8 @@
     <link rel="stylesheet" href="{{ asset('site/css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/swiper.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/style.css?v=0.0.5') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/custom.css?v=0.0.4') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/style.css?v=0.0.6') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/custom.css?v=0.0.5') }}" />
 	 <link rel="stylesheet" href="{{ asset('site/css/career.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/Blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/news.css') }}" />

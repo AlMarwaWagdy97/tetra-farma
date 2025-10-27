@@ -14,7 +14,7 @@ use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ShopController;
 use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\AboutController;
-
+use App\Http\Controllers\site\CategoryController;
 use App\Http\Controllers\Site\ReviewController;
 
 use App\Http\Controllers\Site\SearchController;
@@ -115,10 +115,13 @@ Route::group([
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
     Route::post('/subscribe', [SubscribeController::class, 'store'])->name('subscribe.store');
 
-    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
 
-    Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+
+    Route::post('products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
     Route::get('/whatsapp', [WhatsAppContactController::class, 'index'])->name('site.whatsapp');
 

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\PromoCode;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductCategory extends Model
 {
-    use HasFactory; 
+    use HasFactory, Translatable; 
 
 
     protected $fillable = [
@@ -31,6 +32,7 @@ class ProductCategory extends Model
         'product_category_id',
         'locale',
         'title',
+        'description',
         'slug',
         'meta_title',
         'meta_description',

@@ -48,7 +48,7 @@ class ProductCategoryRequest extends FormRequest
         foreach (config('translatable.locales') as $locale) {
             $arr += [$locale . '.title' => 'required|min:1'];
             $arr += [$locale . '.slug' => 'required|min:1'];
-//            $arr += [$locale . '.description' => 'nullable|min:1'];
+           $arr += [$locale . '.description' => 'nullable|min:1'];
             $arr += [$locale . '.meta_title' => 'nullable|min:1'];
             $arr += [$locale . '.meta_desc' => 'nullable|min:1'];
             $arr += [$locale . '.meta_key' => 'nullable|min:1'];

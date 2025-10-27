@@ -463,3 +463,11 @@
 .mobile-links a.dropdown-item {
     padding: 6px 15px !important;
 }
+.category .chip {
+  background: #fff !important;
+}
+
+.category .chip.active {
+  background: #1157a4 !important;
+  color: #fff !important;
+}

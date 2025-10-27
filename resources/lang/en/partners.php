@@ -1,7 +1,9 @@
 <?php
 return [
-    'index' => 'Partners',
+    'page' => 'Partners',
     'create' => 'Create Partner',
+    'edit' => 'Edit Partner',
+    'view' => 'View Partner',
     'created_success' => 'Partner created successfully.',
     'updated_success' => 'Partner updated successfully.',
     'deleted_success' => 'Partner deleted successfully.',

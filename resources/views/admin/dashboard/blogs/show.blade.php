@@ -1,28 +1,28 @@
 @extends('admin.app')
 
+@section('title', __('admin.show_blog'))
+@section('title_page', __('admin.show_blog'))
+
 @section('content')
-    <div class="container">
-        <h1>{{ __('admin.show_blog') }} #{{ @$blog->id }}</h1>
-        <div class="mb-3">
-            <strong>{{ __('admin.title_en') }}:</strong> {{ @$blog->translate('en')->title }}
-        </div>
-        <div class="mb-3">
-            <strong>{{ __('admin.description_en') }}:</strong><br>
-            {!! nl2br(e(@$blog->translate('en')->description)) !!}
-        </div>
-        <div class="mb-3">
-            <strong>{{ __('admin.title_ar') }}:</strong> {{ @$blog->translate('ar')->title }}
-        </div>
-        <div class="mb-3">
-            <strong>{{ __('admin.description_ar') }}:</strong><br>
-            {!! nl2br(e(@$blog->translate('ar')->description)) !!}
-        </div>
-        <div class="mb-3">
-            <strong>{{ __('admin.image') }}:</strong><br>
-            @if ($blog->image)
-                <img src="{{ asset(@$blog->pathInView()) }}" width="80" alt="">
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ optional($blog->translate(app()->getLocale()))->title }}</h3>
+
+            @if($blog->image)
+                <img src="{{ asset(@$blog->pathInView()) }}" style="max-width:300px" class="mb-3" alt="">
             @endif
+
+            <h5>{{ __('blogs.description') }}</h5>
+            <div>{!! optional($blog->translate(app()->getLocale()))->description !!}</div>
+
+            
+
+            <div class="mt-3">
+                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-primary btn-sm">@lang('button.edit')</a>
+                <a href="{{ route('admin.blogs.index') }}" class="btn btn-success btn-sm">@lang('admin.back')</a>
+            </div>
         </div>
-        <a href="{{ route('admin.blogs.index') }}" class="btn btn-secondary">{{ __('admin.back') }}</a>
     </div>
+</div>
 @endsection

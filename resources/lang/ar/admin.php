@@ -26,7 +26,7 @@ return [
     'login' => 'تسجيل الدخول',
     'name' => 'اسم',
     'Show_contact' => 'عرض اتصل بنا',
-    'contact_us' => 'اتصل بنا',
+    'contact_us' => 'البريد الوارد',
     'image' => 'صورة',
     'edit' => 'تعديل',
     'delete' => 'حذف',
@@ -326,12 +326,11 @@ return [
     'menus' => 'القوائم',
     'pages' => 'الصفحات',
     'slider' => 'السلايدر',
-    'contact_us' => 'اتصل بنا',
     'subscribes' => 'الاشتراكات',
     'whatsapp_contacts' => 'جهات اتصال واتساب',
     'orders' => 'الطلبات',
     'shop' => 'المتجر',
-    'product_category' => 'فئة المنتج',
+    'product_category' => 'اقسام المنتج',
     'occasions_products' => 'منتجات المناسبات',
     'products' => 'المنتجات',
     'products_of_cart_only' => 'منتجات السلة فقط',
@@ -550,6 +549,8 @@ return [
     'themes' => 'السمات',
     'dashboard_theme' => 'السمات لوحه التحكم',
     'create_menus' => 'اضافة قوائم',
+    'cvs' => 'السير الذاتية',
+    'jobs' => 'الوظائف',
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page' => 'About Page',
+    'page' => 'About-Us',
     'create' => 'Create About',
     'edit' => 'Edit About',
     'view' => 'View About',

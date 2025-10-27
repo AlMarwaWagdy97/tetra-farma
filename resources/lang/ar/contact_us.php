@@ -22,7 +22,7 @@ return [
     'search_phone'                  => 'البحث عن طريق الهاتف',
     'show'                       => 'عرض الرساله :name',
     'subscribe_show'            => 'عرض الاشتراك',
-    'contact_show'              =>  'اتصل بنا',
+    'contact_show'              =>  'البريد الوارد',
     'first_name'                => 'الاسم الأول',
     'last_name'                => 'اسم العائلة',
     'project'                => 'المشاريع',

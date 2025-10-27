@@ -1,61 +1,84 @@
 @extends('admin.app')
 
+@section('title', __('admin.create_blog'))
+@section('title_page', __('admin.create_blog'))
+
 @section('content')
-<div class="container">
-    <h1>{{ __('admin.create_blog') }}</h1>
-    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        <!-- ENGLISH TITLE -->
-        <div class="mb-3">
-            <label>{{ __('admin.title_en') }}</label>
-            <input type="text" name="en[title]" class="form-control" value="{{ old('en.title') }}">
+    <div class="container-fluid">
+        <div class="row mb-3 text-end">
+            <div class="col-12">
+                <a href="{{ route('admin.blogs.index') }}" class="btn btn-success btn-sm">@lang('button.cancel')</a>
+            </div>
         </div>
 
-        <!-- ENGLISH DESCRIPTION with CKEditor -->
-        <div class="mb-3">
-            <label>{{ __('admin.description_en') }}</label>
-            <textarea name="en[description]" id="description_en" class="form-control">
-                {{ old('en.description') }}
-            </textarea>
-        </div>
+        <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-md-12">
+                    @foreach ($languages as $key => $locale)
+                        <div class="accordion mb-3" id="accordionLang{{ $key }}">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseLang{{ $key }}">
+                                        @lang('lang.' . \Locale::getDisplayName($locale))
+                                    </button>
+                                </h2>
 
-        <!-- ARABIC TITLE -->
-        <div class="mb-3">
-            <label>{{ __('admin.title_ar') }}</label>
-            <input type="text" name="ar[title]" class="form-control" value="{{ old('ar.title') }}">
-        </div>
+                                <div id="collapseLang{{ $key }}" class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionLang{{ $key }}">
+                                    <div class="accordion-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">@lang('blogs.title')</label>
+                                            <input type="text" name="{{ $locale }}[title]" class="form-control"
+                                                value="{{ old($locale . '.title') }}">
 
-        <!-- ARABIC DESCRIPTION with CKEditor -->
-        <div class="mb-3">
-            <label>{{ __('admin.description_ar') }}</label>
-            <textarea name="ar[description]" id="description_ar" class="form-control">
-                {{ old('ar.description') }}
-            </textarea>
-        </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">@lang('job.description')</label>
+                                            <textarea id="description{{ $key }}" name="{{ $locale }}[description]" class="form-control"
+                                                rows="6">{{ old($locale . '.description') }}</textarea>
+                                        </div>
 
-        <!-- IMAGE UPLOAD -->
-        <div class="mb-3">
-            <label>{{ __('admin.image') }}</label>
-            <input type="file" name="image" class="form-control">
-        </div>
 
-        <button type="submit" class="btn btn-success">{{ __('admin.create') }}</button>
-    </form>
-</div>
+                              
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('admin.image') }}</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="row mb-3 text-end">
+                    <div>
+                        <a href="{{ route('admin.blogs.index') }}"
+                            class="btn btn-primary waves-effect waves-light ml-3 btn-sm">@lang('button.cancel')</a>
+                        <button type="submit"
+                            class="btn btn-outline-success waves-effect waves-light ml-3 btn-sm">@lang('button.save')</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
-@push('scripts')
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    
+@section('style')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace('description_en', {
-            filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}",
-            filebrowserUploadMethod: 'form'
-        });
-        CKEDITOR.replace('description_ar', {
-            filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}",
-            filebrowserUploadMethod: 'form'
+        $(function() {
+            @foreach ($languages as $key => $locale)
+                CKEDITOR.replace('description{{ $key }}', {
+                    filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) ?? '#' }}",
+                    filebrowserUploadMethod: 'form'
+                });
+            @endforeach
         });
     </script>
-@endpush
+@endsection

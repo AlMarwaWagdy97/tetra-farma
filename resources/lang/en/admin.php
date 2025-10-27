@@ -28,7 +28,7 @@ return [
     'login' => 'Log In ',
     'name' => 'Name',
     'Show_contact' => 'Show Contact Us',
-    'contact_us' => 'Contact Us',
+    'contact_us' => ' Inbox',
     'image' => 'Image',
     'edit' => 'Edit',
     'delete' => 'Delete',
@@ -48,7 +48,6 @@ return [
     'slug' => 'Slug',
     'menus' => 'Menus',
     'footerMenu' => 'Footer Menus',
-    'contact_us' => 'Contact Us',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'feature' => 'Feature',
@@ -527,6 +526,8 @@ return [
     'themes' => 'Themes',
     'dashboard_theme' => 'Dashboard theme',
     'create_menus' => 'Create Menus',
+    'cvs' => 'Cvs',
+    'jobs' => 'Jobs',
 
     
 

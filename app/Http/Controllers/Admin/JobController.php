@@ -13,10 +13,17 @@ class JobController extends Controller
 {
     // Index: list jobs
     public function index(Request $request)
-    {
-        $jobs = Job::with('translations')->orderBy('id', 'DESC')->paginate(15);
-        return view('admin.dashboard.jobs.index', compact('jobs'));
+{
+    $query = Job::with('translations')->orderBy('created_at', 'desc');
+
+    if ($request->filled('title')) {
+        $title = trim($request->input('title'));
+        $query->whereTranslation('title', 'like', "%{$title}%");
     }
+
+    $jobs = $query->paginate(20)->appends($request->only(['title']));
+    return view('admin.dashboard.jobs.index', compact('jobs'));
+}
 
     // Show create form
     public function create()

@@ -9,7 +9,7 @@
 	        <div class="faq1">
 	            <div class="faqtitle">@lang('home.faq')</div>
 	            <h2 class="faq2">@lang('home.faq_title')</h2>
-	            <p faqP>@lang('home.faq_p')</p>
+	            {{-- <p faqP>@lang('home.faq_p')</p> --}}
 	        </div>
 	        @forelse ( $faq_questions as $key => $question )
 	        <div class="tf-item faqitem wow bounceInLeft" style="animation-delay: 0.{{ ($key + 1) }}s;">

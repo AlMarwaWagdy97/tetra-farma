@@ -13,7 +13,7 @@
             <h2 class="section-title">@lang('messages.Our Products')</h2>
             <div class="DivNews">
              </div>
-            <p class="section-sub pt-2">@lang('messages.our_products')</p>
+            {{-- <p class="section-sub pt-2">@lang('messages.our_products')</p> --}}
         </div>
         <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
             @forelse ($products as $key => $product)

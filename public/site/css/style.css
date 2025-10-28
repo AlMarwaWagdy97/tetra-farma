@@ -64,7 +64,7 @@ html,body{margin:0}
 .site-nav.overlay:not(.scrolled){ background:#fff ; border-color:#fff  }
 .site-nav.overlay:not(.scrolled) .links a{ color: #1157a4 }
 .site-nav.overlay:not(.scrolled) .links a::after{ background:#1157a4 }
-.site-nav.overlay:not(.scrolled) .navImg{ filter:drop-shadow(0 0 6px rgba(0,0,0,.35)) }
+/* .site-nav.overlay:not(.scrolled) .navImg{ filter:drop-shadow(0 0 6px rgba(0,0,0,.35)) } */
 
 .site-nav.scrolled{ background:#fff; border-color:var(--border); box-shadow:var(--shadow)  }
 

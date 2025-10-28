@@ -10,8 +10,8 @@
 
          <div class="DivNews">
          </div>
-         <p class="section-sub pt-2 wow fadeInDown">@lang('blogs.blogs_p')</p>
-         <div class="container">
+         {{-- <p class="section-sub pt-2 wow fadeInDown">@lang('blogs.blogs_p')</p> --}}
+         <div class="container pt-3">
              <div class="row gap-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
                  @forelse ($blogs as $key => $blog)
                      <div class=" col-lg-4 col-md-6 card wow bounceInUp" style="animation-delay: 0.{{ $key + 1 }}s;">

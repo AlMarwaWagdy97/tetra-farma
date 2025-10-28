@@ -35,7 +35,7 @@
          </div>
 
 
-         <div class="viewall wow fadeInLeft" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
+         <div class="viewall py-3 wow fadeInLeft" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
              <a class="viewnews" href="{{ route('site.news.index') }}">
                  <span class="viewnewstext">@lang('site.view_all_news')</span>
                  <span class="viewnewsspan">→</span>

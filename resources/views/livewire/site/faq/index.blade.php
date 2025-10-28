@@ -26,10 +26,9 @@
             <div class="faq">
                 @forelse ($faq_questions as $question)
                     <details data-tags="science,quality" open>
-                        <summary><span class="dot"></span> {{ $question->question }}</summary>
+                        <summary><span class="dot text-primary"></span> <span class="text-primary">{{ $question->question }}</span></summary>
                         <div class="content">
-                            <p> {!! $question->answer !!}
-                            </p>
+                            <p> {!! $question->answer !!} </p>
                         </div>
                     </details>
                 @empty

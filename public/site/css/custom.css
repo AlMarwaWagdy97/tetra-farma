@@ -485,3 +485,7 @@
   background: #d6103d;
   transform: scaleX(1);
 }
+.panel .btn:hover {
+  color: #fff !important;
+  
+}

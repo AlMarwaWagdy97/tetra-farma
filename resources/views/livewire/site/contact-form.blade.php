@@ -1,4 +1,4 @@
-<div class="card p-4">
+<div class="card p-4 wow bounceInLeft">
 
 
     <form wire:submit.prevent="submit" class="form-wrap">

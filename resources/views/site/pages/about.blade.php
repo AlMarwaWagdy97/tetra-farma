@@ -3,7 +3,7 @@
 <section class="about-section py-5">
     <div class="container">
         <div class="row align-items-center gy-4">
-            <div class="col-lg-6 order-2 ">
+            <div class="col-lg-6 order-2 wow bounceInRight">
                 <div class="about-left text-start ">
                     <img src="{{ asset('storage/' . $about_us->image_background) }}" alt="Tetra Pharma"
                         class=" me-3 small-logo">
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 order-1 order-lg-{{ app()->getLocale() == 'en' ? '1' : '2' }}">
+            <div class="col-lg-6 order-1 wow bounceInLeft order-lg-{{ app()->getLocale() == 'en' ? '1' : '2' }}">
                 <div
                     class="about-right d-flex justify-content-center justify-content-lg-{{ app()->getLocale() == 'en' ? 'start' : 'end' }} align-items-center h-100">
 

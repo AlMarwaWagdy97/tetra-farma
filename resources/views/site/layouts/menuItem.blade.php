@@ -19,7 +19,6 @@
             <a {{ $isActive ? 'active' : '' }}  aria-current="page" href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale(), $item->type == 'dynamic' ? $item->dynamic_url : $item->url) }}">
                 {{ $item->trans->where('locale', app()->getLocale())->first()->title ?? 'No Title' }}
             </a>
-            
         
     @endif
 @endforeach

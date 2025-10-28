@@ -6,7 +6,6 @@
 
 <body>
 
-
     <!-- nav bar -->
     <x-site.layouts.navbar />
     <!-- End nav bar -->

@@ -1,7 +1,7 @@
 @extends('site.app')
 @section('title', 'Tetra Pharma' . ' | ' . 'Contact Us')
 @section('content')
- <section class="page-hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+ <section class="page-hero wow bounceInRight" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container">
       <div class="kicker">@lang('home.contact')</div>
       <h1 class="title">@lang('home.contact-us')</h1>

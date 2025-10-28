@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- ================== HEADER / BREADCRUMB ================== -->
-<section class="hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<section class="hero wow bounceInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="shell">
         <div class="crumb">
             <a class=" color: #d6103d !important" href="../index.html">Home</a> › <a href="./product.html">Products</a>
@@ -18,7 +18,7 @@
 
     @livewire('site.gallery', ['galleryGroup' => optional($product->galleryGroup)->id])
     <!-- Details -->
-    <aside class="panel">
+    <aside class="panel wow bounceInRight">
         <div class="price">
             @if ($product->price_after_sale !== $product->price)
             <div class="main">{{ $product->price_after_sale }} EGP </div>
@@ -41,7 +41,10 @@
         {{-- start payment Lines  --}}
         <div class="btns">
             @forelse (@$product->paymentLineActive as $lines)
-            <a class="btn primary" href="{{ $lines->links }}" target="_blank" rel="noopener" style="background-color:{{ $lines->color }} !important">{{ $lines->transNow?->title }}</a>
+            <a class="btn primary animate__animated animate__headShake" href="{{ $lines->links }}" target="_blank" rel="noopener" 
+                style="background-color:{{ $lines->color }} !important; border-color: {{ $lines->color }} !important;">
+                {{ $lines->transNow?->title }}
+            </a>
             @empty
 
             @endforelse
@@ -50,8 +53,8 @@
 
 
         <div class="meta">
-            @forelse (@$product->tipsActive as $tip)
-            <div class="card">
+            @forelse (@$product->tipsActive as $key => $tip)
+            <div class="card wow fadeInUp"  style="animation-delay: 0.{{ ($key + 1) }}s;">
                 <div class="title"> {{ $tip->transNow?->title }}</div>
                 {{ $tip->transNow?->description }}
             </div>
@@ -66,8 +69,8 @@
 
 <!-- ================== INFO CARDS ================== -->
 <section class="shell info">
-    @forelse (@$product->infoActive as $info)
-    <article class="ibox">
+    @forelse (@$product->infoActive as $key => $info)
+    <article class="ibox wow fadeInUp"  style="animation-delay: 0.{{ ($key + 1) }}s;">
         <h3 class="text-danger">{{ $info->transNow?->title }}</h3>
         {!! $info->transNow?->description !!}
     </article>

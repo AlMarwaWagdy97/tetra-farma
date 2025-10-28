@@ -1,4 +1,4 @@
-<div class="gallery-component">
+<div class="gallery-component  wow bounceInLeft">
     @if(empty($images))
         <div class="no-image text-center p-4">
             <p>No image</p>

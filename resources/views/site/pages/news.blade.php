@@ -1,14 +1,14 @@
  <!-- news -->
  <section class="latestnews" id="latest-news" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
      <div class="news">
-         <div class="newstitle">
+         <div class="newstitle wow fadeInDown">
              <h2 class="newsh2">@lang('site.latest_news')</h2>
              <div class="DivNews">
              </div>
          </div>
          <div class="news-grid gridNews">
-             @forelse ($news as $new)
-                 <article class="news-card newcard">
+             @forelse ($news as $key => $new)
+                 <article class="news-card newcard wow bounceInUp" style="animation-delay: 0.{{ ($key + 1) }}s;">
                      <a href="#" class="newA">
                          <img class="newImg" src="{{ asset($new->image) }}" alt="Selenium ACE new pack size">
                          <div class="new1">
@@ -30,7 +30,7 @@
          </div>
 
 
-         <div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
+         <div class="viewall wow fadeInLeft" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
              <a class="viewnews" href="{{ route('site.news.index') }}">
                  <span class="viewnewstext">@lang('site.view_all_news')</span>
                  <span class="viewnewsspan">→</span>

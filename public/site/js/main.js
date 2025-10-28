@@ -1,5 +1,5 @@
 
-	
+new WOW().init();
 		const lazyloadRunObserver = () => {
 			const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);
 			const lazyloadBackgroundObserver = new IntersectionObserver((entries) => {
@@ -248,7 +248,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
- document.getElementById('y_foot').textContent = new Date().getFullYear();
+//  document.getElementById('y_foot').textContent = new Date().getFullYear();
 // 
 (function () {
 						const items = document.querySelectorAll('#our-products .reveal');

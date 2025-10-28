@@ -1,6 +1,6 @@
 
 {{-- Reviews --}}
-<div class="Review testimonial my-4 p-5 text-center">
+<div class="Review testimonial my-4 p-5 text-center  wow fadeInUp">
     <div class="container">
             <h2 class="testimonialh2">@lang('reviews.reviews')</h2>
 

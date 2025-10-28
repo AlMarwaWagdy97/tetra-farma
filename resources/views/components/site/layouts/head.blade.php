@@ -197,7 +197,7 @@
 	<meta name="msapplication-TileImage"
 		content="https://snapster.foxthemes.me/wp-content/uploads/2020/05/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+	{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" /> --}}
      <link rel="stylesheet" href="{{ asset('site/fonts/css2.css') }}" />
 
     <link href="{{ $settings->getItem('icon') ? asset($settings->getItem('icon')) : asset('site/img/logos/logo.png') }}"
@@ -211,10 +211,18 @@
 	{{-- <link rel="stylesheet" href="./fonts/LCALLIG.TTF">
 	<link rel="stylesheet" href="index.css"> --}}
 
+<<<<<<< Updated upstream
  	<link rel="stylesheet" href="{{ asset('site/fonts/all.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{ asset('site/fonts/nouislider.min.css') }}" />
 
+=======
+ <link rel="stylesheet" href="{{ asset('site/fonts/all.min.css') }}" />
+ {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> --}}
+ <link rel="stylesheet" href="{{ asset('site/fonts/nouislider.min.css') }}" />
+ 
+ <link rel="stylesheet" href="{{ asset('site/css/all.min.css') }}" />
+>>>>>>> Stashed changes
     <link rel="stylesheet" href="{{ asset('site/css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/swiper.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/swiper-bundle.min.css') }}" />

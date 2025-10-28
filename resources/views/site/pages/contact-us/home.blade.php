@@ -2,7 +2,7 @@
       $settings = \App\Settings\SettingSingleton::getInstance();
   @endphp
   <!-- ========== CONTACT SECTION ========== -->
-  <section class="section hero con-section" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+  <section class="section hero pt-0 con-section" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
       @if (session('success'))
           <div class="alert alert-success">
@@ -13,7 +13,7 @@
           <div class="grid">
 
               <!-- left: details -->
-              <div class="card contact-left">
+              <div class="card contact-left  wow bounceInRight">
                   <div class="bigline">
                       @lang('home.questions')
                   </div>

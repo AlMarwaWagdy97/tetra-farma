@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- OUR PRODUCTS -->
-<section class="products-section hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<section class="products-section hero wow fadeInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container">
         
         <div class="text-center mb-4">

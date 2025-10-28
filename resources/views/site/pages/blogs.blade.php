@@ -1,14 +1,14 @@
  <!-- BLOG SECTION -->
 
  <section class="blog-section text-center py-5" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-     <h2 class="section-title">@lang('blogs.blogs')</h2>
+     <h2 class="section-title wow fadeInDown">@lang('blogs.blogs')</h2>
      <div class="DivNews">
      </div>
-     <p class="section-sub pt-2">@lang('blogs.blogs_p')</p>
+     <p class="section-sub pt-2 wow fadeInDown">@lang('blogs.blogs_p')</p>
      <div class="container">
          <div class="row gap-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
-             @forelse ($blogs as $blog)
-                 <div class=" col-lg-4 col-md-6 card">
+             @forelse ($blogs as $key => $blog)
+                 <div class=" col-lg-4 col-md-6 card wow bounceInUp" style="animation-delay: 0.{{ ($key + 1) }}s;">
                      <div class="blog-card">
                          <div class="blog-media">
                              <img src="{{ asset($blog->pathInView()) }}" alt="Your Image Alt Text">
@@ -28,7 +28,7 @@
 
          </div>
      </div>
-     <div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
+     <div class="viewall  wow fadeInLeft" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
          <a class="viewnews" href="{{ route('site.site.blogs.index') }}">
              <span class="viewnewstext">@lang('site.view_all_blogs')</span>
              <span class="viewnewsspan">→</span>

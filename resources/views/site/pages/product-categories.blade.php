@@ -8,8 +8,8 @@
         
         <div class="swiper categorySlider">
             <div class="swiper-wrapper mt-3">
-                @forelse ($categoryProducts as $category)
-                    <div class="swiper-slide">
+                @forelse ($categoryProducts as $key => $category)
+                    <div class="swiper-slide wow bounceInUp" style="animation-delay: 0.{{ ($key + 1) }}s;">
                         <a href="{{ route('site.categories.show', $category->transNow->slug) }}">
                         <div class="Reviewbox d-flex flex-column align-items-center mx-auto p-3 rounded" >
                                 <img src="{{ asset($category->path() . $category->image)}}" class="img-fluid rounded-circle" alt="{{ $category->transNow->title }}" style="width: 100px; height: 100px; object-fit: cover;">
@@ -29,7 +29,7 @@
             <div class="swiper-button-next category-button-next"></div>
         </div>
 
-        <div class="viewall" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
+        <div class="viewall wow fadeInLeft" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'ltr' }}">
             <a class="viewnews" href="{{ route('site.categories.index') }}">
                 <span class="viewnewstext">@lang('view all categories')</span>
                 <span class="viewnewsspan">→</span>

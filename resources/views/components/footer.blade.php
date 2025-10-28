@@ -55,12 +55,12 @@
              <div class="col-md-4 text-center">
                  <div class="socialDiv color_blue">@lang('home.links')</div>
 
-                 <div class="Link text-center">
+                 <div class="Link text-center mt-2">
                      <ul class="d-flex flex-column align-items-center fw-bold">
                          @foreach ($footerLinks as $link)
-                             <li class="">
+                             <li class="m-0 p-0">
                                  <a href="{{ $link->type === 'static' && $link->url ? url($link->url) : ($link->dynamic_url ? url($link->dynamic_url) : '#') }}"
-                                     style="color: #000000;">
+                                     style="color: #000000;" class="m-0 p-0">
                                      {{ $link->trans->where('locale', app()->getLocale())->first()->title ?? 'No Title' }}
                                  </a>
                              </li>

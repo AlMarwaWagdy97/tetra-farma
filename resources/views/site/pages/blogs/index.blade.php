@@ -1,7 +1,7 @@
 @extends('site.app')
 @section('title', 'Tetra Pharma' . ' | ' . 'Blogs')
 @section('content')
-    <header class="hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+    <header class="hero  wow fadeInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
         <div class="container">
             <h1 class="color_blue">@lang('blogs.take_a_look_at_our_blogs')</h1>
             <p class="lead">@lang('blogs.blogs_p')</p>
@@ -12,8 +12,8 @@
     <section class="section" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
         <div class="container">
             <div class="blog-grid">
-                @forelse ($blogs as $blog)
-                    <article class="post-card">
+                @forelse ($blogs as $key =>$blog)
+                    <article class="post-card wow bounceInUp" style="animation-delay: 0.{{ ($key + 1) }}s;">
                         <img class="card-img" src="{{ asset($blog->pathInView()) }}" alt="Science-based approach">
                         <div class="card-body">
                             <h4 class="">{{ $blog->title }}</h4>

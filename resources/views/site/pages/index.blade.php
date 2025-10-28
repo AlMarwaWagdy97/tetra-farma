@@ -1,10 +1,9 @@
 @extends('site.app')
 
 @section('content')
+
     <!-- Slider -->
     <x-slider />
-    <!-- End Slider -->
-
 
    <!-- About -->
     @include('site.pages.about')
@@ -18,28 +17,22 @@
     <!-- Jobs -->
     @include('site.pages.careere')
 
-
-        <!-- Blogs -->
+    <!-- Blogs -->
     @include('site.pages.blogs')
 
-        <!-- our-partner -->
+    <!-- our-partner -->
     @include('site.pages.our-partner')
-        <!-- news -->
+
+    <!-- news -->
     @include('site.pages.news')
-        <!-- contact us -->
+
+    <!-- contact us -->
     @include('site.pages.contact-us.home')
 
-        <!-- Reviews -->
+    <!-- Reviews -->
     <x-reviews :limit="10" />
-    <!-- End Reviews -->
-        <!-- FAQ -->
+
+    <!-- FAQ -->
     @include('site.pages.faq_questions')
-
-
-
-
-
-
-
     
 @endsection

@@ -1,6 +1,6 @@
 <?php 
 return [
-    'faq_category' => 'أسئلة شائعة',
+    'faq_category' => 'اقسام الاسئلة الشائعة',
     'faq_categories' => 'أسئلة شائعة',
     'faq_category_id' => 'أسئلة شائعة',
     'title' => 'العنوان',

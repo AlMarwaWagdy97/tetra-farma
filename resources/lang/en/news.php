@@ -1,18 +1,17 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Admin Dashboard 
     |--------------------------------------------------------------------------
     */
     'news'                    => 'Offers',
-    'edit'                        => 'Edit in ":name" Offers',
-    'show'                        => 'Show ":name" Offers',
-    'show_news'               => 'Show Offers',
-    'create_news'             => 'Create Offers',
-    'edit_news'               => 'Edit Offers',
+    'edit'                        => 'Edit in ":name" ',
+    'show'                        => 'Show ":name" ',
+    'show_news'               => 'News',
+    'create_news'             => 'Create News',
+    'edit_news'               => 'Edit News',
     'create_new_news'         => 'Create New Offers',
     'name_en'                     => 'Name in English',
     'name_ar'                     => 'Name in Arabic',  

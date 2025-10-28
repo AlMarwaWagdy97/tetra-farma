@@ -22,7 +22,7 @@
 
             <div class="mt-3">
                 <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn btn-primary btn-sm">@lang('button.edit')</a>
-                <a href="{{ route('admin.jobs.index') }}" class="btn btn-secondary btn-sm">@lang('admin.back')</a>
+                <a href="{{ route('admin.jobs.index') }}" class="btn btn-success btn-sm">@lang('admin.back')</a>
             </div>
         </div>
     </div>

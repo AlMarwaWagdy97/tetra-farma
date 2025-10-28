@@ -145,6 +145,8 @@
                                         style="width:100%; max-height:150px; object-fit:cover;">
                                 </div>
                             @endif
+                            <span class="text-danger">@lang('admin.image_site', ['width' => '300px', 'height' => '300px'])</span>
+
                             <input type="file" name="ceo_image" class="form-control" accept="ceo_image/*">
                         </div>
                         <div class="mb-3">

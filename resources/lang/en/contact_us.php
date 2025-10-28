@@ -9,7 +9,7 @@ return [
     */
 
     'contact'                   =>  'Contact Us',
-    'contact_show'              =>  'Show Contact Us',
+    'contact_show'              =>  'Inbox',
     'subscribe_show'            => 'Show Subscribe',
     'name'                      =>  'Name',
     'email'                     =>  'Email',

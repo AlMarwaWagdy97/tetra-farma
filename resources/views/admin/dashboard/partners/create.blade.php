@@ -1,5 +1,6 @@
 @extends('admin.app')
 @section('title', __('partners.create'))
+@section('title_page', __('partners.create'))
 @section('content')
     <div class="container-fluid">
         <form action="{{ isset($partner) ? route('admin.partners.update', $partner->id) : route('admin.partners.store') }}"

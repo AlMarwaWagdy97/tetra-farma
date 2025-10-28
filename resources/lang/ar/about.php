@@ -2,10 +2,8 @@
 
 return [
     // page titles / actions
-    'page' => 'صفحة من نحن',
-    'create' => 'إنشاء صفحة من نحن',
-    'edit' => 'تعديل صفحة من نحن',
-    'view' => 'عرض صفحة من نحن',
+    'page' => ' من نحن',
+   
 
     // main fields
     'title' => 'العنوان',

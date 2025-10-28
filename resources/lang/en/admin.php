@@ -28,7 +28,7 @@ return [
     'login' => 'Log In ',
     'name' => 'Name',
     'Show_contact' => 'Show Contact Us',
-    'contact_us' => 'Contact Us',
+    'contact_us' => ' Inbox',
     'image' => 'Image',
     'edit' => 'Edit',
     'delete' => 'Delete',
@@ -48,7 +48,6 @@ return [
     'slug' => 'Slug',
     'menus' => 'Menus',
     'footerMenu' => 'Footer Menus',
-    'contact_us' => 'Contact Us',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'feature' => 'Feature',
@@ -531,16 +530,8 @@ return [
     'payment_lines' => 'Payment Lines',
     'product_tips' => 'Product Tips',
     'product_info' => 'Product Info',
-    
-
-
-
-
-
-
-
-
-
+    'cvs' => 'Cvs',
+    'jobs' => 'Jobs',    
 
 
 

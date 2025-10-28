@@ -1,7 +1,7 @@
 @extends('admin.app')
 
-@section('title', __('Faq Categories'))
-@section('title_page', __('Faq Categories'))
+@section('title', __('faq_category.faq_category'))
+@section('title_page', __('faq_category.faq_category'))
 
 @section('content')
 <div class="container-fluid">

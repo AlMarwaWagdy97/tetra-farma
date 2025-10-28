@@ -7,15 +7,7 @@ use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\AboutController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\Site\CategoryController;
-use App\Http\Controllers\Site\ReviewController;
-
-use App\Http\Controllers\Site\SearchController;
-
-=======
-use App\Http\Controllers\site\CategoryController;
->>>>>>> Stashed changes
 use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\FaqController;

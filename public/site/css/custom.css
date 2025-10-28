@@ -488,6 +488,15 @@
 .panel .btn:hover {
   color: #fff !important;
 }
-/* .links{
-  margin: auto !important;
-} */
+.meta {
+  grid-template-columns: none !important;
+} 
+.shell .panel {
+   background: none !important;
+   border-radius: none !important;
+   box-shadow: none !important;
+}
+
+.meta .card {
+    background: #e5e7ee !important;
+ }

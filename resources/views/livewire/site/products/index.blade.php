@@ -1,6 +1,6 @@
 <div>
     <div class="row category text-center d-flex justify-content-center">
-        <div class="faq-controls controls">
+        <div class="faq-controls controls d-flex justify-content-center">
             <span class="chip  {{ $selectedCategory == 0 ? 'active': '' }}" data-tag="@lang('All')" wire:click="changeCategory(0)"> @lang('All')</span>
             @forelse ($categories as $category)
                 <span class="chip {{ $selectedCategory == $category->id ? 'active': '' }}" data-tag="{{ $category->transNow->title }}" wire:click="changeCategory({{ $category->id }})"> {{ $category->transNow->title }} </span>

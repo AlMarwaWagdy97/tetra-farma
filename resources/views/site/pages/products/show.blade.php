@@ -54,9 +54,8 @@
 
         <div class="meta">
             @forelse (@$product->tipsActive as $key => $tip)
-            <div class="card wow fadeInUp"  style="animation-delay: 0.{{ ($key + 1) }}s;">
-                <div class="title"> {{ $tip->transNow?->title }}</div>
-                {{ $tip->transNow?->description }}
+            <div class="card wow fadeInUp mb-0"  style="animation-delay: 0.{{ ($key + 1) }}s;">
+                <div class=""> <span class="text-primary fw-bold">{{  $tip->transNow?->title  }} : </span> {{ $tip->transNow?->description }}</div>
             </div>
             @empty
 

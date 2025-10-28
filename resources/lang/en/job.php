@@ -61,5 +61,6 @@ return [
     'cv_file' => 'CV File',
     'send' => 'Send',
     'build_career' => 'Build Your <span>Career</span> With Tetra Pharma',
+    'show' => 'Show Job'
 
 ];

@@ -1,5 +1,6 @@
 @extends('admin.app')
-@section('title', __('partners.create'))
+@section('title', __('partners.edit'))
+@section('title_page', __('partners.edit'))
 @section('content')
     <div class="container-fluid">
         <form

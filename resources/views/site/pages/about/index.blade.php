@@ -44,31 +44,31 @@
 
     <!-- STORY + CEO -->
     <section class="section about-cards" id="story" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-        <div class="container ac-grid">
+        <div class="container">
             <!-- Card 1: Our Story -->
 
-            <article class="ac-card">
-                <div class="ac-head">
-                    <span class="ac-badge">@lang('about.ceo_message')</span>
-                    <h3 class="ac-title">{{ $about->ceo_title }}</h3>
+            <article class="ac-card  d-flex">
+                <div>
+                    <div class="ac-head">
+                        <span class="ac-badge">@lang('about.ceo_message')</span>
+                        <h3 class="ac-title">{{ $about->ceo_title }}</h3>
+                    </div>
+
+                    <div class="ac-body">
+                        <p>
+                            {{ $about->ceo_description }}
+                        </p>
+                    </div>
+                    <button class="ac-toggle" aria-expanded="false" type="button">@lang('about.see_more')</button>
+
                 </div>
 
-                <div class="ac-body">
-                    <p>
-                        {{ $about->ceo_description }}
-                    </p>
-
-
+                <div class="ac-image card-img">
+                    <img class="rounded-5" src="{{ asset('storage/' . $about->ceo_image) }}" alt="ceo_image">
                 </div>
-
-                <button class="ac-toggle" aria-expanded="false" type="button">@lang('about.see_more')</button>
             </article>
             <!-- Card 2: CEO Message -->
-            <article class="ac-card">
-                <div>
-                    <img src="{{ asset('storage/' . $about->ceo_image) }}" alt="ceo_image">
-                </div>
-            </article>
+
 
         </div>
     </section>

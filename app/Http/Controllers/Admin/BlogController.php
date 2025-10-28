@@ -6,12 +6,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::with('translations')->latest()->paginate(10);
+        $query  = Blog::with('translations')
+            ->orderBy('id', 'DESC');
+     
+
+     if ($request->filled('title')) {
+    $query->whereTranslationLike('title', '%' . $request->title . '%');
+}
+        $blogs = $query->paginate(20)->appends($request->only(['title']));
+        
+
         return view('admin.dashboard.blogs.index', compact('blogs'));
     }
 

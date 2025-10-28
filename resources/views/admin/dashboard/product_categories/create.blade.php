@@ -45,7 +45,7 @@
                                                 <div class="row mb-3">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">{{ trans('products.description') .  trans('lang.' .Locale::getDisplayName($locale)) }}</label>
                                                     <div class="col-sm-10">
-                                                        {{-- <textarea class="form-control" --}}
+                                                        <textarea class="form-control"
                                                         id="description{{ $key }}"
                                                         name="{{ $locale }}[description]">
                                                         {{ old($locale . '.description') }}

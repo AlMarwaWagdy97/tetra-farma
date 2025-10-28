@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\MenuPositionEnums;
 use App\Models\Menue;
 use App\Models\Pages;
-use App\Models\Articles;
-use App\Models\ServiceCategory;
-use App\Models\Services;
-use App\Models\Categories;
 use App\Enums\UrlTypesEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MenuRequest;
-use App\Models\Doctor;
-use App\Models\Gallery;
+use App\Models\Blog;
+use App\Models\Job;
 use App\Models\News;
 use App\Models\Product;
-use App\Models\Specialties;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Cache;
 
 class MenueController extends Controller
@@ -188,16 +184,39 @@ class MenueController extends Controller
             }
         }
 
-
-        if($name == UrlTypesEnum::PRODUCTS){
-//                $res[] =  '/services/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
-            $items = Product::query()->with('trans')->active()->get(['id']);
+        if($name == UrlTypesEnum::CATEGORIES){
+            $items = ProductCategory::query()->with('trans')->active()->get(['id']);
             foreach($items as $item){
-                $res[] =  '/Product/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+                $res[] =  '/categories/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
             }
         }
+        if($name == UrlTypesEnum::PRODUCTS){
+            $items = Product::query()->with('trans')->active()->get(['id']);
+            foreach($items as $item){
+                $res[] =  '/products/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+            }
+        }
+        if($name == UrlTypesEnum::BLOGS){
+            $items = Blog::query()->with('trans')->get(['id']);
+            foreach($items as $item){
+                // $res[] =  '/blogs/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+                $res[] =  '/blogs/' . $item->id;
+            }
+        }
+        if($name == UrlTypesEnum::NEWS){
+            $items = News::query()->with('trans')->active()->get(['id']);
+            foreach($items as $item){
+                $res[] =  '/news/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+            }
+        }
+        if($name == UrlTypesEnum::JOBS){
 
-
+            $items = Job::query()->with('trans')->active()->get(['id']);
+            foreach($items as $item){
+                // $res[] =  '/jobs/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+                $res[] =  '/jobs/' . $item->id;
+            }
+        }
         return $res;
     }
 

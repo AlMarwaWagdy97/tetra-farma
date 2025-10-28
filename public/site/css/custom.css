@@ -376,7 +376,7 @@
     }
 
     .site-nav .nav-inner {
-        max-width: 1180px !;
+        max-width: 1300px;
         margin: 0 auto;
         height: 68px !important;
         padding: 0 16px;
@@ -487,5 +487,7 @@
 }
 .panel .btn:hover {
   color: #fff !important;
-  
 }
+/* .links{
+  margin: auto !important;
+} */

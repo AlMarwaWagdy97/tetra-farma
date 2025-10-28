@@ -30,6 +30,7 @@ return [
     'links' => 'الروابط',
     'copyright' => 'جميع الحقوق محفوظة &copy; :year :company',
     'sending' => 'جاري الإرسال...',
+    'cv_file' => 'السيرة الذاتية',
     
 
 ];

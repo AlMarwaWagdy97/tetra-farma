@@ -33,5 +33,6 @@ return [
     'links' => 'Links',
     'copyright' => 'All Rights Reserved &copy; :year :company',
     'sending' => 'Sending...',
+    'cv_file' => 'CV File',
 ];
 ?>

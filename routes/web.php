@@ -14,7 +14,7 @@ use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ShopController;
 use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\AboutController;
-use App\Http\Controllers\site\CategoryController;
+use App\Http\Controllers\Site\CategoryController;
 use App\Http\Controllers\Site\ReviewController;
 
 use App\Http\Controllers\Site\SearchController;

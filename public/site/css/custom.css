@@ -463,3 +463,25 @@
 .mobile-links a.dropdown-item {
     padding: 6px 15px !important;
 }
+.category .chip {
+  background: #fff !important;
+}
+
+.category .chip.active {
+  background: #1157a4 !important;
+  color: #fff !important;
+}
+.faq summary .dot{
+  background: #1157a4 !important;
+}
+.faq .text-primary{
+  color: #1157a4 !important;
+}
+/* #mainNav .links .active{
+  background-color: #f8fafc !important;
+  border-radius: 1rem;
+} */
+#mainNav .links .active::after{
+  background: #d6103d;
+  transform: scaleX(1);
+}

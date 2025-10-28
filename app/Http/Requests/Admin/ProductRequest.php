@@ -45,12 +45,12 @@ class ProductRequest extends FormRequest
         foreach (config('translatable.locales') as $locale) {
             $arr += [$locale . '.title' => 'required|min:1'];
             $arr += [$locale . '.slug' => 'required|min:1'];
-            $arr += [$locale . '.description' => 'required|min:1'];
-            $arr += [$locale . '.care_tips'=> 'nullable|min:1'];
-            $arr += [$locale . '.servings'=> 'nullable|min:1'];
-            $arr += [$locale . '.form'=> 'nullable|min:1'];
-            $arr += [$locale . '.category'=> 'nullable|min:1'];
-            $arr += [$locale . '.dispatch'=> 'nullable|min:1'];
+            $arr += [$locale . '.description' => 'nullable|min:1'];
+            $arr += [$locale . '.care_tips' => 'nullable|min:1'];
+            $arr += [$locale . '.servings' => 'nullable|min:1'];
+            $arr += [$locale . '.form' => 'nullable|min:1'];
+            $arr += [$locale . '.category' => 'nullable|min:1'];
+            $arr += [$locale . '.dispatch' => 'nullable|min:1'];
 
 
             $arr += [$locale . '.meta_title' => 'nullable|min:1'];
@@ -59,22 +59,22 @@ class ProductRequest extends FormRequest
         }
         $arr += ['image' => 'nullable|' . ImageValidate()];
 
-        
 
-            $arr += ['url' => 'nullable|url'];
+
+        $arr += ['url' => 'nullable|url'];
 
         $arr += ['price' => 'required|numeric|min:0'];
         $arr += ['sale' => 'nullable|numeric|min:0'];
         $arr += ['price_after_sale' => 'nullable|numeric|min:0'];
-        $arr += ['code' => 'string'];
-        $arr += ['sort' => 'integer|min:0'];
+        $arr += ['code' => 'nullable'];
+        $arr += ['sort' => 'nullable|integer|min:0'];
         $arr += ['feature' => 'nullable'];
         $arr += ['status' => 'nullable'];
         $arr += ['show_in_slider' => 'nullable'];
         $arr += ['in_stock' => 'nullable'];
-        $arr += ['show_text'=> 'nullable'];
-        $arr += ['user_input'=> 'nullable'];
-        $arr += ['product_cart'=> 'nullable'];
+        $arr += ['show_text' => 'nullable'];
+        $arr += ['user_input' => 'nullable'];
+        $arr += ['product_cart' => 'nullable'];
 
 
         $arr += ['categories' => 'nullable|array'];
@@ -83,16 +83,47 @@ class ProductRequest extends FormRequest
         $arr += ['occasions.*' => 'nullable|exists:occassions,id'];
 
 
+        $arr += ['lines.*.id' => 'nullable'];
+        $arr += ['lines.*.title' => 'nullable|array'];
+        $arr += ['lines.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['lines.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['lines.*.links' => 'nullable'];
+        $arr += ['lines.*.color' => 'nullable'];
+        $arr += ['lines.*.sort' => 'nullable'];
+        $arr += ['lines.*.status' => 'nullable'];
+
+        $arr += ['tips.*.id' => 'nullable'];
+        $arr += ['tips.*.title' => 'nullable|array'];
+        $arr += ['tips.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['tips.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['tips.*.description' => 'nullable|array'];
+        $arr += ['tips.*.description.en' => 'nullable|string'];
+        $arr += ['tips.*.description.ar' => 'nullable|string'];
+        $arr += ['tips.*.sort' => 'nullable'];
+        $arr += ['tips.*.status' => 'nullable'];
+
+        $arr += ['info.*.id' => 'nullable'];
+        $arr += ['info.*.title' => 'nullable|array'];
+        $arr += ['info.*.title.en' => 'nullable|string|max:255'];
+        $arr += ['info.*.title.ar' => 'nullable|string|max:255'];
+        $arr += ['info.*.description' => 'nullable|array'];
+        $arr += ['info.*.description.en' => 'nullable|string'];
+        $arr += ['info.*.description.ar' => 'nullable|string'];
+        $arr += ['info.*.sort' => 'nullable'];
+        $arr += ['info.*.status' => 'nullable'];
+
+        $arr['has_pockets']    = 'nullable';
+        if ($this->has('pockets')) {
+            $arr['pockets.en.*']    = 'nullable|string|max:255';
+            $arr['pockets.ar.*']    = 'nullable|string|max:255';
+            $arr['pockets.price.*'] = 'nullable|numeric|min:0';
+            $arr['pockets.image.*'] = 'nullable|array';
+            $arr['pockets.image.*.*'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+        }
+
         if (request()->isMethod('POST')) {
             $arr['image'] = 'required|' . ImageValidate();
         }
-         if ($this->has('pockets')) {
-        $arr['pockets.price.*'] = 'nullable|numeric|min:0';
-        $arr['pockets.en.*']    = 'required|string|max:255';
-        $arr['pockets.ar.*']    = 'required|string|max:255';
-           $arr['pockets.image.*'] = 'nullable|array';
-        $arr['pockets.image.*.*'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
-    }
 
         return $arr;
     }
@@ -112,18 +143,15 @@ class ProductRequest extends FormRequest
         $data['user_input'] = isset($data['user_input']) ? 1 : 0;
         $data['product_cart'] = isset($data['product_cart']) ? 1 : 0;
 
-        if (isset($data['pockets']['price']) && is_array($data['pockets']['price'])) {
-        foreach ($data['pockets']['price'] as $key => $price) {
-            $data['pockets']['price'][$key] = is_numeric($price) ? $price : 0;
+        if (isset($data['pockets']['en']) && is_array($data['pockets']['en'])) {
+            foreach ($data['pockets']['en'] as $key => $price) {
+                $data['pockets']['price'][$key] = is_numeric(@$data['pockets']['price'][$key]) ? $price : 0;
 
-
-            if (isset($data['pockets']['image'][$key]) && is_string($data['pockets']['image'][$key])) {
-                $data['pockets']['image'][$key] = $this->uploadFile($data['pockets']['image'][$key], $this->productPath);
+                if (isset($data['pockets']['image'][$key]) && is_string($data['pockets']['image'][$key])) {
+                    $data['pockets']['image'][$key] = $this->uploadFile($data['pockets']['image'][$key], $this->productPath);
+                }
             }
-            
         }
-    }
-        
 
         foreach (config('translatable.locales') as $locale) {
             $data[$locale]['slug'] = slug($data[$locale]['slug']);

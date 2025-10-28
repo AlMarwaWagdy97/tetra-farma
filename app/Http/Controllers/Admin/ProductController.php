@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Exports\ProductsExport;
+use App\Models\ProductInfo;
+use App\Models\ProductPaymentLine;
+use App\Models\ProductTips;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Traits\TranslatableHandler;
 
@@ -137,7 +140,8 @@ class ProductController extends Controller
 
 
         return view('admin/dashboard/products/index')->with([
-            'items' => $items, 'cats' => $cats
+            'items' => $items,
+            'cats' => $cats
         ]);
     }
 
@@ -184,11 +188,66 @@ class ProductController extends Controller
     {
         $data = $request->getSanitized();
 
+        // dd($data['lines'], @$data['lines']['title']['en'], @$data['lines']['title']['ss']);
         $data['image'] = $this->storeImage2($request, $this->productPath, $request->image, 'image');
         $data['url'] = $request->url;
         $product = Product::create($data);
 
         $this->saveModelTranslation($product, $data);
+
+
+        if ($request->has('lines')) {
+            foreach ($data['lines'] as $lines) {
+                $lineData = [
+                    'product_id' => $product->id,
+                    'links' => $lines['links'],
+                    'color' => $lines['color'],
+                    'sort' => $lines['sort'],
+                    'status' => $lines['status'] ?? 1,
+                    'en' =>  ['title' => @$lines['title']['en']],
+                    'ar' =>  ['title' => @$lines['title']['ar']],
+                ];
+                $line = ProductPaymentLine::create($lineData);
+            }
+        }
+
+        if ($request->has('tips')) {
+            foreach ($data['tips'] as $tips) {
+                $tipsData = [
+                    'product_id' => $product->id,
+                    'sort' => $tips['sort'],
+                    'status' => $tips['status'] ?? 1,
+                    'en' =>  [
+                        'title' => @$tips['title']['en'],
+                        'description' => @$tips['description']['en']
+                    ],
+                    'ar' =>  [
+                        'title' => @$tips['title']['ar'],
+                        'description' => @$tips['description']['en']
+                    ],
+                ];
+                $tips = ProductTips::create($tipsData);
+            }
+        }
+
+        if ($request->has('info')) {
+            foreach ($data['info'] as $info) {
+                $infoData = [
+                    'product_id' => $product->id,
+                    'sort' => $info['sort'],
+                    'status' => $info['status'] ?? 1,
+                    'en' =>  [
+                        'title' => @$info['title']['en'],
+                        'description' => @$info['description']['en']
+                    ],
+                    'ar' =>  [
+                        'title' => @$info['title']['ar'],
+                        'description' => @$info['description']['en']
+                    ],
+                ];
+                $info = ProductInfo::create($infoData);
+            }
+        }
 
         if ($request->has('has_pockets')) {
             $product->has_pockets = true;
@@ -199,7 +258,6 @@ class ProductController extends Controller
                     if (!isset($request->pockets['ar'][$index])) {
                         continue;
                     }
-
                     $pocketData = [
                         'product_id' => $product->id,
                         'price' => null,
@@ -219,6 +277,7 @@ class ProductController extends Controller
                 }
             }
         }
+
         if ($request->gallery_image) {
             $group = GalleryGroup::create([
                 'type' => 0,
@@ -256,11 +315,6 @@ class ProductController extends Controller
         if ($request->filters) {
             $product->filters()->attach($request->filters);
         }
-
-
-
-
-
 
         session()->flash('success', trans('message.admin.created_sucessfully'));
         return redirect((route('admin.products.index')));
@@ -307,40 +361,148 @@ class ProductController extends Controller
         $product->update($data);
         $this->saveModelTranslation($product, $data);
 
+        // paymentLine ---------------------------------------------------
+        if ($request->has('lines')) {
+            $submittedLineIds = collect($data['lines'])
+                ->pluck('id')
+                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->toArray();
+
+            ProductPaymentLine::where('product_id', $product->id)
+                ->whereNotIn('id', $submittedLineIds)
+                ->delete();
+
+            foreach ($data['lines'] as $tipData) {
+                $tipAttributes = [
+                    'product_id' => $product->id,
+                    'color' => @$tipData['color'],
+                    'links' => @$tipData['links'],
+                    'sort' => @$tipData['sort'],
+                    'status' => @$tipData['status'] ?? 1,
+                ];
+                $translations = [
+                    'en' => [
+                        'title' => @$tipData['title']['en'],
+                        'description' => @$tipData['description']['en']
+                    ],
+                    'ar' => [
+                        'title' => @$tipData['title']['ar'],
+                        'description' => @$tipData['description']['ar']
+                    ],
+                ];
+                $fullTipData = array_merge($tipAttributes, $translations);
+                if (isset($tipData['id']) && $tipData['id']) {
+                    $tip = ProductPaymentLine::find($tipData['id']);
+                    if ($tip) {
+                        $tip->update($fullTipData);
+                    }
+                } else {
+                    $tip = ProductPaymentLine::create($fullTipData);
+                }
+            }
+        } else {
+            ProductPaymentLine::where('product_id', $product->id)->delete();
+        }
+        // paymentLine ---------------------------------------------------
+
+
+        // Product Tips ---------------------------------------------------
+        if ($request->has('tips')) {
+            $submittedTipIds = collect($data['tips'])
+                ->pluck('id')
+                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->toArray();
+
+            ProductTips::where('product_id', $product->id)
+                ->whereNotIn('id', $submittedTipIds)
+                ->delete();
+
+            foreach ($data['tips'] as $tipData) {
+                $tipAttributes = [
+                    'product_id' => $product->id,
+                    'sort' => @$tipData['sort'],
+                    'status' => @$tipData['status']?? 1,
+                ];
+                $translations = [
+                    'en' => [
+                        'title' => @$tipData['title']['en'],
+                        'description' => @$tipData['description']['en']
+                    ],
+                    'ar' => [
+                        'title' => @$tipData['title']['ar'],
+                        'description' => @$tipData['description']['ar']
+                    ],
+                ];
+                $fullTipData = array_merge($tipAttributes, $translations);
+                if (isset($tipData['id']) && $tipData['id']) {
+                    $tip = ProductTips::find($tipData['id']);
+                    if ($tip) {
+                        $tip->update($fullTipData);
+                    }
+                } else {
+                    $tip = ProductTips::create($fullTipData);
+                }
+            }
+        } else {
+            ProductTips::where('product_id', $product->id)->delete();
+        }
+        // Product Tips ---------------------------------------------------
+
+         // Product Tips ---------------------------------------------------
+        if ($request->has('info')) {
+            $submittedTipIds = collect($data['info'])
+                ->pluck('id')
+                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->toArray();
+
+            ProductInfo::where('product_id', $product->id)
+                ->whereNotIn('id', $submittedTipIds)
+                ->delete();
+
+            foreach ($data['info'] as $tipData) {
+                $tipAttributes = [
+                    'product_id' => $product->id,
+                    'sort' => @$tipData['sort'],
+                    'status' => @$tipData['status']?? 1,
+                ];
+                $translations = [
+                    'en' => [
+                        'title' => @$tipData['title']['en'],
+                        'description' => @$tipData['description']['en']
+                    ],
+                    'ar' => [
+                        'title' => @$tipData['title']['ar'],
+                        'description' => @$tipData['description']['ar']
+                    ],
+                ];
+                $fullTipData = array_merge($tipAttributes, $translations);
+                if (isset($tipData['id']) && $tipData['id']) {
+                    $tip = ProductInfo::find($tipData['id']);
+                    if ($tip) {
+                        $tip->update($fullTipData);
+                    }
+                } else {
+                    $tip = ProductInfo::create($fullTipData);
+                }
+            }
+        } else {
+            ProductInfo::where('product_id', $product->id)->delete();
+        }
+        // Product Tips ---------------------------------------------------
+
         if ($request->has('has_pockets')) {
             $pocketIdsToKeep = [];
-
-
+            
+            
             $pockets = $request->input('pockets', []);
-            $prices = is_array($pockets) && isset($pockets['price']) ? $pockets['price'] : [];
-
-            foreach ($prices as $index => $price) {
+            
+            foreach ($pockets['en'] as $index => $item) {
                 $pocketData = [
                     'product_id' => $product->id,
-                    'price'      => $price ?? 0,
+                    'price'      =>  0,
                 ];
 
                 $pocketId = $pockets['id'][$index] ?? null;
-
-                // if ($request->hasFile("pockets.image.{$index}")) {
-                //     $images = [];
-                //     foreach ($request->file("pockets.image.{$index}") as $imgKey => $image) {
-                //         if ($image && $image->isValid()) {
-                //             $images[] = $this->storePocketImage(
-                //                 $image,
-                //                 '/attachments/pockets/',
-                //                 $imgKey
-                //             );
-                //         }
-                //     }
-                //     $pocketData['image'] = !empty($images) ? json_encode($images) : null;
-                // } elseif ($pocketId && $pocketId !== 'new') {
-                //     $existingPocket = ProductPocket::find($pocketId);
-                //     if ($existingPocket) {
-                //         $pocketData['image'] = $existingPocket->image;
-                //     }
-                // }
-
                 if ($pocketId && $pocketId !== 'new') {
                     $pocket = ProductPocket::find($pocketId);
                     if ($pocket) {
@@ -377,8 +539,7 @@ class ProductController extends Controller
             ProductPocket::where('product_id', $product->id)
                 ->whereNotIn('id', $pocketIdsToKeep)
                 ->delete();
-        } else {
-        }
+        } 
 
         if ($product->galleryGroup) {
             $groupGallery = $product->galleryGroup;

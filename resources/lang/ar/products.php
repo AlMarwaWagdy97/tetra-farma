@@ -62,6 +62,11 @@ return [
     'form' => 'الشكل',
     'servings' => 'الكمية',
     'dispatch' => 'التوصيل',
+    'product' => 'منتج',
+
+    'payment_lines' => 'خط البيع',
+    'product_tips' => 'نصائح المنتج',
+    'product_info' => 'معلومات المنتج',
     
 
 

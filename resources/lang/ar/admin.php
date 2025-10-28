@@ -552,6 +552,10 @@ return [
     'cvs' => 'السير الذاتية',
     'jobs' => 'الوظائف',
 
+    'product' => 'منتج',
+    'payment_lines' => 'خط البيع',
+    'product_tips' => 'نصائح المنتج',
+    'product_info' => 'معلومات المنتج',
 
 
 

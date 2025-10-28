@@ -9,9 +9,11 @@
    <!-- About -->
     @include('site.pages.about')
 
+    <!-- category -->
+    @include('site.pages.product-categories')
+
     <!-- Products -->
     @include('site.pages.products')
-
     
     <!-- Jobs -->
     @include('site.pages.careere')

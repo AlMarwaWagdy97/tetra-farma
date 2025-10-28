@@ -526,19 +526,12 @@ return [
     'themes' => 'Themes',
     'dashboard_theme' => 'Dashboard theme',
     'create_menus' => 'Create Menus',
+    'product' => 'Product',
+    'payment_lines' => 'Payment Lines',
+    'product_tips' => 'Product Tips',
+    'product_info' => 'Product Info',
     'cvs' => 'Cvs',
-    'jobs' => 'Jobs',
-
-    
-
-
-
-
-
-
-
-
-
+    'jobs' => 'Jobs',    
 
 
 

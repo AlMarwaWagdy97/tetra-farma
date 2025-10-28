@@ -105,6 +105,32 @@ const swiperReview = new Swiper(".ReviewSlider", {
     },
 });
 
+const categoryReview = new Swiper(".categorySlider", {
+  // Optional parameters
+  autoplay: true,
+  loop: false,
+  slidesPerView: 'auto',
+  navigation: {
+    nextEl: ".category-button-next",
+    prevEl: ".category-button-prev",
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  breakpoints: {
+      320: {
+          slidesPerView: 1,
+      },
+      768: {
+          slidesPerView: 3,
+      },
+      1024: {
+          slidesPerView: 5,
+      },
+  },
+});
+
 // Simple carousel logic (safe init)
 window.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('#tsl .slide');

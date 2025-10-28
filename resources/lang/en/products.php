@@ -64,7 +64,9 @@ return [
     'form' => 'Form',
     'servings' => 'Servings',
     'dispatch' => 'Dispatch',
-
+    'payment_lines' => 'Payment Lines',
+    'product_tips' => 'Product Tips',
+    'product_info' => 'Product Info',
 
     
 

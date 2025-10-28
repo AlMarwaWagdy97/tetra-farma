@@ -12,7 +12,7 @@ class CreateProductPocketsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('pocket_name');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

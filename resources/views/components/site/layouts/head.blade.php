@@ -211,7 +211,7 @@
 	{{-- <link rel="stylesheet" href="./fonts/LCALLIG.TTF">
 	<link rel="stylesheet" href="index.css"> --}}
 
- <link rel="stylesheet" href="{{ asset('site/fonts/all.min.css') }}" />
+ 	<link rel="stylesheet" href="{{ asset('site/fonts/all.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{ asset('site/fonts/nouislider.min.css') }}" />
 
@@ -219,7 +219,7 @@
     <link rel="stylesheet" href="{{ asset('site/css/swiper.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/style.css?v=0.0.6') }}" />
-    <link rel="stylesheet" href="{{ asset('site/css/custom.css?v=0.0.6') }}" />
+    <link rel="stylesheet" href="{{ asset('site/css/custom.css?v=0.0.7') }}" />
 	 <link rel="stylesheet" href="{{ asset('site/css/career.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/Blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/css/news.css') }}" />

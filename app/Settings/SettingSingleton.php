@@ -9,7 +9,7 @@ class SettingSingleton
 {
     private static $instance;
     private $settings;
-    private $siteSetting, $colorsSetting, $scriptSetting, $infoSetting, $metaSetting, $viewSetting, $couponSetting, $upperNotify;
+    private $siteSetting, $colorsSetting, $scriptSetting, $infoSetting, $home_setting , $metaSetting, $viewSetting, $couponSetting, $upperNotify;
 
     private function __construct() {}
 
@@ -45,6 +45,8 @@ class SettingSingleton
 
         $this->upperNotify = (clone $this->settings)->where('key', 'upper_notify_setting')->first()?->values;
         $this->scriptSetting = (clone $this->settings)->where('key', 'header_scripts')->first()?->values;
+        $this->home_setting = (clone $this->settings)->where('key', 'home_setting')->first()?->values;
+
     }
 
     public function getSiteSetting()
@@ -68,6 +70,10 @@ class SettingSingleton
     public function getScriptSetting()
     {
         return $this->scriptSetting;
+    }
+    public function getHomeSetting()
+    {
+        return $this->home_setting;
     }
 
     public function getColorSetting()
@@ -112,223 +118,33 @@ class SettingSingleton
             case 'footer_description':
                 $value = $this->siteSetting?->where('key', 'footer_description_' . app()->getLocale())->first()?->value;
                 break;
-            case 'categories':
-                $value = $this->siteSetting?->where('key', 'categories_' . app()->getLocale())->first()?->value;
-                break;
-            case 'occassions':
-                $value = $this->siteSetting?->where('key', 'occassions_' . app()->getLocale())->first()?->value;
-                break;
-            case 'Shop_by_Occasions':
-                $value = $this->siteSetting?->where('key', 'Shop_by_Occasions_' . app()->getLocale())->first()?->value;
-                break;
-            case 'Shop_by_category':
-                $value = $this->siteSetting?->where('key', 'Shop_by_category_' . app()->getLocale())->first()?->value;
-                break;
-            case 'Best_Seller':
-                $value = $this->siteSetting?->where('key', 'Best_Seller_' . app()->getLocale())->first()?->value;
-                break;
-            case 'Best_Offers':
-                $value = $this->siteSetting?->where('key', 'Best_Offers_' . app()->getLocale())->first()?->value;
-                break;
-            case 'show_text_in_product':
-                $value = $this->siteSetting?->where('key', 'show_text_in_product_' . app()->getLocale())->first()?->value;
-                break;
-            case 'tax':
-                $value = $this->siteSetting
-                    ?->where('key', 'tax')
-                    ->first()?->value;
-                break;
-            case 'shipping_giza':
-                $value = $this->siteSetting
-                    ?->where('key', 'shipping_giza')
-                    ->first()?->value;
-                break;
-            case 'shipping_cairo':
-                $value = $this->siteSetting
-                    ?->where('key', 'shipping_cairo')
-                    ->first()?->value;
-                break;
-            case 'Downtown':
-                $value = $this->siteSetting
-                    ?->where('key', 'Downtown')
-                    ->first()?->value;
-                break;
-            case 'Zamalek':
-                $value = $this->siteSetting
-                    ?->where('key', 'Zamalek')
-                    ->first()?->value;
-                break;
-            case 'Garden_City':
-                $value = $this->siteSetting
-                    ?->where('key', 'Garden_City')
-                    ->first()?->value;
-                break;
-            case 'ElManial':
-                $value = $this->siteSetting
-                    ?->where('key', 'ElManial')
-                    ->first()?->value;
-                break;
-            case 'Nasr_City':
-                $value = $this->siteSetting
-                    ?->where('key', 'Nasr_City')
-                    ->first()?->value;
-                break;
-            case 'Heliopolis':
-                $value = $this->siteSetting
-                    ?->where('key', 'Heliopolis')
-                    ->first()?->value;
-                break;
-            case 'Abbassia':
-                $value = $this->siteSetting
-                    ?->where('key', 'Abbassia')
-                    ->first()?->value;
-                break;
-            case 'Roxy':
-                $value = $this->siteSetting
-                    ?->where('key', 'Roxy')
-                    ->first()?->value;
-                break;
-            case 'ElNozha':
-                $value = $this->siteSetting
-                    ?->where('key', 'ElNozha')
-                    ->first()?->value;
-                break;
-            case 'Sheraton':
-                $value = $this->siteSetting
-                    ?->where('key', 'Sheraton')
-                    ->first()?->value;
-                break;
-            case 'Shubra':
-                $value = $this->siteSetting
-                    ?->where('key', 'Shubra')
-                    ->first()?->value;
-                break;
-            case 'Maadi':
-                $value = $this->siteSetting
-                    ?->where('key', 'Maadi')
-                    ->first()?->value;
-                break;
-            case 'Helwan':
-                $value = $this->siteSetting
-                    ?->where('key', 'Helwan')
-                    ->first()?->value;
-                break;
-            case 'ElRehab':
-                $value = $this->siteSetting
-                    ?->where('key', 'ElRehab')
-                    ->first()?->value;
-                break;
-            case 'Madinaty':
-                $value = $this->siteSetting
-                    ?->where('key', 'Madinaty')
-                    ->first()?->value;
-                break;
-            case 'The_fifth_settlement':
-                $value = $this->siteSetting
-                    ?->where('key', 'The_fifth_settlement')
-                    ->first()?->value;
-                break;
-            case 'Giza':
-                $value = $this->siteSetting
-                    ?->where('key', 'Giza')
-                    ->first()?->value;
-                break;
-            case 'Dokki':
-                $value = $this->siteSetting
-                    ?->where('key', 'Dokki')
-                    ->first()?->value;
-                break;
-            case 'Mohandessin':
-                $value = $this->siteSetting
-                    ?->where('key', 'Mohandessin')
-                    ->first()?->value;
-                break;
-            case 'Agouza':
-                $value = $this->siteSetting
-                    ?->where('key', 'Agouza')
-                    ->first()?->value;
-                break;
-            case 'Imbaba':
-                $value = $this->siteSetting
-                    ?->where('key', 'Imbaba')
-                    ->first()?->value;
-                break;
-            case 'Faisal':
-                $value = $this->siteSetting
-                    ?->where('key', 'Faisal')
-                    ->first()?->value;
-                break;
-            case '6th_of_October_City':
-                $value = $this->siteSetting
-                    ?->where('key', '6th_of_October_City')
-                    ->first()?->value;
-                break;
-            case 'Sheikh_Zayed':
-                $value = $this->siteSetting
-                    ?->where('key', 'Sheikh_Zayed')
-                    ->first()?->value;
-                break;
-            case 'Haram':
-                $value = $this->siteSetting
-                    ?->where('key', 'Haram')
-                    ->first()?->value;
-                break;
-            case 'order_email_1':
-                $value = $this->siteSetting
-                    ?->where('key', 'order_email_1')
-                    ->first()?->value;
-                break;
-            case 'order_email_2':
-                $value = $this->siteSetting
-                    ?->where('key', 'order_email_2')
-                    ->first()?->value;
-                break;
-
-            case 'coupon_description':
-                $value = $this->couponSetting
-                    ?->where('key', 'coupon_description_' . app()->getLocale())
-                    ->first()?->value;
-                break;
-            case 'coupon_title':
-                $value = $this->couponSetting
-                    ?->where('key', 'coupon_title_' . app()->getLocale())
-                    ->first()?->value;
-                break;
-            case 'upper_text':
+      
+            case 'show_slider':
                 $value = $this->upperNotify
-                    ?->where('key', 'upper_text_' . app()->getLocale())
+                    ?->where('key', 'show_slider')
                     ->first()?->value;
                 break;
-            case 'upper_text_coupon':
+            case 'show_about_us':
                 $value = $this->upperNotify
-                    ?->where('key', 'upper_text_coupon_' . app()->getLocale())
+                    ?->where('key', 'show_about_us')
                     ->first()?->value;
                 break;
-            case 'upper_text_sale':
+            case 'show_product':
                 $value = $this->upperNotify
-                    ?->where('key', 'upper_text_sale_' . app()->getLocale())
+                    ?->where('key', 'show_product')
                     ->first()?->value;
                 break;
-            case 'upper_text_other':
+            case 'show_category':
                 $value = $this->upperNotify
-                    ?->where('key', 'upper_text_other_' . app()->getLocale())
+                    ?->where('key', 'show_category')
                     ->first()?->value;
                 break;
-            case 'upper_text_shipping_cairo_giza':
+            case 'show_career':
                 $value = $this->upperNotify
-                    ?->where('key', 'upper_text_shipping_cairo_giza_' . app()->getLocale())
+                    ?->where('key', 'show_career')
                     ->first()?->value;
                 break;
-            case 'upper_show':
-                $value = $this->upperNotify
-                    ?->where('key', 'upper_show')
-                    ->first()?->value;
-                break;
-            case 'upper_price':
-                $value = $this->upperNotify
-                    ?->where('key', 'upper_price')
-                    ->first()?->value;
-                break;
+         
             case 'openTime':
                 $value = $this->siteSetting?->where('key', 'open_' . app()->getLocale())->first()?->value;
                 break;
@@ -383,5 +199,9 @@ class SettingSingleton
     public function getView($val)
     {
         return $this->viewSetting?->where('key', $val)->first()?->value;
+    }
+    public function getHome($val)
+    {
+        return $this->home_setting?->where('key', $val)->first()?->value;
     }
 }

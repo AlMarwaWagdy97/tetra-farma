@@ -1,7 +1,10 @@
-<!-- OUR PRODUCTS -->
 
-{{-- Reviews --}}
-<div class="Review testimonial my-4 p-5 text-center">
+@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_category    = (int) $settings->getHome('show_category');
+@endphp
+@if ($show_category)
+    <div class="Review testimonial my-4 p-5 text-center">
     <div class="container">
         <h2 class="testimonialh2">@lang('Our Categories')</h2>
 
@@ -37,3 +40,4 @@
         </div>
     </div>
 </div>
+@endif

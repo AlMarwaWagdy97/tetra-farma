@@ -1,7 +1,12 @@
   @php
       $settings = \App\Settings\SettingSingleton::getInstance();
+      
+    $show_contact_us    = (int) $settings->getHome('show_contact_us');
+
   @endphp
   <!-- ========== CONTACT SECTION ========== -->
+
+  @if ( $show_contact_us)
   <section class="section hero pt-0 con-section" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
       @if (session('success'))
@@ -68,7 +73,7 @@
           </div>
       </div>
   </section>
+  @endif
+ 
 
-  <style>
-
-  </style>
+ 

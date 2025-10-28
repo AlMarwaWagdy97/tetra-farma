@@ -2,8 +2,12 @@
  @php
      $settings = \App\Settings\SettingSingleton::getInstance();
      $footer_description = $settings->getItem('footer_description');
+         $show_footer    = (int) $settings->getHome('show_footer');
+
+
  @endphp
- <footer dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}  h-25 ">
+ @if ($show_footer)
+      <footer dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}  h-25 ">
      <div class="container-fluid">
          <div class="row  ">
              <div class=" col-md-4 text-center">
@@ -71,6 +75,8 @@
          </div>
      </div>
  </footer>
+ @endif
+
 
  <!-- ============ /FOOTER ============ -->
 

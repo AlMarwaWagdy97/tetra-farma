@@ -1,4 +1,9 @@
 	<!-- FAQ Section--------------------------------- -->
+		@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_faq    = (int) $settings->getHome('show_faq');
+@endphp
+@if ($show_faq)
 	<section id="tetra-faq" class="faqsec" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 	    <div class="faqdiv wow fadeInUp">
 	        <div class="faq1">
@@ -29,4 +34,7 @@
 	        </a>
 	    </div>
 	</section>
-	<!-- faq end -->
+
+
+@endif
+	

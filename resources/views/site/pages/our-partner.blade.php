@@ -1,5 +1,10 @@
 <!-- OUR PARTNERS -->
-<section class="OurPartner" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+	@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_partners    = (int) $settings->getHome('show_partners');
+@endphp
+@if ($show_partners)
+    <section class="OurPartner" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <h3 class="PartnerH3">@lang('site.our_partners')</h3>
 
     <div class="parner">
@@ -27,3 +32,5 @@
         </div>
     </div>
 </section>
+@endif
+

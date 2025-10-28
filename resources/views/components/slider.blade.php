@@ -1,6 +1,11 @@
 @php
-    $firstVideoSlide = $slides->firstWhere('video', '!=', null);
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_slider    = (int) $settings->getHome('show_slider');
+    // dd($show_slider);
+        $firstVideoSlide = $slides->firstWhere('video', '!=', null);
 @endphp
+
+@if ( $show_slider)
 @if ($firstVideoSlide)
 
     <div class="heroVideo">
@@ -39,6 +44,8 @@
         <div class="swiper-pagination"></div>
     </div>
 @endif
+@endif
+
 
 
 <style>

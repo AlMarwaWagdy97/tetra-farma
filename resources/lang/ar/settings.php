@@ -119,6 +119,22 @@ return [
     "upper_text_other_en" => "النص العلوي الآخر (إنجليزي)",
     "upper_text_shipping_cairo_giza_ar" => "النص العلوي لشحن القاهرة والجيزة (عربي)",
     "upper_text_shipping_cairo_giza_en" => "النص العلوي لشحن القاهرة والجيزة (إنجليزي)",
+    'header_scripts' => 'سكربتات الهيدر',
+    'home_setting' => 'اعدادات الصفحة الرئيسية',
+    'show_product' => 'اظهار المنتجات',
+    'show_category' => 'اظهار الاقسام',
+    'show_slider' => 'اظهار السليدر',
+    'show_news' => 'اظهار الاخبار',
+    'show_contact' => 'اظهار الاتصال بنا',
+    'show_about_us' => 'اظهار من نحن',
+    'show_career' => 'اظهار الوظائف',
+    'show_blogs' => 'اظهار المقالات',
+    'show_partners' => 'اظهار الشركاء',
+    'show_contact_us' => 'اظهار الاتصال بنا',
+    'show_reviews' => 'اظهار المراجعات',
+    'show_faq' => 'اظهار الاسئلة الشائعة',
+    'show_footer' => 'اظهار الفوتر',
+    
     
 
 ];

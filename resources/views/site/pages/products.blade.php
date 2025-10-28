@@ -1,5 +1,13 @@
 <!-- OUR PRODUCTS -->
+
+@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_product    = (int) $settings->getHome('show_product');
+@endphp
+
+@if ($show_product)
 <section class="products-section  wow bounceInUp" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+
     <div class="container">
         <div class="text-center mb-4">
             <h2 class="section-title">@lang('messages.Our Products')</h2>
@@ -35,3 +43,4 @@
              </a>
          </div>
 </section>
+@endif

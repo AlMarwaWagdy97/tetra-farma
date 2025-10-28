@@ -1,5 +1,10 @@
  <!-- news -->
- <section class="latestnews" id="latest-news" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+ 	@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_news    = (int) $settings->getHome('show_news');
+@endphp
+@if ($show_news)
+     <section class="latestnews" id="latest-news" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
      <div class="news">
          <div class="newstitle wow fadeInDown">
              <h2 class="newsh2">@lang('site.latest_news')</h2>
@@ -41,3 +46,5 @@
 
 
  </section>
+@endif
+

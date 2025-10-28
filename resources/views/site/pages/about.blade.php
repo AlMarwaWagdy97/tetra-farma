@@ -1,6 +1,12 @@
 
+@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_about_us    = (int) $settings->getHome('show_about_us');
+@endphp
+
 <!-- ABOUT US -->
-<section class="about-section py-5">
+@if ( $show_about_us)
+    <section class="about-section py-5">
     <div class="container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-6 order-2 wow bounceInRight">
@@ -37,3 +43,5 @@
         </div>
     </div>
 </section>
+@endif
+

@@ -117,6 +117,27 @@ return [
     "upper_text_other_en" => "Upper Text Other (English)",
     "upper_text_shipping_cairo_giza_ar" => "Upper Text Shipping Cairo Giza (Arabic)",
     "upper_text_shipping_cairo_giza_en" => "Upper Text Shipping Cairo Giza (English)",
+    'header_scripts' => 'Header Scripts',
+    'home_setting' => 'Home Settings',
+    'show_product' => 'Show Product',
+    'show_category' => 'Show Category',
+    'show_slider' => 'Show Slider',
+    'show_news' => 'Show News',
+    'show_contact' => 'Show Contact',
+    'show_about_us' => 'Show About Us',
+    'show_career' => 'Show Career',
+    'show_blogs' => 'Show Blogs',
+    'show_partners' => 'Show Partners',
+    'show_contact_us' => 'Show Contact Us',
+    'show_reviews' => 'Show Reviews',
+    'show_faq' => 'Show Faq',
+    'show_footer' => 'Show Footer',
+    
+    
+
+
+
+
    
 
 ];

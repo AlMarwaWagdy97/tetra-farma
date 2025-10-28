@@ -1,6 +1,13 @@
 
 {{-- Reviews --}}
-<div class="Review testimonial my-4 p-5 text-center  wow fadeInUp">
+
+	@php
+    $settings     = \App\Settings\SettingSingleton::getInstance();
+    $show_reviews    = (int) $settings->getHome('show_reviews');
+@endphp
+@if ($show_reviews)
+    <div class="Review testimonial my-4 p-5 text-center  wow fadeInUp">
+
     <div class="container">
             <h2 class="testimonialh2">@lang('reviews.reviews')</h2>
 
@@ -51,6 +58,8 @@
         </div>
     </div>
 </div>
+@endif
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

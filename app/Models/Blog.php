@@ -11,18 +11,40 @@ class Blog extends Model
 {
     use HasFactory, Translatable;
 
-    public $translatedAttributes = ['title','description'];
-    protected $fillable = ['image'];
+    public $translatedAttributes =
+    [
+        'blog_id',
+        'title',
+        'description',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'meta_key',
+        'locale',
+
+
+    ];
+
+
+
+    protected $fillable = 
+    ['image',
+    'status',
+    'feature',
+    'sort',
+];
 
     protected $translationForeignKey = 'blog_id';
 
 
-    public function trans(){
-        return $this->hasMany(BlogTranslation::class,'blog_id');
+    public function trans()
+    {
+        return $this->hasMany(BlogTranslation::class, 'blog_id');
     }
 
-    public function transNow(){
-        return $this->hasOne(BlogTranslation::class,'blog_id')->where('locale' , app()->getLocale());
+    public function transNow()
+    {
+        return $this->hasOne(BlogTranslation::class, 'blog_id')->where('locale', app()->getLocale());
     }
 
 
@@ -31,7 +53,7 @@ class Blog extends Model
         return $this->translations()->where('locale', app()->getLocale())->first();
     }
 
-        public static function staticPath(): string
+    public static function staticPath(): string
     {
         return 'attachments/blogs/';
     }

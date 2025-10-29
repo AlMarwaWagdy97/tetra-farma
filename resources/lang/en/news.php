@@ -6,7 +6,7 @@ return [
     | Admin Dashboard 
     |--------------------------------------------------------------------------
     */
-    'news'                    => 'Offers',
+    'news'                    => 'news',
     'edit'                        => 'Edit in ":name" ',
     'show'                        => 'Show ":name" ',
     'show_news'               => 'News',

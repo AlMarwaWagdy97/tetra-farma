@@ -365,7 +365,7 @@ class ProductController extends Controller
         if ($request->has('lines')) {
             $submittedLineIds = collect($data['lines'])
                 ->pluck('id')
-                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->filter() 
                 ->toArray();
 
             ProductPaymentLine::where('product_id', $product->id)
@@ -410,7 +410,7 @@ class ProductController extends Controller
         if ($request->has('tips')) {
             $submittedTipIds = collect($data['tips'])
                 ->pluck('id')
-                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->filter() 
                 ->toArray();
 
             ProductTips::where('product_id', $product->id)
@@ -452,7 +452,7 @@ class ProductController extends Controller
         if ($request->has('info')) {
             $submittedTipIds = collect($data['info'])
                 ->pluck('id')
-                ->filter() // تصفية لحذف القيم الفارغة (IDs) للنصائح الجديدة
+                ->filter() 
                 ->toArray();
 
             ProductInfo::where('product_id', $product->id)

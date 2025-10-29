@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
@@ -147,7 +148,9 @@ Route::group([
                 Route::post('filters/{filter}/products', [FilterController::class, 'updateProducts'])
                     ->name('filters.products.update');
 
-                Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class);
+                Route::resource('blogs', BlogController::class);
+                Route::get('blogs-update-featured/{id}', [BlogController::class, 'updateFeature'])->name('blogs.update-featured');
+                Route::get('blogs-update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.update-status');
 
                 Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
                 Route::post('about', [AboutController::class, 'update'])->name('about.update');
@@ -217,7 +220,7 @@ Route::group([
 
                 // ----- Cv -----------------------------------------------
                 Route::get('/cvs', [AdminCvController::class, 'index'])->name('cvs.index');
-              
+
                 // ----- faqs -----------------------------------------------
                 Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
                 Route::get('faqs/{faq}/toggle-status', [App\Http\Controllers\Admin\FaqController::class, 'toggleStatus'])->name('faqs.toggle-status');

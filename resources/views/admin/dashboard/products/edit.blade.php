@@ -823,7 +823,8 @@
             </div> <!-- end col -->
         </div>
     </div> <!-- end row-->
-</div> <!-- container-fluid -->
+</div>
+ <!-- container-fluid -->
 
 @endsection
 

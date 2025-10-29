@@ -11,8 +11,8 @@
         <div class="container">
             <p class="kicker color_red">Company Updates</p>
             <h1 class="color_blue">Latest News & Press</h1>
-            <p class="lead">Announcements, partnerships, product milestones, and community impact from Tetra Pharma.</p>
-            <p class="breadcrumb color_red"><a href="../index.html">Home</a> / News</p>
+            
+            <p class="breadcrumb color_red"><a href="{{ route('site.home') }}" target="_blank">@lang('home.home')</a> / @lang('news.news')</p>
         </div>
     </header>
 

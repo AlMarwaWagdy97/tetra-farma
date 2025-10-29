@@ -5,7 +5,7 @@
 <section class="hero wow bounceInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="shell">
         <div class="crumb">
-            <a class=" color: #d6103d !important" href="../index.html">Home</a> › <a href="./product.html">Products</a>
+            <a class="" href="{{ route('site.home') }}">Home</a> › <a href="{{ route('site.products.index') }}">Products</a>
         </div>
         <h1 class="p-title">{{ $product->transNow->title }}</h1>
         {{-- <div class="p-sub">{!! $product->transNow->description !!}</div> --}}

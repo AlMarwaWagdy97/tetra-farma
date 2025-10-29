@@ -1,5 +1,10 @@
 @extends('site.app')
-@section('title', 'Tetra Pharma' . ' | ' . 'Blogs')
+
+@section('title', @$metaSetting->where('key', 'blogs_meta_title_' . $current_lang)->first()->value)
+@section('meta_key', @$metaSetting->where('key', 'blogs_meta_key_' . $current_lang)->first()->value)
+@section('meta_description', @$metaSetting->where('key', 'blogs_meta_description_' . $current_lang)->first()->value)
+
+
 @section('content')
     <header class="hero  wow fadeInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
         <div class="container">

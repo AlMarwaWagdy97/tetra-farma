@@ -42,7 +42,7 @@ return [
     'services'              => 'Services Page',
     'blogs'                 => 'News Page',
     'portfolio'             => 'Projects Page',
-    'offers'                => 'Offers Page',
+    'offers'                => 'News Page',
     'contact'               => 'Contact Page',
     'meta_setting'          => 'Meta Setting',
     'url'                   => 'Url',
@@ -89,7 +89,7 @@ return [
     'contact_meta_description_ar'  => 'Contact Meta Description Arabic',
     'contact_meta_key_en'          => 'Contact Meta Key English',
     'contact_meta_key_ar'          => 'Contact Meta Key Arabic',
-    'offers_paginate'              => 'Offers paginate',
+    'offers_paginate'              => 'News paginate',
     'snapchat'                     => 'Snapchat',
     'logo_en'                     => 'Logo in en',
     'logo_ar'                     => 'Logo in ar',
@@ -99,5 +99,12 @@ return [
     'address_links'               => 'Address links',
     'mail_booking'               => 'Mail Booking',
     'section_' => 'Section',
+
+    'about_us' => 'About Us Page',
+    'categories' => 'Categories',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 
 ];

@@ -21,31 +21,31 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $contacts = WhatsAppContact::active()->with('transNow')->get();
+        if (Schema::hasTable('settings_values')) {
+            $currentLang = app()->getLocale();
 
-        view()->share('contacts', $contacts);
-     
+            // $settings  = @SettingsValues::query();
+            $settings  = SettingSingleton::getInstance();
 
-        // if (Schema::hasTable('settings_values')) {
-        //     $currentLang = app()->getLocale();
 
-        //     // $settings  = @SettingsValues::query();
-        //     $settings  = SettingSingleton::getInstance();
+            $contacts = WhatsAppContact::active()->with('transNow')->get();
 
-        //     //  meta setting  ---------------------------------------------------------
-        //     $metaSetting =  $settings->getMetaSetting();
+            view()->share('contacts', $contacts);
 
-        //     //  Site  setting  ---------------------------------------------------------
-        //     $settingsSite = $settings->getSiteSetting();
+            //  meta setting  ---------------------------------------------------------
+            $metaSetting =  $settings->getMetaSetting();
 
-        //     if ($settingsSite != null) {
-        //         $SiteSetting['site_name'] = @$settingsSite->where('key', 'site_name_' . $currentLang)->first()->value;
-        //         $SiteSetting['logo'] = @$settingsSite->where('key', 'logo_' . $currentLang)->first()->value;
-        //         $SiteSetting['icon'] = @$settingsSite->where('key', 'icon')->first()->value;
+            //  Site  setting  ---------------------------------------------------------
+            $settingsSite = $settings->getSiteSetting();
 
-        //         view()->share('metaSetting', $metaSetting);
-        //         view()->share('SiteSetting', $SiteSetting);
-        //     }
-        // }
+            if ($settingsSite != null) {
+                $SiteSetting['site_name'] = @$settingsSite->where('key', 'site_name_' . $currentLang)->first()->value;
+                $SiteSetting['logo'] = @$settingsSite->where('key', 'logo_' . $currentLang)->first()->value;
+                $SiteSetting['icon'] = @$settingsSite->where('key', 'icon')->first()->value;
+
+                view()->share('metaSetting', $metaSetting);
+                view()->share('SiteSetting', $SiteSetting);
+            }
+        }
     }
 }

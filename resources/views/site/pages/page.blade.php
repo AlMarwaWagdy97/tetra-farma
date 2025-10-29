@@ -1,15 +1,8 @@
 @extends('site.app')
 
-@php
-$settings = \App\Settings\SettingSingleton::getInstance();
-$pages = \App\Models\PagesTranslation::where('title', 'about-us')->first();
-@endphp
-
-@section('title', 'Dalia El Haggar' . ' | ' .  'About Us')
-
-@section('title', $settings->getMeta('page_meta_title_' . $current_lang) ?? 'Default Title ')
-@section('meta_key', $settings->getMeta('page_meta_key_' . $current_lang) ?? 'Default Keywords')
-@section('meta_description', $settings->getMeta('page_meta_description_' . $current_lang) ?? 'Default Description')
+@section('title', @$page->trans->where('locale',$current_lang)->first()->meta_title)
+@section('meta_key', @$page->trans->where('locale',$current_lang)->first()->meta_key)
+@section('meta_description', @$page->trans->where('locale',$current_lang)->first()->meta_description)
 
 @section('content')
 

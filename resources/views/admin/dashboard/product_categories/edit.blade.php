@@ -234,15 +234,6 @@
                                                         <textarea id="meta_description{{$key}}" name="{{ $locale }}[meta_desc]" class="form-control description"> {{ $trans->meta_desc ??  old($locale . '.meta_desc') }} </textarea>
                                                         {{-- {!! $trans->meta_desc !!}--}}
 
-                                                        <script type="text/javascript">
-                                                            CKEDITOR.replace('meta_description{{ $key }}', {
-                                                                filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}"
-                                                                , filebrowserUploadMethod: 'form'
-                                                            });
-
-                                                        </script>
-
-
                                                         @if($errors->has( $locale . '.meta_description'))
                                                         <span class="missiong-spam">{{ $errors->first( $locale . '.meta_description') }}</span>
                                                         @endif

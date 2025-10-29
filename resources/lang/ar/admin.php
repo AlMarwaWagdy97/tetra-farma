@@ -61,7 +61,6 @@ return [
     'payment' => 'دفع',
     'tags' => 'العلامات',
     'cheak_all' => 'تحديد الكل',
-    'news' => 'العروض',
     'blog' => 'المدونة',
     'site' => 'الصفحه',
     'footerMenu' => 'عرض القائمة الفوتر',
@@ -557,6 +556,8 @@ return [
     'product_tips' => 'نصائح المنتج',
     'product_info' => 'معلومات المنتج',
 
+    'categories' => 'الاقسام',
+    'faq' => 'Faq',
 
 
 

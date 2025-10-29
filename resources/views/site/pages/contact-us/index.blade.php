@@ -1,5 +1,9 @@
 @extends('site.app')
-@section('title', 'Tetra Pharma' . ' | ' . 'Contact Us')
+
+@section('title', @$metaSetting->where('key', 'contact_us_meta_title_' . $current_lang)->first()->value)
+@section('meta_key', @$metaSetting->where('key', 'contact_us_meta_key_' . $current_lang)->first()->value)
+@section('meta_description', @$metaSetting->where('key', 'contact_us_meta_description_' . $current_lang)->first()->value)
+
 @section('content')
  <section class="page-hero wow bounceInRight" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container">

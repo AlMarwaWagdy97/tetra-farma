@@ -1,4 +1,10 @@
 @extends('site.app')
+
+@section('title', @$news->meta_title  )
+@section('meta_key', @$news->meta_key )
+@section('meta_description', @$news->meta_description )
+
+
 @section('content')
 <div class="container hero blog-page pt-5 py-5" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 

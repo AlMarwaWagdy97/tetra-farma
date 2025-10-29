@@ -1,4 +1,10 @@
 @extends('site.app')
+
+@section('title', @$category->transNow->meta_title  )
+@section('meta_key', @$category->transNow->meta_key )
+@section('meta_description', @$category->transNow->meta_desc )
+
+
 @section('content')
 <section class="products-section hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">

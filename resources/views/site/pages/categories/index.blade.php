@@ -1,5 +1,10 @@
 @extends('site.app')
 
+@section('title', @$metaSetting->where('key', 'categories_meta_title_' . $current_lang)->first()->value)
+@section('meta_key', @$metaSetting->where('key', 'categories_meta_key_' . $current_lang)->first()->value)
+@section('meta_description', @$metaSetting->where('key', 'categories_meta_description_' . $current_lang)->first()->value)
+
+
 @section('content')
      <!-- OUR PRODUCTS -->
 <section class="products-section hero" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">

@@ -1,5 +1,10 @@
 @extends('site.app')
 
+@section('title', @$product->transNow->meta_title  )
+@section('meta_key', @$product->transNow->meta_key )
+@section('meta_description', @$product->transNow->meta_desc )
+
+
 @section('content')
 <!-- ================== HEADER / BREADCRUMB ================== -->
 <section class="hero wow bounceInDown" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">

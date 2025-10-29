@@ -1,10 +1,12 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang))</title>
-    <meta name="title" content="@yield('title', $settings->getMeta($pageName . '_meta_title_' . $currentLang) ?? 'Tetra Pharma ')" />
-    <meta name="keywords" content="@yield('meta_key', $settings->getMeta($pageName . '_meta_key_' . $currentLang) ?? 'Tetra Pharma, Pharmaceuticals, Healthcare')">
-    <meta name="description" content="@yield('meta_description', $settings->getMeta($pageName . '_meta_description_' . $currentLang) ?? 'Discover the excellence of Tetra Pharma in pharmaceuticals and healthcare.')">
+    <title> {{ @$settings->getItem('site_name') }} | @yield('title', $settings->getItem('meta_title_' . $current_lang)) </title>
+
+    <meta name="keywords" content="@yield('meta_key', $settings->getItem('meta_key_' . $current_lang))">
+    <meta name="description" content="@yield('meta_description', $settings->getItem('meta_description_' . $current_lang))">
+
+
     <link rel="canonical" href="{{ url()->current() }}" />
     <meta property="og:title" content="{{ $title }}" />
     <meta property="og:type" content="website" />

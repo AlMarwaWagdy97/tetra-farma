@@ -1,5 +1,11 @@
 @extends('site.app')
 
+
+@section('title', @$metaSetting->where('key', 'product_meta_title_' . $current_lang)->first()->value)
+@section('meta_key', @$metaSetting->where('key', 'product_meta_key_' . $current_lang)->first()->value)
+@section('meta_description', @$metaSetting->where('key', 'product_meta_description_' . $current_lang)->first()->value)
+
+
 @section('content')
 
 <!-- OUR PRODUCTS -->

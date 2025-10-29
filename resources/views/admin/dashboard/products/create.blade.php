@@ -130,15 +130,6 @@
                                                         </textarea>
 
 
-                                                        <script type="text/javascript">
-                                                            CKEDITOR.replace('meta_description{{ $key }}', {
-                                                                filebrowserUploadUrl: "{{ route('admin.ckeditor.upload', ['_token' => csrf_token()]) }}"
-                                                                , filebrowserUploadMethod: 'form'
-                                                            });
-
-                                                        </script>
-
-
                                                     </div>
                                                     @if ($errors->has($locale . '.meta_desc'))
                                                     <span class="missiong-spam">{{ $errors->first($locale . '.meta_desc') }}</span>

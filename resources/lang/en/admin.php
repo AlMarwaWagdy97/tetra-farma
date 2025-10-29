@@ -66,7 +66,7 @@ return [
     'payment' => 'Payment',
     'tags' => 'Tags',
     'cheak_all' => 'Cheak All',
-    'news' => 'Offers',
+    'news' => 'News',
     'blog' => 'Blog',
     'site' => 'Site',
     'ar' => [
@@ -532,7 +532,8 @@ return [
     'product_info' => 'Product Info',
     'cvs' => 'Cvs',
     'jobs' => 'Jobs',    
-
+    'faq' => 'Faq',    
+    'categories' => 'Categories',    
 
 
 ];

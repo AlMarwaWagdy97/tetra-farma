@@ -29,8 +29,24 @@ class Job extends Model
         'created_by',
         'updated_by'
     ];
+
     public function cvs()
     {
         return $this->hasMany(Cv::class);
     }
+
+
+    public function trans(){
+        return $this->hasMany(JobTranslation::class,'job_id');
+    }
+
+    public function transNow(){
+        return $this->hasOne(JobTranslation::class,'job_id')->where('locale' , app()->getLocale());
+    }
+
+    // Scopes ----------------------------
+    public function scopeActive($query){
+        return $query->where('status', 1);
+    }
+
 }

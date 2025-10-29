@@ -7,11 +7,19 @@ class UrlTypesEnum
 
 
     public const PAGES = 'pages';
-    public const SHOP = 'shop';
-    public const EVENTS = 'events';
-    public const LANDSCAPE = 'landscape';
+    public const ABOUTUS = 'about-us';
+    public const CATEGORIES = 'categories';
+    public const ALLCATEGORIE = 'all-categories';
     public const PRODUCTS = 'products';
-    public const CONTACTUS = 'contact us';
+    public const ALLPRODUCT = 'allproducts';
+    public const BLOGS = 'blogs';
+    public const ALLBLOG = 'all-blogs';
+    public const NEWS = 'news';
+    public const ALLNEW = 'all-news';
+    public const JOBS = 'jobs';
+    public const ALLJOB = 'all-jobs';
+    public const QUESTIONS = 'faq-questions';
+    public const CONTACTUS = 'contact-us';
 
 
     public static function values(): array
@@ -19,12 +27,21 @@ class UrlTypesEnum
 
         return [
             static::PAGES => 'pages',
-            static::SHOP => 'shop',
-            static::EVENTS => 'events',
-            static::LANDSCAPE => 'landscape',
+            static::ABOUTUS => 'about-us',
+            static::CONTACTUS => 'contact-us',
+            static::ALLCATEGORIE => 'all-categories',
+            static::CATEGORIES => 'categories',
+            static::ALLPRODUCT => 'all-products',
             static::PRODUCTS => 'products',
-            static::CONTACTUS => 'contact us',
+            static::ALLBLOG => 'all-blogs',
+            static::BLOGS => 'blogs',
+            static::ALLNEW => 'all-news',
+            static::NEWS => 'news',
+            static::ALLJOB => 'all-jobs',
+            static::JOBS => 'jobs',
+            static::QUESTIONS => 'faq-questions',
+            
+
         ];
     }
-
 }

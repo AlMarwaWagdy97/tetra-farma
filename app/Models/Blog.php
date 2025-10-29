@@ -5,18 +5,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Blog extends Model
 {
-    use Translatable;
+    use HasFactory, Translatable;
 
     public $translatedAttributes = ['title','description'];
     protected $fillable = ['image'];
 
-    public function translations()
-    {
-        return $this->hasMany(BlogTranslation::class);
+    protected $translationForeignKey = 'blog_id';
+
+
+    public function trans(){
+        return $this->hasMany(BlogTranslation::class,'blog_id');
     }
+
+    public function transNow(){
+        return $this->hasOne(BlogTranslation::class,'blog_id')->where('locale' , app()->getLocale());
+    }
+
 
     public function getTransNowAttribute()
     {

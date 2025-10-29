@@ -335,15 +335,30 @@
                     //     $("#get-dynamic-urls").append(
                     //         '<option selected value="/contact-us">/contact us</option>');
                     // }
-                    if (val == "shop") {
+                    if (val == "about-us") {
                         $('#get-dynamic-urls').find('option').remove().end();
-                        $("#get-dynamic-urls").append('<option selected value="/shop">/shop</option>');
-                    } else if (val == "events") {
+                        $("#get-dynamic-urls").append('<option selected value="/about-us">/about-us</option>');
+                    } else if (val == "contact-us") {
                         $('#get-dynamic-urls').find('option').remove().end();
-                        $("#get-dynamic-urls").append('<option selected value="/events">/events</option>');
-                    } else if (val == "landscape") {
+                        $("#get-dynamic-urls").append('<option selected value="/contact-us">/contact-us</option>');
+                    } else if (val == "all-categories") {
                         $('#get-dynamic-urls').find('option').remove().end();
-                        $("#get-dynamic-urls").append('<option selected value="/landscape">/landscape</option>');
+                        $("#get-dynamic-urls").append('<option selected value="/categories">/categories</option>');
+                    } else if (val == "all-products") {
+                        $('#get-dynamic-urls').find('option').remove().end();
+                        $("#get-dynamic-urls").append('<option selected value="/products">/products</option>');
+                    } else if (val == "all-blogs") {
+                        $('#get-dynamic-urls').find('option').remove().end();
+                        $("#get-dynamic-urls").append('<option selected value="/blogs">/blogs</option>');
+                    } else if (val == "all-news") {
+                        $('#get-dynamic-urls').find('option').remove().end();
+                        $("#get-dynamic-urls").append('<option selected value="/news">/news</option>');
+                    } else if (val == "all-jobs") {
+                        $('#get-dynamic-urls').find('option').remove().end();
+                        $("#get-dynamic-urls").append('<option selected value="/jobs">/jobs</option>');
+                    } else if (val == "faq-questions") {
+                        $('#get-dynamic-urls').find('option').remove().end();
+                        $("#get-dynamic-urls").append('<option selected value="/faq-questions">/faq-questions</option>');
                     }
 
                     else {

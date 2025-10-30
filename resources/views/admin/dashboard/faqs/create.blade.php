@@ -65,10 +65,10 @@
                                         <div class="row mb-3">
                                             <label class="col-sm-12 col-form-label">@lang('faq.category')</label>
                                             <div class="col-sm-12">
-                                                <select name="category_id" class="form-control">
+                                                <select name="faq_category_id" class="form-control">
                                                     <option value="">- @lang('admin.select') -</option>
                                                     @foreach($categoriesList as $cat)
-                                                        <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>
+                                                        <option value="{{ $cat->id }}" {{ old('faq_category_id') == $cat->id ? 'selected' : '' }}>
                                                             {{ optional($cat->translate(app()->getLocale()))->title ?? optional($cat->translate(config('app.fallback_locale')))->title }}
                                                         </option>
                                                     @endforeach

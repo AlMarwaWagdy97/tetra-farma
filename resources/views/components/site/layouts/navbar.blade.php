@@ -33,7 +33,7 @@
             </a>
         </nav>
         <div class="right">
-            <div class="dropdown d-none d-sm-block">
+            <div class="dropdown  ">
                 <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="fa-solid fa-globe main-color m-0 p-0 "></i>
                     {{ strtoupper(app()->getLocale()) }}

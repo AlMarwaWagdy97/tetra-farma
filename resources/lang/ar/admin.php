@@ -560,6 +560,10 @@ return [
     'faq' => 'الاسئلة الشائعة',
     'requirements' => 'المتطلبات',
     'short_description' => 'وصف قصير',
+    'total_blogs' => 'المقالات ',
+    'total_jobs' => 'الوظائف',
+    'total_partners' => 'الشركاء',
+    'total_new' => 'الاخبار',
 
 
 

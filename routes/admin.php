@@ -221,6 +221,10 @@ Route::group([
 
                 // ----- Cv -----------------------------------------------
                 Route::get('/cvs', [AdminCvController::class, 'index'])->name('cvs.index');
+               
+                Route::delete('/cvs/{cv}', [AdminCvController::class, 'destroy'])->name('cvs.destroy');
+
+                // ----- End Cv -------------------------------------------
 
                 // ----- faqs -----------------------------------------------
                 Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);

@@ -51,7 +51,10 @@
                                     <th>@lang('admin.job_title')</th>
                                     <th>@lang('admin.email')</th>
                                     <th>@lang('admin.phone')</th>
-                                    <th class="text-end">@lang('admin.cv')</th>
+                                    <th class="">@lang('admin.cv')</th>
+                                    <th class="text-center">@lang('admin.actions')</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,9 +71,22 @@
                                         </td>
                                         <td>{{ $cv->email }}</td>
                                         <td>{{ $cv->phone ?? '—' }}</td>
-                                        <td class="text-end">
+                                        <td class="">
                                             <a href="{{ asset('storage/' . $cv->cv_file) }}" class="btn btn-info btn-sm"
                                                 target="_blank"><i class="fas fa-download"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="{{ route('admin.cvs.destroy', $cv->id) }}" method="POST"
+                                                style="display:inline"
+                                                onsubmit="return confirm('هل تريد الحذف  ');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="{{ trans('admin.delete') }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
 
                                     </tr>

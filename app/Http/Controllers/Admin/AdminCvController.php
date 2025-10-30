@@ -35,4 +35,11 @@ class AdminCvController extends Controller
     return view('admin.dashboard.cvs.index', compact('cvs'));
 }
 
+
+    public function destroy (Cv $cv)
+    {
+        $cv->delete();
+        return back()->with('success', 'CV deleted');
+    }
+
 }

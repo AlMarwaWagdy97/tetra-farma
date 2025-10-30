@@ -229,6 +229,70 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('admin.blogs.index') }}">
+                            <div class="mini-stat">
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i
+                                        class="fas fa-newspaper"></i></span>
+                                <div class="mini-stat-info">
+                                    <span class="counter text-brown">{{ App\Models\Blog::count() }}</span>
+                                    @lang('admin.total_blogs')
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('admin.jobs.index') }}">
+                            <div class="mini-stat">
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i
+                                        class="fas fa-briefcase"></i></span>
+                                <div class="mini-stat-info">
+                                    <span class="counter text-brown">{{ App\Models\Job::count() }}</span>
+                                    @lang('admin.total_jobs')
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('admin.partners.index') }}">
+                            <div class="mini-stat">
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i
+                                        class="fas fa-handshake"></i></span>
+                                <div class="mini-stat-info">
+                                    <span class="counter text-brown">{{ App\Models\Partner::count() }}</span>
+                                    @lang('admin.total_partners')
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('admin.news.index') }}">
+                            <div class="mini-stat">
+                                <span class="mini-stat-icon bg-brown me-0 float-end"><i
+                                        class="fas fa-newspaper"></i></span>
+                                <div class="mini-stat-info">
+                                    <span class="counter text-brown">{{ App\Models\News::count() }}</span>
+                                    @lang('admin.total_new')
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             {{--            <div class="col-md-6 col-xl-4"> --}}
             {{--                <div class="card"> --}}

@@ -536,6 +536,10 @@ return [
     'categories' => 'Categories',    
     'requirements_in' => 'Requirements',    
     'short_description_in' => 'Short Description',
+    'total_blogs' => 'Blogs',
+    'total_jobs' => 'Jobs',
+    'total_partners' => 'Partners',
+    'total_new' => 'News',
 
 
 

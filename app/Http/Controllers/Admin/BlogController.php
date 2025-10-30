@@ -106,9 +106,7 @@ class BlogController extends Controller
         if ($blog->image && file_exists($file)) {
             @unlink($file);
         }
-
-        $blog->delete();
-
+     $blog->delete();
         return back()->with('success', 'Blog deleted');
     }
 }

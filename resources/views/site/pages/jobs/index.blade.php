@@ -23,7 +23,7 @@
         <article class="jobcard">
             <div class="jobdesc">{{ $job->employment_type }} • {{ $job->location }}</div>
             <h3 class="job_h3"> {{ optional($job->translate(app()->getLocale()))->title ?? '—' }}</h3>
-            <p class="job_P">{{ optional($job->translate(app()->getLocale()))->short_description ?? '—' }}</p>
+            <p class="job_P">{!!  optional($job->translate(app()->getLocale()))->short_description ?? '—' !!}</p>
             {{-- <div class="field_title">
                 @foreach (explode(',',optional($job->translate(app()->getLocale()))->description ) as $requirement)
                     <span class="fieldspan">{!!   trim($requirement) !!}</span>

@@ -557,7 +557,9 @@ return [
     'product_info' => 'معلومات المنتج',
 
     'categories' => 'الاقسام',
-    'faq' => 'Faq',
+    'faq' => 'الاسئلة الشائعة',
+    'requirements' => 'المتطلبات',
+    'short_description' => 'وصف قصير',
 
 
 

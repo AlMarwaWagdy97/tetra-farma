@@ -17,7 +17,7 @@ class JobController extends Controller
 
     public function show($slug)
     {
-        $job = Job::with('translations')->where('slug', $slug)->firstOrFail();
+        $job = Job::with('translations')->firstOrFail();
         return view('site.pages.jobs.show', compact('job'));
     }
 

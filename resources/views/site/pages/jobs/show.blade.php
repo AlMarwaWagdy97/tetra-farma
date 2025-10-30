@@ -7,7 +7,7 @@
             {{-- <p>{{ optional($job->translate(app()->getLocale()))->short_description ?? '—' }}</p> --}}
             <p>{!! optional($job->translate(app()->getLocale()))->description ?? '—' !!}</p>
             <h3>@lang('job.requirements')</h3>
-            <p>{{ optional($job->translate(app()->getLocale()))->requirements ?? '—' }}</p>
+            <p>{!!  optional($job->translate(app()->getLocale()))->requirements ?? '—' !!}</p>
             <h4>@lang('job.apply')</h4>
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>

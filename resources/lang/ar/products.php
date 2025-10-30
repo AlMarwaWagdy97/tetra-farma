@@ -67,6 +67,10 @@ return [
     'payment_lines' => 'خط البيع',
     'product_tips' => 'نصائح المنتج',
     'product_info' => 'معلومات المنتج',
+    'short_description' => 'وصف قصير',
+    'requirements' => 'المتطلبات',
+    'employment_type' => 'نوع الوظيفة',
+    'location' => 'الموقع',
     
 
 

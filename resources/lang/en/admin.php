@@ -534,6 +534,9 @@ return [
     'jobs' => 'Jobs',    
     'faq' => 'Faq',    
     'categories' => 'Categories',    
+    'requirements_in' => 'Requirements',    
+    'short_description_in' => 'Short Description',
+
 
 
 ];

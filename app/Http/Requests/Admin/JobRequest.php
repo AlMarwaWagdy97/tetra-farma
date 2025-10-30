@@ -11,13 +11,21 @@ class JobRequest extends FormRequest
         return true; 
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'feature' => $this->has('feature') ? 1 : 0,
+            'status'  => $this->has('status') ? 1 : 0,
+        ]);
+    }
     public function rules()
     {
         $rules = [
             'employment_type' => 'nullable|string|max:100',
             'location' => 'nullable|string|max:191',
             'image' => 'nullable|image|max:2048',
-            'status' => 'nullable|boolean',
+            'status' => 'nullable',
+            'feature' => 'nullable',
             'sort' => 'nullable|integer',
         ];
 
@@ -27,6 +35,11 @@ class JobRequest extends FormRequest
             $rules["{$locale}.short_description"] = 'nullable|string|max:500';
             $rules["{$locale}.description"] = 'nullable|string';
             $rules["{$locale}.requirements"] = 'nullable|string';
+            $rules["{$locale}.slug"] = 'nullable|string|max:255';
+            $rules["{$locale}.meta_title"] = 'nullable|string|max:255';
+            $rules["{$locale}.meta_desc"] = 'nullable|string|max:255';
+            $rules["{$locale}.meta_key"] = 'nullable|string|max:255';
+            
         }
 
         // tags array optional

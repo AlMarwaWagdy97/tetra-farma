@@ -44,7 +44,10 @@ class JobForm extends Component
 
       
         if ($this->job_slug) {
-            $job = Job::where('slug', $this->job_slug)->first();
+            $slug = $this->job_slug;
+           $job = Job::whereHas('transNow', function($q) use ($slug) {
+    $q->where('slug', $slug);
+})->first();
             if (!$job) {
                 $this->addError('job_slug', 'Job not found.');
                 return;

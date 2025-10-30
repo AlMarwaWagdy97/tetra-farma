@@ -41,6 +41,7 @@ class UrlTypesEnum
             static::JOBS => 'jobs',
             static::QUESTIONS => 'faq-questions',
             
+            
 
         ];
     }

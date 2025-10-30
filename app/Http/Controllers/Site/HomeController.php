@@ -26,7 +26,7 @@ class HomeController extends Controller
             $about_us = new About();
             $about_us->transNow = new AboutTranslation();
         }
-        $blogs = Blog::with('translations')->take(3)->get();
+        $blogs = Blog::with('translations')->where('status', 1)->take(3)->get();
         $partners = Partner::with('translations')->where('status', 1)->get();
         $news = News::with('translations')->where('status', 1)->get();
         $faq_questions = Faq::with('translations')->where('status', 1)->get();

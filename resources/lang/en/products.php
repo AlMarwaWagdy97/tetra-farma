@@ -40,7 +40,6 @@ return [
     'created_by' => 'Created by',
     'updated_by' => 'Updated by',
     'after_sale' => 'Price after sale',
-
     'meta_info' => ' Meta  ',
     'price_after_sale' => 'Price after sale',
     'from_total' => 'From Total',
@@ -67,7 +66,11 @@ return [
     'payment_lines' => 'Payment Lines',
     'product_tips' => 'Product Tips',
     'product_info' => 'Product Info',
-
+    'short_description' => 'Short Description',
+    'requirements' => 'Requirements',
+    'employment_type' => 'Employment Type',
+    'location' => 'Location',
+ 
     
 
 ];

@@ -37,34 +37,11 @@ class JobController extends Controller
     {
         $data = $request->validated();
 
-        $job = new Job();
-        $job->slug = $request->input('slug') ?? null;
-        $job->employment_type = $request->input('employment_type') ?? null;
-        $job->location = $request->input('location') ?? null;
-        $job->status = $request->has('status') ? 1 : 0;
-        $job->sort = $request->input('sort', 0);
-        $job->created_by = Auth::id();
+     
 
-        if ($request->hasFile('image')) {
-            $job->image = $request->file('image')->store('attachments/jobs', 'public');
-        }
+        Job::create($data);
 
-        $job->save();
-
-        // translations
-        foreach (config('translatable.locales', ['en']) as $locale) {
-            $trans = $request->input($locale, []);
-            if (!empty($trans)) {
-                $job->translateOrNew($locale)->title = $trans['title'] ?? null;
-                $job->translateOrNew($locale)->short_description = $trans['short_description'] ?? null;
-                $job->translateOrNew($locale)->description = $trans['description'] ?? null;
-                $job->translateOrNew($locale)->requirements = $trans['requirements'] ?? null;
-                // seo fields if exist
-                $job->translateOrNew($locale)->seo_title = $trans['seo_title'] ?? null;
-                $job->translateOrNew($locale)->seo_description = $trans['seo_description'] ?? null;
-            }
-        }
-        $job->save();
+  
 
         session()->flash('success', __('Created successfully'));
         return redirect()->route('admin.jobs.index');
@@ -80,34 +57,16 @@ class JobController extends Controller
     // Update
     public function update(JobRequest $request, Job $job)
     {
-        $data = $request->validated();
 
-        if ($request->hasFile('image')) {
-            if ($job->image) {
-                Storage::disk('public')->delete($job->image);
-            }
-            $job->image = $request->file('image')->store('attachments/jobs', 'public');
-        }
+               $data = $request->validated();
 
-        $job->slug = $request->input('slug') ?? $job->slug;
-        $job->employment_type = $request->input('employment_type') ?? $job->employment_type;
-        $job->location = $request->input('location') ?? $job->location;
-        $job->status = $request->has('status') ? 1 : 0;
-        $job->sort = $request->input('sort', $job->sort);
-        $job->updated_by = Auth::id();
-        $job->save();
+                Job::create($data);
 
-        // update translations
-        foreach (config('translatable.locales', ['en']) as $locale) {
-            $trans = $request->input($locale, []);
-            $job->translateOrNew($locale)->title = $trans['title'] ?? $job->translate($locale)->title ?? null;
-            $job->translateOrNew($locale)->short_description = $trans['short_description'] ?? $job->translate($locale)->short_description ?? null;
-            $job->translateOrNew($locale)->description = $trans['description'] ?? $job->translate($locale)->description ?? null;
-            $job->translateOrNew($locale)->requirements = $trans['requirements'] ?? $job->translate($locale)->requirements ?? null;
-            $job->translateOrNew($locale)->seo_title = $trans['seo_title'] ?? $job->translate($locale)->seo_title ?? null;
-            $job->translateOrNew($locale)->seo_description = $trans['seo_description'] ?? $job->translate($locale)->seo_description ?? null;
-        }
-        $job->save();
+
+     
+
+     
+        
 
         session()->flash('success', __('Updated successfully'));
         return redirect()->route('admin.jobs.index');
@@ -137,6 +96,13 @@ class JobController extends Controller
         $job->status = !$job->status;
         $job->save();
         session()->flash('success', __('Status updated'));
+        return redirect()->back();
+    }
+    public function toggleFeature(Job $job)
+    {
+        $job->feature = !$job->feature;
+        $job->save();
+        session()->flash('success', __('Feature updated'));
         return redirect()->back();
     }
 }

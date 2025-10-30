@@ -199,8 +199,8 @@ class MenueController extends Controller
         if($name == UrlTypesEnum::BLOGS){
             $items = Blog::query()->with('trans')->get(['id']);
             foreach($items as $item){
-                // $res[] =  '/blogs/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
-                $res[] =  '/blogs/' . $item->id;
+                $res[] =  '/blogs/' . $item->trans->where("locale", app()->getLocale())->first()->slug;
+                // $res[] =  '/blogs/' . $item->id;
             }
         }
         if($name == UrlTypesEnum::NEWS){

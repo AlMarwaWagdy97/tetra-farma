@@ -161,6 +161,7 @@ Route::group([
                 // ----- Jobs -----------------------------------------------
                 Route::resource('jobs', App\Http\Controllers\Admin\JobController::class);
                 Route::get('jobs/{job}/toggle-status', [App\Http\Controllers\Admin\JobController::class, 'toggleStatus'])->name('jobs.toggle-status');
+                Route::get('jobs/{job}/toggle-feature', [App\Http\Controllers\Admin\JobController::class, 'toggleFeature'])->name('jobs.toggle-feature');
 
 
                 // ----- Partners -----------------------------------------------

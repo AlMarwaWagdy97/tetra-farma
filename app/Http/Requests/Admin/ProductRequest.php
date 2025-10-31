@@ -28,13 +28,21 @@ class ProductRequest extends FormRequest
     {
         return true;
     }
-
+     protected function prepareForValidation()
+    {
+        $this->merge([
+            'has_pockets' => $this->has('has_pockets') ? 1 : 0,
+            
+        ]);
+    }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
      */
+
+
     public function rules()
     {
         $arr = [];
